@@ -1,5 +1,9 @@
 package com.hotels;
 
+/**
+ * Employee class to store Employee data
+ */
+
 public class Employee {
 
     private String SSN;
@@ -11,6 +15,15 @@ public class Employee {
     private String role;
 
 
+    /**
+     * Constructor to save employee's data (without id)
+     *
+     * @param SSN SSN of employee
+     * @param fullName full name of employee
+     * @param address address of employee
+     * @param role the employee's role
+     *
+     */
     public Employee(String SSN, String fullName, String address, String role) {
         this.SSN = SSN;
         this.fullName = fullName;
@@ -51,6 +64,15 @@ public class Employee {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>full name = " + fullName + "</li>"
+                + "<li>address = " + address + "</li>"
+                + "<li>role= " + role + "</li>";
     }
 
 }

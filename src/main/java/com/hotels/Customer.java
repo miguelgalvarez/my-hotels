@@ -2,6 +2,9 @@ package com.hotels;
 
 import java.util.Date;
 
+/**
+ * Customer class to store Customer data
+ */
 public class Customer {
 
     private String customerID;
@@ -11,8 +14,16 @@ public class Customer {
     private String IDPresented;
 
 
-    public Customer(String customerID, String fullName, Date dateOfRegistration, String address, String IDPresented) {
-        this.customerID = customerID;
+    /**
+     * Constructor to save customer's data (without id)
+     *
+     * @param fullName full name of customer
+     * @param dateOfRegistration date of registering their account
+     * @param address the customer's address
+     * @param IDPresented the customer's ID presented
+     *
+     */
+    public Customer(String fullName, Date dateOfRegistration, String address, String IDPresented) {
         this.fullName = fullName;
         this.dateOfRegistration = dateOfRegistration;
         this.address = address;
@@ -59,5 +70,16 @@ public class Customer {
 
     public void setIDPresented(String IDPresented) {
         this.IDPresented = IDPresented;
+    }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>full name = " + fullName + "</li>"
+                + "<li>date of registration = " + dateOfRegistration + "</li>"
+                + "<li>address= " + address + "</li>"
+                + "<li>Id presented = " + IDPresented + "</li>";
+
     }
 }

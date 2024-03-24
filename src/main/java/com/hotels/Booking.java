@@ -2,21 +2,27 @@ package com.hotels;
 
 import java.util.Date;
 
+/**
+ * Booking class to store Booking data
+ */
 public class Booking {
-
 
     private String bookingID;
     private int pricePaid;
     private int numberOfRooms;
     private String period;
 
-
-    public Booking(String bookingID, int pricePaid, int numberOfRooms, String period) {
-        this.bookingID = bookingID;
+    /**
+     * Constructor to save booking's data (without id)
+     *
+     * @param pricePaid price paid for the booking
+     * @param numberOfRooms number of rooms for the booking
+     * @param period the period that the hotel is booked for
+     */
+    public Booking(int pricePaid, int numberOfRooms, String period) {
         this.pricePaid = pricePaid;
         this.numberOfRooms = numberOfRooms;
         this.period = period;
-
     }
 
 
@@ -52,5 +58,14 @@ public class Booking {
 
     public void setPeriod(String period) {
         this.period = period;
+    }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>price paid = " + pricePaid + "</li>"
+                + "<li>number of rooms = " + numberOfRooms + "</li>"
+                + "<li>period = " + period + "</li>";
     }
 }

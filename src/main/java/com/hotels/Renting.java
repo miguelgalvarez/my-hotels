@@ -1,11 +1,22 @@
 package com.hotels;
 
+/**
+ * Renting class to store Renting data
+ */
+
 public class Renting {
     private String rentingID;
     private String period;
     private int numberOfRooms;
 
 
+    /**
+     * Constructor to save renting's data (without id)
+     *
+     * @param numberOfRooms the number of rooms in a renting
+     * @param period the period that the customer is staying
+     *
+     */
     public Renting(String rentingID, String period, int numberOfRooms) {
         this.rentingID = rentingID;
         this.numberOfRooms = numberOfRooms;
@@ -37,5 +48,13 @@ public class Renting {
 
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
+    }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>period = " + period + "</li>"
+                + "<li>number of rooms = " + numberOfRooms + "</li>";
     }
 }

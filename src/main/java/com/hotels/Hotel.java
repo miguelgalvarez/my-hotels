@@ -68,4 +68,16 @@ public class Hotel {
     public void setNumRooms(int numRooms) {this.numRooms = numRooms; }
     public void setAddress(String address) {this.address = address; }
     public void setEmail(String email) {this.email = email;}
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>rating = " + rating + "</li>"
+                + "<li>phone number = " + phoneNumber + "</li>"
+                + "<li>number of rooms= " + numRooms + "</li>"
+                + "<li>address= " + address + "</li>"
+                + "<li>email= " + email + "</li>";
+
+    }
 }

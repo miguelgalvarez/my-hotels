@@ -1,5 +1,9 @@
 package com.hotels;
 
+/**
+ * Room class to store Room data
+ */
+
 public class Room {
     private int roomID;
 
@@ -17,23 +21,25 @@ public class Room {
 
     private int roomNumber;
 
-    public Room(int roomID, int price, int capacity, String[] amenities, String roomView, String roomExtension, String[] damages) {
-        this.roomID = roomID;
+    /**
+     * Constructor to save room's data (without id)
+     *
+     * @param price price of a room
+     * @param capacity capacity
+     * @param amenities the amenities that a room has
+     * @param roomView the type of view that a room has
+     * @param roomExtension if a room can have an extension
+     * @param damages the damages to a room
+     * @param roomNumber the room number
+     */
+    public Room(int price, int capacity, String[] amenities, String roomView, String roomExtension, String[] damages, int roomNumber) {
         this.price = price;
         this.capacity = capacity;
         this.amenities = amenities;
         this.roomView = roomView;
         this.roomExtension =  roomExtension;
         this.damages = damages;
-    }
-
-    public Room(int price, int capacity, String[] amenities, String roomView, String roomExtension, String[] damages) {
-        this.price = price;
-        this.capacity = capacity;
-        this.amenities = amenities;
-        this.roomView = roomView;
-        this.roomExtension =  roomExtension;
-        this.damages = damages;
+        this.roomNumber = roomNumber;
     }
 
     /* Getters */
@@ -43,7 +49,8 @@ public class Room {
     public String[] getAmeneties() {return this.amenities; }
     public String getRoomView() {return this.roomView; }
     public String getRoomExtension() {return this.roomExtension; }
-    public String[] getDamages() {return this.damages; }
+    public String[] getDamages() {return this.damages;}
+    public int getRoomID() {return this.roomID;}
 
     /* Setters */
     public void setRoomID(int roomID) {this.roomID = roomID; }
@@ -53,6 +60,20 @@ public class Room {
     public void setRoomView(String roomView) {this.roomView = roomView; }
     public void setRoomExtension(String roomExtension) {this.roomExtension = roomExtension; }
     public void setDamages(String[] damages) {this.damages = damages; }
+    public void setRoomNumber(int roomNumber) {this.roomNumber = roomNumber; }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>price = " + price + "</li>"
+                + "<li>capacity = " + capacity + "</li>"
+                + "<li>amenities= " + amenities + "</li>"
+                + "<li>room view= " + roomView + "</li>"
+                + "<li>room extension= " + roomExtension + "</li>"
+                + "<li>room damages= " + damages + "</li>"
+                + "<li>room room number= " + roomNumber + "</li>";
+    }
 
 
 }
