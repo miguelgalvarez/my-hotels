@@ -29,7 +29,7 @@
             border-radius: 16px; /* Rounded edges for the container */
         }
         .navbar a:hover {
-            background-color: #FFAF45; /* Lighter blue on hover */
+            background-color: #FFAF45; /* Lighter orange on hover */
             /*padding: 12px 12px; /* reduced padding on hover */
             /*margin: 4px 4px; /* adjusted margin to compensate for the reduced padding */
 
