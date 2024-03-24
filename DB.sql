@@ -71,7 +71,7 @@ CREATE TABLE customer (
 DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
 	EmployeeID serial PRIMARY KEY,
-	HotelID serial REFERENCES employee(HotelID),
+	HotelID serial REFERENCES hotel(HotelID),
 	Address varchar(45) NOT NULL,
 	FullName varchar(45) NOT NULL,
 	SSN INT NOT NULL,
