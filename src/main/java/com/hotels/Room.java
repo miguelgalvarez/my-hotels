@@ -27,5 +27,4 @@ public class Room {
         this.damages = damages;
     }
 
-    public Room()
 }
