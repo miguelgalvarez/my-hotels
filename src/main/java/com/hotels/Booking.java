@@ -19,4 +19,38 @@ public class Booking {
 
     }
 
+
+    // Getters
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public int getPricePaid() {
+        return pricePaid;
+    }
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    // Setters
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+
+    public void setPricePaid(int pricePaid) {
+        this.pricePaid = pricePaid;
+    }
+
+    public void setNumberOfRooms(int numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
 }

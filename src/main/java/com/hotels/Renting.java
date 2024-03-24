@@ -12,4 +12,30 @@ public class Renting {
         this.period = period;
 
     }
+
+    // Getters
+    public String getRentingID() {
+        return rentingID;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public int getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
+    // Setters
+    public void setRentingID(String rentingID) {
+        this.rentingID = rentingID;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
+    public void setNumberOfRooms(int numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+    }
 }

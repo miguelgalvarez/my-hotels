@@ -19,5 +19,45 @@ public class Customer {
         this.IDPresented = IDPresented;
 
     }
+    // Getters
+    public String getCustomerID() {
+        return customerID;
+    }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Date getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getIDPresented() {
+        return IDPresented;
+    }
+
+    // Setters
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setIDPresented(String IDPresented) {
+        this.IDPresented = IDPresented;
+    }
 }
