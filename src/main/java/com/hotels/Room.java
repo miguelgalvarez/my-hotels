@@ -27,71 +27,34 @@ public class Room {
         this.damages = damages;
     }
 
-
-    // Getters
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public String[] getAmenities() {
-        return amenities;
-    }
-
-    public String getRoomView() {
-        return roomView;
-    }
-
-    public String getRoomExtension() {
-        return roomExtension;
-    }
-
-    public String[] getDamages() {
-        return damages;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    // Setters
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
-    public void setPrice(int price) {
+    public Room(int price, int capacity, String[] amenities, String roomView, String roomExtension, String[] damages) {
         this.price = price;
-    }
-
-    public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-
-    public void setAmenities(String[] amenities) {
         this.amenities = amenities;
-    }
-
-    public void setRoomView(String roomView) {
         this.roomView = roomView;
-    }
-
-    public void setRoomExtension(String roomExtension) {
-        this.roomExtension = roomExtension;
-    }
-
-    public void setDamages(String[] damages) {
+        this.roomExtension =  roomExtension;
         this.damages = damages;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+    /* Getters */
+    public int getID() {return this.roomID; }
+    public int getPrice() {return this.price; }
+    public int getCapacity() {return this.capacity; }
+    public String[] getAmeneties() {return this.amenities; }
+    public String getRoomView() {return this.roomView; }
+    public String getRoomExtension() {return this.roomExtension; }
+    public String[] getDamages() {return this.damages; }
+
+    /* Setters */
+    public void setRoomID(int roomID) {this.roomID = roomID; }
+    public void setPrice(int price) {this.price = price; }
+    public void setCapacity(int capacity) {this.capacity = capacity; }
+    public void setAmenities(String[] amenities) {this.amenities = amenities; }
+    public void setRoomView(String roomView) {this.roomView = roomView; }
+    public void setRoomExtension(String roomExtension) {this.roomExtension = roomExtension; }
+    public void setDamages(String[] damages) {this.damages = damages; }
+
 
 }
+
+

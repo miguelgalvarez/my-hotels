@@ -61,4 +61,15 @@ public class HotelChain {
     public void setNumHotels(int numHotels) {this.numHotels = numHotels ;}
     public void setAddress(String address) {this.address = address; }
     public void setEmail(String email) {this.email = email; }
+
+    @Override
+    public String toString() {
+
+        return "<ul>"
+                + "<li>phone number = " + phoneNumber + "</li>"
+                + "<li>number of hotels = " + numHotels + "</li>"
+                + "<li>email= " + email + "</li>"
+                + "<li>address= " + address + "</li>";
+
+    }
 }
