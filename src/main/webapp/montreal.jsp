@@ -185,19 +185,19 @@
     <div class="hotel-card">
         <a href="payment.jsp" class="hotel-link">
         <img src="https://via.placeholder.com/150" alt="Hotel 1" class="hotel-image">
-        <span class="hotel-name">Hotel 1</span>
+        <span class="hotel-name">Room 1</span>
         </a>
     </div>
     <div class="hotel-card">
         <a href="hotel-details.jsp?id=2" class="hotel-link">
             <img src="https://via.placeholder.com/150" alt="Hotel 2" class="hotel-image">
-            <span class="hotel-name">Hotel 2</span>
+            <span class="hotel-name">Room 2</span>
         </a>
     </div>
     <div class="hotel-card">
         <a href="hotel-details.jsp?id=3" class="hotel-link">
             <img src="https://via.placeholder.com/150" alt="Hotel 3" class="hotel-image">
-            <span class="hotel-name">Hotel 3</span>
+            <span class="hotel-name">Room 3</span>
         </a>
     </div>
     <!-- Add more hotel cards here -->
