@@ -94,7 +94,7 @@
 
         </div>
         <div class="city-card">
-            <a href="hotels.jsp?city=Montreal" class="city-link">
+            <a href="montreal.jsp" class="city-link">
                 <img src="assets/montreal.jpeg" alt="Montreal" class="city-image">
                 <span class="city-name">Montreal</span>
             </a>
