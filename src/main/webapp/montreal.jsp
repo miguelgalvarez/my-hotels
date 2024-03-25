@@ -115,29 +115,18 @@
 <jsp:include page="navbar.jsp" />
 
 
- <div class="content-container">
+<div class="content-container">
+
 <div class="filters-container">
     <h2 class="filter-title">Filters</h2>
     <div class="filter-list">
         <div class="filter-item">
-            <label for="price-filter">Price:</label>
-            <select id="price-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="Under $75">Under $75</option>
-                <option value="$75-$200">$75-$200</option>
-                <option value="Over $200">Over $200</option>
-            </select>
+            <label for="start-date-filter">Start Date:</label>
+            <input type="date" id="start-date-filter">
         </div>
         <div class="filter-item">
-            <label for="rating-filter">Rating:</label>
-            <select id="rating-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="1">1 Star</option>
-                <option value="2">2 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="5">5 Stars</option>
-            </select>
+            <label for="end-date-filter">End Date:</label>
+            <input type="date" id="end-date-filter">
         </div>
         <div class="filter-item">
             <label for="capacity-filter">Capacity:</label>
@@ -149,12 +138,41 @@
             </select>
         </div>
         <div class="filter-item">
-            <label for="type-filter">Type:</label>
-            <select id="type-filter" class="filter-dropdown">
+            <label for="area-filter">Area:</label>
+            <select id="area-filter" class="filter-dropdown">
                 <option value=""></option>
-                <option value="luxury">Luxury</option>
-                <option value="business">Business</option>
+                <option value="downtown">Downtown</option>
+                <option value="suburb">Suburb</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="hotel-chain-filter">Hotel Chain:</label>
+            <select id="hotel-chain-filter" class="filter-dropdown">
+                <option value=""></option>
+                <option value="chain1">Chain 1</option>
+                <option value="chain2">Chain 2</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="hotel-category-filter">Hotel Category:</label>
+            <select id="hotel-category-filter" class="filter-dropdown">
+                <option value=""></option>
                 <option value="budget">Budget</option>
+                <option value="mid-range">Mid-Range</option>
+                <option value="luxury">Luxury</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="total-rooms-filter">Total Rooms:</label>
+            <input type="number" id="total-rooms-filter">
+        </div>
+        <div class="filter-item">
+            <label for="price-filter">Price:</label>
+            <select id="price-filter" class="filter-dropdown">
+                <option value=""></option>
+                <option value="Under $75">Under $75</option>
+                <option value="$75-$200">$75-$200</option>
+                <option value="Over $200">Over $200</option>
             </select>
         </div>
         <div class="filter-item">
@@ -163,13 +181,11 @@
     </div>
 </div>
 
-
-
 <div class="hotels-container">
     <div class="hotel-card">
-        <a href="hotel-details.jsp?id=1" class="hotel-link">
-            <img src="https://via.placeholder.com/150" alt="Hotel 1" class="hotel-image">
-            <span class="hotel-name">Hotel 1</span>
+        <a href="payment.jsp" class="hotel-link">
+        <img src="https://via.placeholder.com/150" alt="Hotel 1" class="hotel-image">
+        <span class="hotel-name">Hotel 1</span>
         </a>
     </div>
     <div class="hotel-card">
