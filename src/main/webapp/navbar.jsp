@@ -96,14 +96,14 @@
  <div class="navbar">
      <a href="/my-hotels" class="logo">myHotels</a>
      <a href="#stays">Stays</a>
-     <a href="#bookings">Bookings</a>
+     <a href="bookings.jsp">Bookings</a>
      <a href="#about">About</a>
      <a href="#contact">Contact</a>
      <div class="profile-dropdown">
              <a href="#profile" class="profile">Profile</a>
              <div class="dropdown-content">
-                 <a href="#signin">Sign In</a>
-                 <a href="#register">Register</a>
+                 <a href="signup.jsp">Sign In</a>
+                 <a href="register.jsp">Register</a>
              </div>
          </div>
  </div>
