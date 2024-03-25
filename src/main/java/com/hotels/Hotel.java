@@ -7,7 +7,7 @@ package com.hotels;
 public class Hotel {
     private int hotelID;
 
-    private int rating;
+    private double rating;
 
     private int phoneNumber;
 
@@ -16,6 +16,8 @@ public class Hotel {
     private String address;
 
     private String email;
+
+    private final String surname;
 
     /**
      * Constructor to save hotel's data (with id)
@@ -27,13 +29,14 @@ public class Hotel {
      * @param address address of hotel
      * @param email email of hotel
      */
-    public Hotel(int hotelID, int rating, int phoneNumber, int numRooms, String address, String email) {
+    public Hotel(int hotelID, double rating, int phoneNumber, int numRooms, String address, String email, String surname) {
         this.hotelID = hotelID;
         this.rating = rating;
         this.phoneNumber = phoneNumber;
         this.numRooms = numRooms;
         this.address = address;
         this.email = email;
+        this.surname = surname;
     }
 
     /**
@@ -45,21 +48,24 @@ public class Hotel {
      * @param address address of hotel
      * @param email email of hotel
      */
-    public Hotel(int rating, int phoneNumber, int numRooms, String address, String email) {
+    public Hotel(double rating, int phoneNumber, int numRooms, String address, String email, String surname) {
         this.rating = rating;
         this.phoneNumber = phoneNumber;
         this.numRooms = numRooms;
         this.address = address;
         this.email = email;
+        this.surname = surname;
     }
 
     /* Getters */
     public int getID() {return this.hotelID; }
-    public int getRating() {return this.rating; }
+    public double getRating() {return this.rating; }
     public int getPhoneNumber() {return this.phoneNumber; }
     public int getNumRooms() {return this.numRooms; }
     public String getAddress() {return this.address; }
     public String getEmail() {return this.email; }
+
+    public String getSurname() {return this.surname;}
 
     /* Setters */
     public void setHotelID(int hotelID) {this.hotelID = hotelID; }

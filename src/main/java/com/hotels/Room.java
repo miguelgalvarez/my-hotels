@@ -5,21 +5,42 @@ package com.hotels;
  */
 
 public class Room {
-    private int roomID;
+    private int RoomID;
 
-    private int price;
+    private double price;
 
     private int capacity;
 
-    private String[] amenities;
+    private String amenities;
 
     private String roomView;
 
-    private String roomExtension;
+    private boolean roomExtension;
 
-    private String[] damages;
+    private String damages;
 
     private int roomNumber;
+
+    /**
+     * Constructor to save hotel's data (with id)
+     *
+     * @param RoomID unique ID of the room
+     * @param capacity capacity for the room
+     * @param amenities list of amenities for the room
+     * @param roomView string describing view of the room
+     * @param roomExtension if a room can have an extension
+     * @param damages the damages to a room
+     * @param roomNumber the room number
+     */
+    public Room(int RoomID, int capacity, String amenities, String roomView, boolean roomExtension, String damages, int roomNumber) {
+        this.RoomID = RoomID;
+        this.capacity = capacity;
+        this.amenities = amenities;
+        this.roomView = roomView;
+        this.roomExtension = roomExtension;
+        this.damages = damages;
+        this.roomNumber = roomNumber;
+    }
 
     /**
      * Constructor to save room's data (without id)
@@ -29,37 +50,33 @@ public class Room {
      * @param amenities the amenities that a room has
      * @param roomView the type of view that a room has
      * @param roomExtension if a room can have an extension
-     * @param damages the damages to a room
-     * @param roomNumber the room number
      */
-    public Room(int price, int capacity, String[] amenities, String roomView, String roomExtension, String[] damages, int roomNumber) {
+    public Room(double price, int capacity, String amenities, String roomView, boolean roomExtension) {
         this.price = price;
         this.capacity = capacity;
         this.amenities = amenities;
         this.roomView = roomView;
         this.roomExtension =  roomExtension;
-        this.damages = damages;
-        this.roomNumber = roomNumber;
     }
 
     /* Getters */
-    public int getID() {return this.roomID; }
-    public int getPrice() {return this.price; }
+    public int getID() {return this.RoomID; }
+    public double getPrice() {return this.price; }
     public int getCapacity() {return this.capacity; }
-    public String[] getAmeneties() {return this.amenities; }
+    public String getAmeneties() {return this.amenities; }
     public String getRoomView() {return this.roomView; }
-    public String getRoomExtension() {return this.roomExtension; }
-    public String[] getDamages() {return this.damages;}
-    public int getRoomID() {return this.roomID;}
+    public boolean getRoomExtension() {return this.roomExtension; }
+    public String getDamages() {return this.damages;}
+    public int getRoomID() {return this.RoomID;}
 
     /* Setters */
-    public void setRoomID(int roomID) {this.roomID = roomID; }
+    public void setRoomID(int roomID) {this.RoomID = roomID; }
     public void setPrice(int price) {this.price = price; }
     public void setCapacity(int capacity) {this.capacity = capacity; }
-    public void setAmenities(String[] amenities) {this.amenities = amenities; }
+    public void setAmenities(String amenities) {this.amenities = amenities; }
     public void setRoomView(String roomView) {this.roomView = roomView; }
-    public void setRoomExtension(String roomExtension) {this.roomExtension = roomExtension; }
-    public void setDamages(String[] damages) {this.damages = damages; }
+    public void setRoomExtension(boolean roomExtension) {this.roomExtension = roomExtension; }
+    public void setDamages(String damages) {this.damages = damages; }
     public void setRoomNumber(int roomNumber) {this.roomNumber = roomNumber; }
 
     @Override
