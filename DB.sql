@@ -20,6 +20,7 @@ CREATE TABLE hotel (
 	HotelID serial PRIMARY KEY,
 	RoomID serial REFERENCES room(RoomID),
 	HotelChainID serial REFERENCES hotelchain(HotelChainID),
+	HotelPhoneNumer INT NOT NULL,
 	Address varchar(45) NOT NULL,
 	NumberOfRooms INT NOT NULL,
 	Surname varchar(45) NOT NULL,
@@ -30,15 +31,12 @@ CREATE TABLE hotel (
 DROP TABLE IF EXISTS room;
 CREATE TABLE room (
 	RoomID serial PRIMARY KEY,
-	Address varchar(45) NOT NULL,
 	RoomView varchar(45) NOT NULL,
 	Price varchar(45) NOT NULL,
 	Capacity INT NOT NULL,
-	NumberOfRooms INT NOT NULL,
-	Surname varchar(45) NOT NULL,
+	RoomNumber INT NOT NULL,
 	Damages TEXT,
-	RoomExtension varchar(45),
-	CustomerEmail varchar(100) NOT NULL CHECK (CustomerEmail LIKE '_%@_%._%')
+	RoomExtension boolean NOT NULL
 );
 
 DROP TABLE IF EXISTS amenity;
@@ -84,8 +82,9 @@ CREATE TABLE booking (
 	BookingID serial PRIMARY KEY,
 	RentingID serial REFERENCES renting(RentingID),
 	CustomerID serial REFERENCES customer(CustomerID),
-	PricePaid varchar(45) NOT NULL,
-	Period varchar(45) NOT NULL,
+	PricePaid double precision NOT NULL,
+	CheckIn date NOT NULL,
+	CheckOut date NOT NULL,
 	NumberOfRooms INT NOT NULL
 );
 
@@ -95,7 +94,6 @@ CREATE TABLE renting (
 	CustomerID serial REFERENCES customer(CustomerID),
 	RoomID serial REFERENCES room(RoomID),
 	Period varchar(45) NOT NULL,
-	CustomerName varchar(45) NOT NULL,
 	NumberOfRooms INT NOT NULL
 );
 
