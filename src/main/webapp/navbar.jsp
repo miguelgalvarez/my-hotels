@@ -102,7 +102,7 @@
      <div class="profile-dropdown">
              <a href="#profile" class="profile">Profile</a>
              <div class="dropdown-content">
-                 <a href="signup.jsp">Sign In</a>
+                 <a href="signin.jsp">Sign In</a>
                  <a href="register.jsp">Register</a>
              </div>
          </div>

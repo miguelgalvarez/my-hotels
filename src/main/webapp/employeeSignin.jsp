@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign In</title>
+    <title>Employee Sign In</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -35,7 +35,7 @@
             gap: 20px;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="text"] {
             font-size: 16px;
             padding: 10px;
             border: 1px solid #ddd;
@@ -65,10 +65,10 @@
 <jsp:include page = "navbar.jsp" />
 
 <div class="container">
-    <h2>Sign In</h2>
-    <form action="login.jsp" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+    <h2>Employee Sign In</h2>
+    <form action="employee.jsp" method="post">
+        <input type="text" name="full name" placeholder="Full Name" required>
+        <input type="text" name="SSN" placeholder="SSN" required>
         <input type="submit" value="Sign In">
     </form>
 </div>
