@@ -83,19 +83,19 @@
     <div class="filters">
         <h2>Filters</h2>
         <label for="price">Price:</label>
-        <select id="price" class="filter-dropdown">
+        <select id="price" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">Lowest First</option>
             <option value="1">Highest First</option>
         </select>
         <label for="type">Type:</label>
-        <select id="type" class="filter-dropdown">
+        <select id="type" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
             <option value="1">Single</option>
             <option value="2">Double</option>
             <option value="3">Suite</option>
         </select>
         <label for="capacity">Capacity:</label>
-        <select id="capacity" class="filter-dropdown">
+        <select id="capacity" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
             <option value="1">1 guest</option>
             <option value="2">2 guests</option>
@@ -104,7 +104,7 @@
         </select>
     </div>
     <div class="hotels">
-        <div class="hotel">
+        <div class="hotel" data-price="25000" data-type="2" data-capacity="2">
             <a href="payment.jsp">
                 <h3>Room 1</h3>
                 <div class="hotel-info">
@@ -114,7 +114,7 @@
                 </div>
             </a>
         </div>
-        <div class="hotel">
+        <div class="hotel" data-price="100" data-type="3" data-capacity="4">
             <a href="payment.jsp">
                 <h3>Room 2</h3>
                 <div class="hotel-info">
@@ -127,6 +127,35 @@
         <!-- Add more hotel entries here -->
     </div>
 </div>
+
+<script>
+    function filterHotels() {
+        const priceFilter = document.getElementById('price').value;
+        const typeFilter = document.getElementById('type').value;
+        const capacityFilter = document.getElementById('capacity').value;
+
+        const hotels = document.querySelectorAll('.hotel');
+
+        hotels.forEach(hotel => {
+            const price = parseInt(hotel.getAttribute('data-price'));
+            const type = parseInt(hotel.getAttribute('data-type'));
+            const capacity = parseInt(hotel.getAttribute('data-capacity'));
+
+            const pricePass = priceFilter == 0 || (priceFilter == 1 && price >= 0) || (priceFilter == 2 && price <= 0);
+            const typePass = typeFilter == 0 || type == typeFilter;
+            const capacityPass = capacityFilter == 0 || capacity == capacityFilter;
+
+            if (pricePass && typePass && capacityPass) {
+                hotel.style.display = 'block';
+            } else {
+                hotel.style.display = 'none';
+            }
+        });
+    }
+
+    // Initial filtering
+    filterHotels();
+</script>
 
 </body>
 </html>
