@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +76,12 @@
             font-size: 18px;
         }
 
+        .available-rooms {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
     </style>
 </head>
 <body>
@@ -90,25 +95,25 @@
             <a href="hotels.jsp?city=Toronto" class="city-link">
                 <img src="assets/toronto.jpeg" alt="Toronto" class="city-image">
                 <span class="city-name">Toronto</span>
+                <span class="available-rooms">200 Available Rooms!</span>
             </a>
-
         </div>
         <div class="city-card">
             <a href="montreal.jsp" class="city-link">
                 <img src="assets/montreal.jpeg" alt="Montreal" class="city-image">
                 <span class="city-name">Montreal</span>
+                <span class="available-rooms">150 Available Rooms!</span>
             </a>
         </div>
         <div class="city-card">
             <a href="hotels.jsp?city=Vancouver" class="city-link">
                 <img src="assets/vancouver.jpeg" alt="Vancouver" class="city-image">
                 <span class="city-name">Vancouver</span>
+                <span class="available-rooms">180 Available Rooms!</span>
             </a>
-
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

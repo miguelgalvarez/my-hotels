@@ -121,23 +121,6 @@
     <h2 class="filter-title">Filters</h2>
     <div class="filter-list">
         <div class="filter-item">
-            <label for="start-date-filter">Start Date:</label>
-            <input type="date" id="start-date-filter">
-        </div>
-        <div class="filter-item">
-            <label for="end-date-filter">End Date:</label>
-            <input type="date" id="end-date-filter">
-        </div>
-        <div class="filter-item">
-            <label for="capacity-filter">Capacity:</label>
-            <select id="capacity-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="single">Single</option>
-                <option value="double">Double</option>
-                <option value="suite">Suite</option>
-            </select>
-        </div>
-        <div class="filter-item">
             <label for="area-filter">Area:</label>
             <select id="area-filter" class="filter-dropdown">
                 <option value=""></option>
@@ -163,17 +146,8 @@
             </select>
         </div>
         <div class="filter-item">
-            <label for="total-rooms-filter">Total Rooms:</label>
+            <label for="total-rooms-filter">Max Total Rooms:</label>
             <input type="number" id="total-rooms-filter">
-        </div>
-        <div class="filter-item">
-            <label for="price-filter">Price:</label>
-            <select id="price-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="Under $75">Under $75</option>
-                <option value="$75-$200">$75-$200</option>
-                <option value="Over $200">Over $200</option>
-            </select>
         </div>
         <div class="filter-item">
             <button id="search-button">Search</button>
@@ -183,21 +157,21 @@
 
 <div class="hotels-container">
     <div class="hotel-card">
-        <a href="payment.jsp" class="hotel-link">
+        <a href="rooms.jsp" class="rooms-link">
         <img src="https://via.placeholder.com/150" alt="Hotel 1" class="hotel-image">
-        <span class="hotel-name">Room 1</span>
+        <span class="hotel-name">Hotel 1</span>
         </a>
     </div>
     <div class="hotel-card">
         <a href="hotel-details.jsp?id=2" class="hotel-link">
             <img src="https://via.placeholder.com/150" alt="Hotel 2" class="hotel-image">
-            <span class="hotel-name">Room 2</span>
+            <span class="hotel-name">Hotel 2</span>
         </a>
     </div>
     <div class="hotel-card">
         <a href="hotel-details.jsp?id=3" class="hotel-link">
             <img src="https://via.placeholder.com/150" alt="Hotel 3" class="hotel-image">
-            <span class="hotel-name">Room 3</span>
+            <span class="hotel-name">Hotel 3</span>
         </a>
     </div>
     <!-- Add more hotel cards here -->
