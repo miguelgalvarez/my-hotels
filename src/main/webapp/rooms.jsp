@@ -106,9 +106,9 @@
     <div class="hotels">
         <div class="hotel">
             <a href="payment.jsp">
-                <h3>Hotel Name 1</h3>
+                <h3>Room 1</h3>
                 <div class="hotel-info">
-                    <p>Price: $2500</p>
+                    <p>Price: $25000</p>
                     <p>Type: Double</p>
                     <p>Capacity: 2 guests</p>
                 </div>
@@ -116,7 +116,7 @@
         </div>
         <div class="hotel">
             <a href="payment.jsp">
-                <h3>Hotel Name 2</h3>
+                <h3>Room 2</h3>
                 <div class="hotel-info">
                     <p>Price: $100</p>
                     <p>Type: Suite</p>
