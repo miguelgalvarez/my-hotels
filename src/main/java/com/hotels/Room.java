@@ -6,6 +6,7 @@ package com.hotels;
 
 public class Room {
     private int RoomID;
+    private int HotelID;
 
     private double price;
 
@@ -32,8 +33,9 @@ public class Room {
      * @param damages the damages to a room
      * @param roomNumber the room number
      */
-    public Room(int RoomID, int capacity, String amenities, String roomView, boolean roomExtension, String damages, int roomNumber) {
+    public Room(int RoomID, int HotelID, int capacity, String amenities, String roomView, boolean roomExtension, String damages, int roomNumber) {
         this.RoomID = RoomID;
+        this.HotelID = HotelID;
         this.capacity = capacity;
         this.amenities = amenities;
         this.roomView = roomView;
@@ -51,8 +53,9 @@ public class Room {
      * @param roomView the type of view that a room has
      * @param roomExtension if a room can have an extension
      */
-    public Room(double price, int capacity, String amenities, String roomView, boolean roomExtension) {
+    public Room(double price, int HotelID, int capacity, String amenities, String roomView, boolean roomExtension) {
         this.price = price;
+        this.HotelID = HotelID;
         this.capacity = capacity;
         this.amenities = amenities;
         this.roomView = roomView;

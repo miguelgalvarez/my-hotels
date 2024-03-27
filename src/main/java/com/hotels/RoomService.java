@@ -38,6 +38,7 @@ public class RoomService {
                 // create new room object
                 Room room = new Room(
                         rs.getDouble("Price"),
+                        rs.getInt("HotelID"),
                         rs.getInt("Capacity"),
                         rs.getString("Amenities"),
                         rs.getString("RoomView"),

@@ -9,9 +9,9 @@ import java.util.List;
 public class HotelService {
 
     /**
-     * Method to get all grades from the database
+     * Method to get all hotels from the database
      *
-     * @return List of grades from database
+     * @return List of hotels from database
      * @throws Exception when trying to connect to database
      */
     public List<Hotel> getHotels() throws Exception {
@@ -38,11 +38,14 @@ public class HotelService {
                 // create new hotel object
                 Hotel hotel = new Hotel(
                         rs.getDouble("Rating"),
+                        rs.getInt("HotelChainID"),
+                        rs.getString("HotelArea"),
+                        rs.getString("HotelCategory"),
                         rs.getInt("HotelPhoneNumber"),
                         rs.getInt("NumberOfRooms"),
                         rs.getString("Address"),
                         rs.getString("HotelEmail"),
-                        rs.getString("Surname")
+                        rs.getString("HotelName")
                 );
 
                 // append hotel in hotels list

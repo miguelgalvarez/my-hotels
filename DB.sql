@@ -17,11 +17,12 @@ CREATE TABLE hotelchain (
 DROP TABLE IF EXISTS hotel;
 CREATE TABLE hotel (
 	HotelID serial PRIMARY KEY,
-	RoomID INT REFERENCES room(RoomID),
 	HotelChainID INT REFERENCES hotelchain(HotelChainID),
 	HotelPhoneNumber BIGINT NOT NULL,
 	Address varchar(45) NOT NULL,
 	NumberOfRooms INT NOT NULL,
+	HotelCategory varchar(45) NOT NULL,
+	HotelArea varchar(45) NOT NULL,
 	HotelName varchar(45) NOT NULL,
 	HotelEmail varchar(100) NOT NULL CHECK (HotelEmail LIKE '_%@_%._%'),
 	Rating double precision NOT NULL
@@ -30,6 +31,7 @@ CREATE TABLE hotel (
 DROP TABLE IF EXISTS room;
 CREATE TABLE room (
 	RoomID serial PRIMARY KEY,
+	HotelID BIGINT REFERENCES hotel(HotelID),
 	RoomView varchar(45) NOT NULL,
 	Price double precision NOT NULL,
 	Capacity INT NOT NULL,
@@ -108,9 +110,9 @@ VALUES
 -- ----------------------------
 -- Records of hotels
 -- ----------------------------	
-INSERT INTO Hotel (HotelEmail, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
+INSERT INTO Hotel (HotelChainID, HotelEmail, HotelArea, HotelCategory, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
 VALUES
-    ('hotel1@gmail.com', 'Holiday Inn', '1234567890', 4, 10, 'Hotel 1 Address'),
+    ('hotel1@gmail.com', 'Montreal', 'Luxury','Holiday Inn', '1234567890', 4, 10, 'Hotel 1 Address'),
     ('hotel2@gmail.com', 'Holiday Inn', '2345678901', 3, 15, 'Hotel 2 Address'),
     ('hotel3@gmail.com', 'Holiday Inn', '3456789012', 5, 12, 'Hotel 3 Address'),
     ('hotel4@gmail.com', 'Holiday Inn', '4567890123', 4, 20, 'Hotel 4 Address'),
@@ -148,3 +150,4 @@ VALUES
 SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = 3;
 SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = 'john_doe') AS username_exists;
 SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';
+SELECT * FROM hotel

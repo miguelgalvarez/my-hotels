@@ -6,7 +6,9 @@ package com.hotels;
 
 public class Hotel {
     private int hotelID;
-
+    private int hotelChainID;
+    private String hotelCategory;
+    private String hotelArea;
     private double rating;
 
     private int phoneNumber;
@@ -17,7 +19,7 @@ public class Hotel {
 
     private String email;
 
-    private final String surname;
+    private String hotelName;
 
     /**
      * Constructor to save hotel's data (with id)
@@ -28,15 +30,17 @@ public class Hotel {
      * @param numRooms number of rooms in a hotel
      * @param address address of hotel
      * @param email email of hotel
+     * @param hotelName name of the hotel
      */
-    public Hotel(int hotelID, double rating, int phoneNumber, int numRooms, String address, String email, String surname) {
+    public Hotel(int hotelID, int hotelChainID, double rating, int phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.hotelID = hotelID;
+        this.hotelChainID = hotelChainID;
         this.rating = rating;
         this.phoneNumber = phoneNumber;
         this.numRooms = numRooms;
         this.address = address;
         this.email = email;
-        this.surname = surname;
+        this.hotelName = hotelName;
     }
 
     /**
@@ -48,24 +52,31 @@ public class Hotel {
      * @param address address of hotel
      * @param email email of hotel
      */
-    public Hotel(double rating, int phoneNumber, int numRooms, String address, String email, String surname) {
+    public Hotel(double rating, int hotelChainID, String hotelArea, String hotelCategory, int phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.rating = rating;
+        this.hotelChainID = hotelChainID;
+        this.hotelArea = hotelArea;
+        this.hotelCategory = hotelCategory;
         this.phoneNumber = phoneNumber;
         this.numRooms = numRooms;
         this.address = address;
         this.email = email;
-        this.surname = surname;
+        this.hotelName = hotelName;
     }
 
     /* Getters */
     public int getID() {return this.hotelID; }
+    public String getHotelArea() {return this.hotelArea;}
+    public String getHotelCategory() {return this.hotelCategory;}
+
+    public int getHotelChainID() {return this.hotelChainID;}
     public double getRating() {return this.rating; }
     public int getPhoneNumber() {return this.phoneNumber; }
     public int getNumRooms() {return this.numRooms; }
     public String getAddress() {return this.address; }
     public String getEmail() {return this.email; }
 
-    public String getSurname() {return this.surname;}
+    public String getHotelName() {return this.hotelName;}
 
     /* Setters */
     public void setHotelID(int hotelID) {this.hotelID = hotelID; }
