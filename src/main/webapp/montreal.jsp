@@ -95,12 +95,6 @@
             <option value="2">Mid-Range</option>
             <option value="3">Luxury</option>
         </select>
-        <label for="Area">Area:</label>
-        <select id="Area" class="filter-dropdown" onchange="filterHotels()">
-            <option value="0">All</option>
-            <option value="1">Downtown</option>
-            <option value="2">Suburb</option>
-        </select>
         <label for="Max-Rooms">Max Rooms:</label>
         <select id="Max-Rooms" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
@@ -110,24 +104,22 @@
         </select>
     </div>
     <div class="hotels">
-        <div class="hotel" data-HotelChain="2" data-type="3" data-Area="1" data-MaxRooms="150">
+        <div class="hotel" data-HotelChain="2" data-type="3" data-MaxRooms="150">
             <a href="rooms.jsp">
                 <h3>Hotel 1</h3>
                 <div class="hotel-info">
                     <p>Hotel Chain 2</p>
                     <p>Type: Luxury</p>
-                    <p>Area: Downtown</p>
                     <p>Max Rooms: 150</p>
                 </div>
             </a>
         </div>
-        <div class="hotel" data-HotelChain="1" data-type="1" data-Area="2" data-MaxRooms="80">
+        <div class="hotel" data-HotelChain="1" data-type="1" data-MaxRooms="80">
             <a href="rooms.jsp">
                 <h3>Hotel 2</h3>
                 <div class="hotel-info">
                     <p>Hotel Chain 1</p>
                     <p>Type: Budget</p>
-                    <p>Area: Suburb</p>
                     <p>Max Rooms: 80</p>
                 </div>
             </a>
@@ -140,7 +132,6 @@
     function filterHotels() {
         const hotelChainFilter = document.getElementById('Hotel-Chain').value;
         const typeFilter = document.getElementById('type').value;
-        const areaFilter = document.getElementById('Area').value;
         const maxRoomsFilter = document.getElementById('Max-Rooms').value;
 
         const hotels = document.querySelectorAll('.hotel');
@@ -148,18 +139,16 @@
         hotels.forEach(hotel => {
             const hotelChain = parseInt(hotel.getAttribute('data-HotelChain'));
             const type = parseInt(hotel.getAttribute('data-type'));
-            const area = parseInt(hotel.getAttribute('data-Area'));
             const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'));
 
             const hotelChainPass = hotelChainFilter == 0 || hotelChain == hotelChainFilter;
             const typePass = typeFilter == 0 || type == typeFilter;
-            const areaPass = areaFilter == 0 || area == areaFilter;
             const maxRoomsPass = maxRoomsFilter == 0 ||
                 (maxRoomsFilter == 1 && maxRooms < 50) ||
                 (maxRoomsFilter == 2 && maxRooms >= 50 && maxRooms <= 100) ||
                 (maxRoomsFilter == 3 && maxRooms > 100);
 
-            if (hotelChainPass && typePass && areaPass && maxRoomsPass) {
+            if (hotelChainPass && typePass && maxRoomsPass) {
                 hotel.style.display = 'block';
             } else {
                 hotel.style.display = 'none';
