@@ -19,6 +19,7 @@ public class BookingService {
 
         //testing
         System.out.println(booking.getPricePaid());
+        System.out.println(booking.getHotelID());
         System.out.println(booking.getCustomerID());
         System.out.println(booking.getCheckIn());
         System.out.println(booking.getCheckOut());

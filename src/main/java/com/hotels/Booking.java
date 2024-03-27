@@ -59,6 +59,7 @@ public class Booking {
     public double getPricePaid() {
         return pricePaid;
     }
+    public int getHotelID() {return hotelID;}
 
     public int getCustomerID() {return customerID;}
     public Date getCheckIn() {
