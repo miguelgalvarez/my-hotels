@@ -65,21 +65,19 @@ CREATE TABLE employee (
 DROP TABLE IF EXISTS booking;
 CREATE TABLE booking (
 	BookingID serial PRIMARY KEY,
-	CustomerID INT REFERENCES customer(CustomerID),
+	CustomerID BIGINT REFERENCES customer(CustomerID),
 	PricePaid double precision NOT NULL,
 	CheckIn date NOT NULL,
-	CheckOut date NOT NULL,
-	NumberOfRooms INT NOT NULL
+	CheckOut date NOT NULL
 );
 
 DROP TABLE IF EXISTS renting;
 CREATE TABLE renting (
 	RentingID serial PRIMARY KEY,
-	CustomerID INT REFERENCES customer(CustomerID),
+	CustomerID BIGINT REFERENCES customer(CustomerID),
 	RoomID INT REFERENCES room(RoomID),
 	CheckIn date NOT NULL,
-	CheckOut date NOT NULL,
-	NumberOfRooms INT NOT NULL
+	CheckOut date NOT NULL
 );
 
 -- ----------------------------
@@ -133,17 +131,16 @@ VALUES
 ('bob_jones', 'pass1234', '2023-03-25', '789 Oak St, Anycity, USA', 'Bob Jones', '2468101214', 'bob.jones@example.com'),
 ('alice_davis', 'abcd7890', '2023-04-30', '101 Pine St, Somecity, USA', 'Alice Davis', '1357924680', 'alice.davis@example.com');
 
-	
 -- ----------------------------
 -- Records of bookings
 -- ----------------------------
 INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut, NumberOfRooms)
 VALUES
-    (1, 150.00, '2024-04-01', '2024-04-05', 2),
-    (2, 200.00, '2024-05-10', '2024-05-15', 1),
-    (3, 180.00, '2024-06-20', '2024-06-25', 3),
-    (4, 250.00, '2024-07-15', '2024-07-20', 2),
-    (5, 300.00, '2024-08-10', '2024-08-15', 1);
+    (1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 180.00, '2024-06-20', '2024-06-25'),
+    (4, 250.00, '2024-07-15', '2024-07-20'),
+    (5, 300.00, '2024-08-10', '2024-08-15');
 
 
 SELECT c.FullName AS CustomerName FROM booking b JOIN customer c ON b.CustomerID = c.CustomerID WHERE b.BookingID = 15;
