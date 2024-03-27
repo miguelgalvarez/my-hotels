@@ -134,13 +134,17 @@ VALUES
 -- ----------------------------
 -- Records of bookings
 -- ----------------------------
-INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut, NumberOfRooms)
+INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut)
 VALUES
     (1, 150.00, '2024-04-01', '2024-04-05'),
     (2, 200.00, '2024-05-10', '2024-05-15'),
     (3, 180.00, '2024-06-20', '2024-06-25'),
-    (4, 250.00, '2024-07-15', '2024-07-20'),
-    (5, 300.00, '2024-08-10', '2024-08-15');
+    (3, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 300.00, '2024-08-10', '2024-08-15');
 
-
-SELECT c.FullName AS CustomerName FROM booking b JOIN customer c ON b.CustomerID = c.CustomerID WHERE b.BookingID = 15;
+-- ----------------------------
+-- Test queries
+-- ----------------------------
+SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = 3;
+SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = 'john_doe') AS username_exists;
+SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';

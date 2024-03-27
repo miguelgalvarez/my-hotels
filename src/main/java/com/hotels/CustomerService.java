@@ -116,7 +116,7 @@ public class CustomerService {
      * @return string returned that states if the customer deleted or not
      * @throws Exception when trying to connect to database
      */
-    public String deleteCustomer(Integer CustomerID) throws Exception {
+    public String deleteCustomer(int CustomerID) throws Exception {
         Connection con = null;
         String message = "";
 
