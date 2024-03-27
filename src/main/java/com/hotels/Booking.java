@@ -8,6 +8,7 @@ import java.util.Date;
 public class Booking {
 
     private int BookingID;
+    private int hotelID;
     private double pricePaid;
     private int customerID;
     private Date checkIn;
@@ -20,8 +21,9 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int BookingID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int BookingID, int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
+        this.hotelID = hotelID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
         this.checkIn = checkIn;
@@ -32,11 +34,13 @@ public class Booking {
      * Constructor to save booking's data (without id)
      *
      * @param pricePaid price paid for the booking
+     * @param hotelID associated hotel for the booking
      * @param customerID id of the customer associated to the booking
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+        this.hotelID = hotelID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
         this.checkIn = checkIn;

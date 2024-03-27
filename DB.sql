@@ -68,6 +68,7 @@ DROP TABLE IF EXISTS booking;
 CREATE TABLE booking (
 	BookingID serial PRIMARY KEY,
 	CustomerID BIGINT REFERENCES customer(CustomerID),
+	HotelID BIGINT REFERENCES hotel(HotelID),
 	PricePaid double precision NOT NULL,
 	CheckIn date NOT NULL,
 	CheckOut date NOT NULL
@@ -112,16 +113,16 @@ VALUES
 -- ----------------------------	
 INSERT INTO Hotel (HotelChainID, HotelEmail, HotelArea, HotelCategory, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
 VALUES
-    ('hotel1@gmail.com', 'Montreal', 'Luxury','Holiday Inn', '1234567890', 4, 10, 'Hotel 1 Address'),
-    ('hotel2@gmail.com', 'Holiday Inn', '2345678901', 3, 15, 'Hotel 2 Address'),
-    ('hotel3@gmail.com', 'Holiday Inn', '3456789012', 5, 12, 'Hotel 3 Address'),
-    ('hotel4@gmail.com', 'Holiday Inn', '4567890123', 4, 20, 'Hotel 4 Address'),
-    ('hotel5@gmail.com', 'Holiday Inn', '5678901234', 3, 8, 'Hotel 5 Address'),
-    ('hotel6@gmail.com', 'Holiday Inn', '6789012345', 4, 18, 'Hotel 6 Address'),
-    ('hotel7@gmail.com', 'Holiday Inn', '7890123456', 5, 10, 'Hotel 7 Address'),
-    ('hotel8@gmail.com', 'Holiday Inn', '8901234567', 4, 25, 'Hotel 8 Address'),
-    ('hotel9@gmail.com', 'Holiday Inn', '9012345678', 3, 12, 'Hotel 9 Address'),
-    ('hotel10@gmail.com', 'Holiday Inn', '0123456789', 4, 22, 'Hotel 10 Address');
+    (1,'hotel1@gmail.com', 'Montreal', 'Luxury','Holiday Inn', '1234567890', 4, 10, 'Hotel 1 Address'),
+    (1,'hotel2@gmail.com', 'Montreal', 'Budget','Holiday Inn', '2345678901', 3, 15, 'Hotel 2 Address'),
+    (2,'hotel3@gmail.com', 'Montreal', 'Luxury','Holiday Inn', '3456789012', 5, 12, 'Hotel 3 Address'),
+    (2,'hotel4@gmail.com', 'Montreal', 'Budget','Holiday Inn', '4567890123', 4, 20, 'Hotel 4 Address'),
+    (3,'hotel5@gmail.com', 'Montreal', 'Luxury','Holiday Inn', '5678901234', 3, 8, 'Hotel 5 Address'),
+    (3,'hotel6@gmail.com', 'Toronto', 'Luxury','Holiday Inn', '6789012345', 4, 18, 'Hotel 6 Address'),
+    (4,'hotel7@gmail.com', 'Toronto', 'Budget','Holiday Inn', '7890123456', 5, 10, 'Hotel 7 Address'),
+    (4,'hotel8@gmail.com', 'Toronto', 'Luxury','Holiday Inn', '8901234567', 4, 25, 'Hotel 8 Address'),
+    (5,'hotel9@gmail.com', 'Toronto', 'Budget','Holiday Inn', '9012345678', 3, 12, 'Hotel 9 Address'),
+    (5,'hotel10@gmail.com', 'Toronto', 'Luxury','Holiday Inn', '0123456789', 4, 22, 'Hotel 10 Address');
 
 -- ----------------------------
 -- Records of customers

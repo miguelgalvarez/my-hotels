@@ -82,6 +82,7 @@ public class BookingService {
             while (rs.next()) {
                 // create new booking object
                 Booking booking = new Booking(
+                        rs.getInt("HotelID"),
                         rs.getDouble("PricePaid"),
                         rs.getInt("CustomerID"),
                         rs.getDate("CheckIn"),
