@@ -1,8 +1,4 @@
 -- ----------------------------
--- Setting search-path
--- ----------------------------
-set search_path = "my-hotels"
--- ----------------------------
 -- Table structure for entities
 -- ----------------------------
 DROP TABLE IF EXISTS hotelchain;
@@ -152,3 +148,4 @@ SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.Cus
 SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = 'john_doe') AS username_exists;
 SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';
 SELECT * FROM hotel
+SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = 'john') AS username_exists;
