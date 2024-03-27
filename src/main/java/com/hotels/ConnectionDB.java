@@ -9,10 +9,10 @@ public class ConnectionDB {
 
     /* Database connection settings, change dbName, dbusername, dbpassword */
     private final String ipAddress = "localhost";
-    private final String dbServerPort = "5432";
-    private final String dbName = "postgres";
-    private final String dbusername = "miguelalvarez";
-    private final String dbpassword = "TRI200308";
+    private final String dbServerPort = "5433";
+    private final String dbName = "myHotels";
+    private final String dbusername = "postgres";
+    private final String dbpassword = "";
 
 
     private Connection con = null;

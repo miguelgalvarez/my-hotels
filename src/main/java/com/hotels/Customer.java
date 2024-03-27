@@ -56,6 +56,18 @@ public class Customer {
         this.customeremail = customeremail;
 
     }
+
+    public Customer(String fullName, String customerusername, String customerpassword, String address, String IDPresented, String customeremail) {
+        this.fullName = fullName;
+        this.customerusername = customerusername;
+        this.customerpassword = customerpassword;
+        //this.dateOfRegistration = new java.sql.Date(System.currentTimeMillis());
+        this.address = address;
+        this.IDPresented = IDPresented;
+        this.customeremail = customeremail;
+
+    }
+
     // Getters
     public int getCustomerID() {
         return customerID;

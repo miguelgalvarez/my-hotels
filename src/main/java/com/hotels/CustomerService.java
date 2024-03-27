@@ -3,8 +3,10 @@ package com.hotels;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class CustomerService {
     /**
@@ -13,57 +15,44 @@ public class CustomerService {
      * @return String that lets the user know if it worked
      * @throws Exception when trying to connect to database
      */
-    public String createCustomer(Customer customer) throws Exception {
-        String message = "";
-        Connection con = null;
+    public Boolean createCustomer(Customer customer) throws Exception {
 
-        // connection object
-        ConnectionDB db = new ConnectionDB();
+        //testing
         System.out.println(customer.getFullName());
         System.out.println(customer.getCustomerUsername());
         System.out.println(customer.getCustomerPassword());
         System.out.println(customer.getDateOfRegistration());
         System.out.println(customer.getAddress());
 
-        // sql query
-        String insertStudentQuery = "INSERT INTO customer (FullName, CustomerUsername, CustomerPassword, Address, IDPresented, CustomerEmail) VALUES (?, ?, ?, ?, ?, ?);";
-        // "INSERT INTO students (name, surname, email) VALUES (" + student.getName().toString() +
-//        ", " + student.getSurname() ...."
+        //turn password into hash code to store securely
+        String hashedPassword = BCrypt.hashpw(customer.getCustomerPassword(), BCrypt.gensalt());
 
-        // try connect to database, catch any exceptions
-        try {
-            con = db.getConnection(); //get Connection
+        //establish connection with DB
+        ConnectionDB db = new ConnectionDB();
 
-            // prepare the statement
-            PreparedStatement stmt = con.prepareStatement(insertStudentQuery);
+        // Insert data into the database
+        try (Connection connection = db.getConnection()) {
+            String sql = "INSERT INTO customer (FullName, Username, Password, CustomerEmail, Address, IDPresented) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, customer.getFullName());
+                statement.setString(2, customer.getCustomerUsername());
+                statement.setString(3, hashedPassword);
+                statement.setString(4, customer.getCustomerEmail());
+                statement.setString(5, customer.getAddress());
+                statement.setString(6, customer.getIDPresented());
 
-            // set every ? of statement
-            stmt.setString(1, customer.getFullName());
-            stmt.setString(2, customer.getCustomerUsername());
-            stmt.setString(3, customer.getCustomerPassword());
-            stmt.setString(4, customer.getAddress());
-            stmt.setString(5, customer.getIDPresented());
-            stmt.setDate(6, customer.getDateOfRegistration());
+                int result = statement.executeUpdate();
 
-            // execute the query
-            int output = stmt.executeUpdate();
-            System.out.println(output);
-
-            // close the statement
-            stmt.close();
-            // close the connection
-            db.close();
+                return result > 0; //registration if registration was successful or not
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL exceptions
         } catch (Exception e) {
-            message = "Error while inserting customer: " + e.getMessage();
-        } finally {
-            if (con != null) // if connection is still open, then close.
-                con.close();
-            if (message.equals("")) message = "Student successfully inserted!";
-
+            throw new RuntimeException(e);
         }
 
-        // return respective message
-        return message;
+        return false; //default case
     }
     /**
      * Method to get all customers from the database

@@ -22,6 +22,10 @@
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
         }
 
         .booking-title {
@@ -29,7 +33,7 @@
             text-align: center;
             color: #333;
             font-size: 28px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .booking-card {
@@ -69,7 +73,34 @@
         }
 
         .booking-info {
-                    flex: 1;
+            flex: 1;
+        }
+
+        /*login/register buttons*/
+
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+
+        }
+
+        .auth-buttons a {
+            padding: 10px 20px;
+            background-color: #f29602;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            width: 100px;
+            text-align: center;
+        }
+
+        .auth-buttons a:hover {
+            background-color: #e08502; /* Darker shade for hover state */
         }
 
     </style>
@@ -80,45 +111,59 @@
 
 <div class="container">
     <h2 class="booking-title">Your Bookings</h2>
-    <%
-        // Enhanced Booking class with additional details
-        class Booking {
-            String bookingId;
-            String hotelName;
-            String checkInDate;
-            String checkOutDate;
-            double pricePaid;
-            int numOfRooms;
-            public Booking(String bookingId, String hotelName, String checkInDate, String checkOutDate, double pricePaid, int numOfRooms) {
-                this.bookingId = bookingId;
-                this.hotelName = hotelName;
-                this.checkInDate = checkInDate;
-                this.checkOutDate = checkOutDate;
-                this.pricePaid = pricePaid;
-                this.numOfRooms = numOfRooms;
+    <% if (session.getAttribute("username") != null) { %>
+        <%-- User is logged in, display bookings --%>
+        <%
+            // Enhanced Booking class with additional details
+            class Booking {
+                String bookingId;
+                String hotelName;
+                String checkInDate;
+                String checkOutDate;
+                double pricePaid;
+                int numOfRooms;
+                public Booking(String bookingId, String hotelName, String checkInDate, String checkOutDate, double pricePaid, int numOfRooms) {
+                    this.bookingId = bookingId;
+                    this.hotelName = hotelName;
+                    this.checkInDate = checkInDate;
+                    this.checkOutDate = checkOutDate;
+                    this.pricePaid = pricePaid;
+                    this.numOfRooms = numOfRooms;
+                }
             }
-        }
 
-        List<Booking> bookings = new ArrayList<>();
-        bookings.add(new Booking("000312", "Hotel Sunshine", "2024-03-01", "2024-03-05", 299.99, 2));
-        bookings.add(new Booking("03312", "Sea View Resort", "2024-04-15", "2024-04-20", 499.99, 1));
+            //getting all bookings of a customer
+            List<Booking> bookings = new ArrayList<>();
 
-        // Displaying enhanced bookings
-        for (Booking booking : bookings) {
-    %>
-        <div class="booking-card">
-            <div class="booking-info">
-                <div class="hotel-name"><%= booking.hotelName %></div>
-                <div class="details">Booking ID: <%= booking.bookingId %></div>
-                <div class="details">Check-in: <%= booking.checkInDate %></div>
-                <div class="details">Check-out: <%= booking.checkOutDate %></div>
-                <div class="details">Number of Rooms: <%= booking.numOfRooms %></div>
+            bookings.add(new Booking("000312", "Hotel Sunshine", "2024-03-01", "2024-03-05", 299.99, 2));
+            bookings.add(new Booking("03312", "Sea View Resort", "2024-04-15", "2024-04-20", 499.99, 1));
+
+            // Displaying enhanced bookings
+            for (Booking booking : bookings) {
+        %>
+            <div class="booking-card">
+                <div class="booking-info">
+                    <div class="hotel-name"><%= booking.hotelName %></div>
+                    <div class="details">Booking ID: <%= booking.bookingId %></div>
+                    <div class="details">Check-in: <%= booking.checkInDate %></div>
+                    <div class="details">Check-out: <%= booking.checkOutDate %></div>
+                    <div class="details">Number of Rooms: <%= booking.numOfRooms %></div>
+                </div>
+                <div class="price">$<%= booking.pricePaid %></div>
             </div>
-            <div class="price">$<%= booking.pricePaid %></div>
+        <%
+            }
+        %>
+    <% } else { %>
+        <%-- No user is logged in, display login and register buttons --%>
+        <div class="booking-title">
+            Please log in or register to view your bookings.
         </div>
-    <%
-        }
-    %>
+        <div class="auth-buttons">
+            <a href="signin.jsp" class = "login-btn">Log In</a>
+            <a href="register.jsp" class="register-btn">Register</a>
+        </div>
+    <% } %>
 </div>
 
 </body>

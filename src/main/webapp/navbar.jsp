@@ -11,6 +11,7 @@
             background-color: #f29602; /* background color for navbar (FFAF45) (0056b3) (f29602)*/
             overflow: hidden;
             padding: 0 20px;
+
         }
         .navbar a {
             float: left;
@@ -65,7 +66,7 @@
             width: 80px; /* Ensure dropdown is as wide as the parent */
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add some shadow */
             z-index: 1; /* Ensure dropdown is on top */
-            top: 58px; /* Start just below the profile link */
+            top: 56px; /* Start just below the profile link */
             /*left: 0; /* Align with the left edge of the profile link */
             border-radius: 14px;
         }
@@ -91,6 +92,21 @@
             background-color: #FFAF45; /* Light grey background on hover */
         }
 
+        .welcome-text {
+            margin-right: 20px; /* Adjust spacing to your preference */
+            color: white; /* Match the navbar text color */
+            position: relative;
+            top: 17px;
+            font-weight: bold;
+
+        }
+
+        .right-section {
+            float: right;
+            align-items: center;
+        }
+
+
  </style>
 
  <div class="navbar">
@@ -99,11 +115,22 @@
      <a href="bookings.jsp">Bookings</a>
      <a href="#about">About</a>
      <a href="#contact">Contact</a>
-     <div class="profile-dropdown">
+
+     <div class="right-section">
+         <% if (session.getAttribute("username") != null) { %>
+             <span class="welcome-text">Welcome <%= session.getAttribute("username") %>!</span>
+         <% } %>
+
+         <div class="profile-dropdown">
              <a href="#profile" class="profile">Profile</a>
              <div class="dropdown-content">
-                 <a href="signin.jsp">Sign In</a>
-                 <a href="register.jsp">Register</a>
+                 <% if (session.getAttribute("username") != null) { %>
+                    <a href="logout">Logout</a>
+                 <% } else { %>
+                     <a href="signin.jsp">Sign In</a>
+                     <a href="register.jsp">Register</a>
+                 <% } %>
              </div>
          </div>
+     </div>
  </div>

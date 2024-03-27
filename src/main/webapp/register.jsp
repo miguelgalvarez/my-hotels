@@ -35,7 +35,7 @@
             gap: 20px;
         }
 
-        input[type="text"], input[type="text"], input[type="password"], input[type="email"], input[type="text"] {
+        input[type="text"], input[type="text"], input[type="password"], input[type="email"], input[type="text"], input[type="text"] {
             font-size: 16px;
             padding: 10px;
             border: 1px solid #ddd;
@@ -66,12 +66,13 @@
 
 <div class="container">
     <h2>Register</h2>
-    <form action="register.jsp" method="post">
+    <form method="post" action="register">
         <input type="text" name="full name" placeholder="Full Name" required>
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="type of ID" placeholder="Type of ID" required>
         <input type="submit" value="Register">
     </form>
 </div>
