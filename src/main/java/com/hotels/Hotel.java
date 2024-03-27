@@ -1,5 +1,7 @@
 package com.hotels;
 
+import java.math.BigDecimal;
+
 /**
  * Hotel class to store Hotel data
  */
@@ -11,7 +13,7 @@ public class Hotel {
     private String hotelArea;
     private double rating;
 
-    private int phoneNumber;
+    private BigDecimal phoneNumber;
 
     private int numRooms;
 
@@ -32,7 +34,7 @@ public class Hotel {
      * @param email email of hotel
      * @param hotelName name of the hotel
      */
-    public Hotel(int hotelID, int hotelChainID, double rating, int phoneNumber, int numRooms, String address, String email, String hotelName) {
+    public Hotel(int hotelID, int hotelChainID, double rating, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.hotelID = hotelID;
         this.hotelChainID = hotelChainID;
         this.rating = rating;
@@ -52,7 +54,7 @@ public class Hotel {
      * @param address address of hotel
      * @param email email of hotel
      */
-    public Hotel(double rating, int hotelChainID, String hotelArea, String hotelCategory, int phoneNumber, int numRooms, String address, String email, String hotelName) {
+    public Hotel(double rating, int hotelChainID, String hotelArea, String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.rating = rating;
         this.hotelChainID = hotelChainID;
         this.hotelArea = hotelArea;
@@ -71,7 +73,7 @@ public class Hotel {
 
     public int getHotelChainID() {return this.hotelChainID;}
     public double getRating() {return this.rating; }
-    public int getPhoneNumber() {return this.phoneNumber; }
+    public BigDecimal getPhoneNumber() {return this.phoneNumber; }
     public int getNumRooms() {return this.numRooms; }
     public String getAddress() {return this.address; }
     public String getEmail() {return this.email; }
@@ -81,7 +83,7 @@ public class Hotel {
     /* Setters */
     public void setHotelID(int hotelID) {this.hotelID = hotelID; }
     public void setRating(int rating) {this.rating = rating; }
-    public void setPhoneNumber(int phoneNumber) {this.phoneNumber = phoneNumber; }
+    public void setPhoneNumber(BigDecimal phoneNumber) {this.phoneNumber = phoneNumber; }
     public void setNumRooms(int numRooms) {this.numRooms = numRooms; }
     public void setAddress(String address) {this.address = address; }
     public void setEmail(String email) {this.email = email;}

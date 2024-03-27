@@ -42,7 +42,7 @@ public class HotelService {
                         rs.getInt("HotelChainID"),
                         rs.getString("HotelArea"),
                         rs.getString("HotelCategory"),
-                        rs.getInt("HotelPhoneNumber"),
+                        rs.getBigDecimal("HotelPhoneNumber"),
                         rs.getInt("NumberOfRooms"),
                         rs.getString("Address"),
                         rs.getString("HotelEmail"),

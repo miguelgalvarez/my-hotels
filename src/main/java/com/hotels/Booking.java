@@ -1,5 +1,6 @@
 package com.hotels;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
 public class Booking {
 
     private int BookingID;
-    private int hotelID;
+    private BigDecimal hotelID;
     private double pricePaid;
     private int customerID;
     private Date checkIn;
@@ -21,7 +22,7 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int BookingID, int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int BookingID, BigDecimal hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
         this.hotelID = hotelID;
         this.pricePaid = pricePaid;
@@ -39,7 +40,7 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(BigDecimal hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.hotelID = hotelID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
@@ -49,9 +50,6 @@ public class Booking {
 
 
     // Getters
-    public int getHotelID() {
-        return hotelID;
-    }
     public int getBookingID() {
         return BookingID;
     }
@@ -59,7 +57,7 @@ public class Booking {
     public double getPricePaid() {
         return pricePaid;
     }
-    public int getHotelID() {return hotelID;}
+    public BigDecimal getHotelID() {return hotelID;}
 
     public int getCustomerID() {return customerID;}
     public Date getCheckIn() {

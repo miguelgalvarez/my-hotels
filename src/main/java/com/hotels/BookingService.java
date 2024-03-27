@@ -83,7 +83,7 @@ public class BookingService {
             while (rs2.next()) {
                 // create new booking object
                 Booking booking = new Booking(
-                        rs2.getInt("HotelID"),
+                        rs2.getBigDecimal("HotelID"),
                         rs2.getDouble("PricePaid"),
                         rs2.getInt("CustomerID"),
                         rs2.getDate("CheckIn"),
