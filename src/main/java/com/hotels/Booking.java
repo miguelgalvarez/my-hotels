@@ -25,6 +25,7 @@ public class Booking {
     public Booking(int BookingID, double pricePaid, int numberOfRooms, String customerName, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
         this.pricePaid = pricePaid;
+        this.customerName = customerName;
         this.numberOfRooms = numberOfRooms;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -60,6 +61,8 @@ public class Booking {
     public int getNumberOfRooms() {
         return numberOfRooms;
     }
+
+    public String getCustomerName() {return customerName;}
 
     public Date getCheckIn() {
         return checkIn;

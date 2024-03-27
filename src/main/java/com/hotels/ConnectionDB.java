@@ -11,8 +11,8 @@ public class ConnectionDB {
     private final String ipAddress = "localhost";
     private final String dbServerPort = "5432";
     private final String dbName = "postgres";
-    private final String dbusername = "postgres";
-    private final String dbpassword = "";
+    private final String dbusername = "miguelalvarez";
+    private final String dbpassword = "TRI200308";
 
 
     private Connection con = null;

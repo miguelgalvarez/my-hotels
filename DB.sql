@@ -2,7 +2,6 @@
 -- Setting search-path
 -- ----------------------------
 set search_path = "my-hotels"
-
 -- ----------------------------
 -- Table structure for entities
 -- ----------------------------
@@ -43,11 +42,12 @@ CREATE TABLE room (
 DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
 	CustomerID serial PRIMARY KEY,
+	CustomerUsername varchar(45) NOT NULL,
+	CustomerPassword varchar(45) NOT NULL,
+	DateOfRegistration date NOT NULL,
 	Address varchar(45) NOT NULL,
 	FullName varchar(45) NOT NULL,
 	IDPresented varchar(45) NOT NULL,
-	Capacity INT NOT NULL,
-	NumberOfRooms INT NOT NULL,
 	CustomerEmail varchar(100) NOT NULL CHECK (CustomerEmail LIKE '_%@_%._%')
 );
 
@@ -77,7 +77,8 @@ CREATE TABLE renting (
 	RentingID serial PRIMARY KEY,
 	CustomerID INT REFERENCES customer(CustomerID),
 	RoomID INT REFERENCES room(RoomID),
-	Period varchar(45) NOT NULL,
+	CheckIn date NOT NULL,
+	CheckOut date NOT NULL,
 	NumberOfRooms INT NOT NULL
 );
 
@@ -108,8 +109,7 @@ VALUES
 
 -- ----------------------------
 -- Records of hotels
--- ----------------------------
-	
+-- ----------------------------	
 INSERT INTO Hotel (HotelEmail, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
 VALUES
     ('hotel1@gmail.com', 'Holiday Inn', '1234567890', 4, 10, 'Hotel 1 Address'),
@@ -126,14 +126,13 @@ VALUES
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
+INSERT INTO customer (CustomerUsername, CustomerPassword, DateOfRegistration, Address, FullName, IDPresented, CustomerEmail) 
+VALUES 
+('john_doe', 'password123', '2023-01-15', '123 Main St, Anytown, USA', 'John Doe', '1234567890', 'john.doe@example.com'),
+('jane_smith', 'qwerty456', '2023-02-20', '456 Elm St, Othertown, USA', 'Jane Smith', '0987654321', 'jane.smith@example.com'),
+('bob_jones', 'pass1234', '2023-03-25', '789 Oak St, Anycity, USA', 'Bob Jones', '2468101214', 'bob.jones@example.com'),
+('alice_davis', 'abcd7890', '2023-04-30', '101 Pine St, Somecity, USA', 'Alice Davis', '1357924680', 'alice.davis@example.com');
 
-INSERT INTO customer (Address, FullName, IDPresented, Capacity, NumberOfRooms, CustomerEmail)
-VALUES
-    ('123 Main St', 'John Doe', '123456789', 1, 1, 'john.doe@example.com'),
-    ('456 Elm St', 'Jane Smith', '987654321', 2, 2, 'jane.smith@example.com'),
-    ('789 Oak St', 'Alice Johnson', '456123789', 1, 1, 'alice.johnson@example.com'),
-    ('321 Pine St', 'Bob Brown', '789456123', 2, 2, 'bob.brown@example.com'),
-    ('654 Maple St', 'Emily Davis', '159357852', 1, 1, 'emily.davis@example.com');
 	
 -- ----------------------------
 -- Records of bookings
@@ -147,7 +146,4 @@ VALUES
     (5, 300.00, '2024-08-10', '2024-08-15', 1);
 
 
-SELECT c.FullName AS CustomerName
-FROM booking b
-JOIN customer c ON b.CustomerID = c.CustomerID
-WHERE b.BookingID = 5;
+SELECT c.FullName AS CustomerName FROM booking b JOIN customer c ON b.CustomerID = c.CustomerID WHERE b.BookingID = 15;

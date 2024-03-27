@@ -7,12 +7,35 @@ import java.util.Date;
  */
 public class Customer {
 
-    private String customerID;
+    private int customerID;
+    private String customerusername;
+    private String customerpassword;
     private String fullName;
     private Date dateOfRegistration;
     private String address;
     private String IDPresented;
+    private String customeremail;
 
+    /**
+     * Constructor to save customer's data (with id)
+     *
+     * @param fullName full name of customer
+     * @param dateOfRegistration date of registering their account
+     * @param address the customer's address
+     * @param IDPresented the customer's ID presented
+     *
+     */
+    public Customer(int customerID, String fullName, String customerusername, String customerpassword, Date dateOfRegistration, String address, String IDPresented, String customeremail) {
+        this.customerID = customerID;
+        this.fullName = fullName;
+        this.customerusername = customerusername;
+        this.customerpassword = customerpassword;
+        this.dateOfRegistration = dateOfRegistration;
+        this.address = address;
+        this.IDPresented = IDPresented;
+        this.customeremail = customeremail;
+
+    }
 
     /**
      * Constructor to save customer's data (without id)
@@ -23,24 +46,28 @@ public class Customer {
      * @param IDPresented the customer's ID presented
      *
      */
-    public Customer(String fullName, Date dateOfRegistration, String address, String IDPresented) {
+    public Customer(String fullName, String customerusername, String customerpassword, Date dateOfRegistration, String address, String IDPresented, String customeremail) {
         this.fullName = fullName;
+        this.customerusername = customerusername;
+        this.customerpassword = customerpassword;
         this.dateOfRegistration = dateOfRegistration;
         this.address = address;
         this.IDPresented = IDPresented;
+        this.customeremail = customeremail;
 
     }
     // Getters
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
+    public String getCustomerUsername() {return customerusername;}
+    public String getCustomerPassword() {return customerpassword;}
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public Date getDateOfRegistration() {
-        return dateOfRegistration;
+    public String getFullName() {return fullName;}
+    public String getCustomerEmail() {return customeremail;}
+    // java.sql.date for the query to work in customerservice
+    public java.sql.Date getDateOfRegistration() {
+        return (java.sql.Date) dateOfRegistration;
     }
 
     public String getAddress() {
@@ -52,7 +79,7 @@ public class Customer {
     }
 
     // Setters
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 

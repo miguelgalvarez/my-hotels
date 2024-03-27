@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingService {
+    /**
+     * Method to create a booking and add it to the database
+     *
+     * @return List of bookings from database
+     * @throws Exception when trying to connect to database
+     */
+
+    public void appendBooking() throws Exception {
+        return;
+    }
 
     /**
      * Method to get all bookings from the database
@@ -16,9 +26,9 @@ public class BookingService {
      */
     public List<Booking> getBookings() throws Exception {
 
-        // sql query
+        // sql queries
         String sql = "SELECT * FROM booking";
-        String sql1 = "SELECT Surname FROM customer";
+        String sql1 = "SELECT c.FullName AS CustomerName FROM booking b JOIN customer c ON b.CustomerID = c.CustomerID WHERE b.BookingID = 1;";
         // database connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -29,9 +39,12 @@ public class BookingService {
         try (Connection con = db.getConnection()) {
             // prepare the statement
             PreparedStatement stmt = con.prepareStatement(sql);
-
+            // prepare second statement
+            PreparedStatement stmt2 = con.prepareStatement(sql1);
             // get the results from executing the query
             ResultSet rs = stmt.executeQuery();
+
+            ResultSet rs2 = stmt2.executeQuery();
 
 
             // iterate through the result set
@@ -68,7 +81,7 @@ public class BookingService {
      * Method to delete by ID a booking
      *
      * @param BookingID is the ID of the booking to be deleted from database
-     * @return string returned that states if the grade deleted or not
+     * @return string returned that states if the booking has been deleted or not
      * @throws Exception when trying to connect to database
      */
     public String deleteBooking(Integer BookingID) throws Exception {
