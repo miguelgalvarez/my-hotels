@@ -1,181 +1,175 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <title>Montreal Hotels</title>
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-     <style>
-         body {
-             font-family: 'Poppins', sans-serif;
-             background-color: #f4f4f4;
-             margin: 0;
-             padding: 0;
-             box-sizing: border-box;
-             display: flex;
-             flex-direction: column;
-         }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montreal Hotels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-         /* Main container for filters and hotels */
-         .content-container {
-             display: flex;
-             flex: 1;
-         }
-
-         /* Styles for the filters */
-         .filters-container {
-             padding: 20px;
-             flex: 0 0 200px; /* Fixed width for filters */
-         }
-
-         .filter-title {
-             font-size: 24px;
-             margin-bottom: 10px;
-         }
-
-         .filter-list {
-             display: flex;
-             flex-direction: column;
-             gap: 10px;
-         }
-
-         .filter-item {
-             padding: 10px;
-             background-color: #f9f9f9;
-             border-radius: 8px;
-             cursor: pointer;
-         }
-
-         .filter-item:hover {
-             background-color: #eaeaea;
-         }
-
-         /* Styles for the hotels */
-         .hotels-container {
-             flex: 1; /* Fill remaining space */
-             display: flex;
-             flex-wrap: wrap;
-             padding: 20px;
-             gap: 20px;
-             justify-content: flex-start;
-             align-items: flex-start;
-         }
-
-         .hotel-card {
-             width: calc(33.333% - 20px);
-             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-             border-radius: 8px;
-             overflow: hidden;
-             transition: transform 0.2s ease, box-shadow 0.2s ease;
-         }
-
-         .hotel-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-         }
-
-         .hotel-link {
-             display: block;
-             text-decoration: none;
-         }
-
-         .hotel-image {
-             width: 100%;
-             height: auto;
-             border-bottom: 4px solid #fff;
-             transition: transform 0.3s ease;
-         }
-
-         .hotel-image:hover {
-             transform: scale(1.1);
-         }
-
-         .hotel-name {
-             display: block;
-             text-align: center;
-             padding: 15px 0;
-             background-color: #f29602;
-             color: white;
-             font-size: 18px;
-         }
-
-         /* Styles for the filter dropdowns */
-         .filter-dropdown {
-             width: 100%;
-             padding: 5px;
-             border: 1px solid #ccc;
-             border-radius: 4px;
-             background-color: white;
-             cursor: pointer;
-         }
-
-     </style>
- </head>
- <body>
-
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .filters {
+            flex: 0 0 200px; /* Fixed width */
+            background-color: #f9f9f9;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .filters h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .filters label, .filters select {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 10px; /* Added for spacing */
+        }
+        .filters select:hover {
+            background-color: #eaeaea;
+        }
+        .hotels {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .hotel {
+            width: calc(33.333% - 20px);
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .hotel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .hotel h3 {
+            background-color: #f29602;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+        }
+        .hotel-info {
+            padding: 20px;
+        }
+        .hotel-info p {
+            margin: 10px 0; /* Added for spacing */
+        }
+    </style>
+</head>
+<body>
 <jsp:include page="navbar.jsp" />
 
-
-<div class="content-container">
-
-<div class="filters-container">
-    <h2 class="filter-title">Filters</h2>
-    <div class="filter-list">
-        <div class="filter-item">
-            <label for="area-filter">Area:</label>
-            <select id="area-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="downtown">Downtown</option>
-                <option value="suburb">Suburb</option>
-            </select>
+<div class="container">
+    <div class="filters">
+        <h2>Filters</h2>
+        <label for="Hotel Chain">Hotel Chain:</label>
+        <select id="Hotel Chain" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Hotel Chain 1</option>
+            <option value="2">Hotel Chain 2</option>
+        </select>
+        <label for="type">Type:</label>
+        <select id="type" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Budget</option>
+            <option value="2">Mid-Range</option>
+            <option value="3">Luxury</option>
+        </select>
+        <label for="Area">Area:</label>
+        <select id="Area" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Downtown</option>
+            <option value="2">Suburb</option>
+        </select>
+        <label for="Max-Rooms">Max Rooms:</label>
+        <select id="Max-Rooms" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Less than 50</option>
+            <option value="2">50-100</option>
+            <option value="3">More than 100</option>
+        </select>
+    </div>
+    <div class="hotels">
+        <div class="hotel" data-HotelChain="2" data-type="3" data-Area="1" data-MaxRooms="150">
+            <a href="rooms.jsp">
+                <h3>Hotel 1</h3>
+                <div class="hotel-info">
+                    <p>Hotel Chain 2</p>
+                    <p>Type: Luxury</p>
+                    <p>Area: Downtown</p>
+                    <p>Max Rooms: 150</p>
+                </div>
+            </a>
         </div>
-        <div class="filter-item">
-            <label for="hotel-chain-filter">Hotel Chain:</label>
-            <select id="hotel-chain-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="chain1">Chain 1</option>
-                <option value="chain2">Chain 2</option>
-            </select>
+        <div class="hotel" data-HotelChain="1" data-type="1" data-Area="2" data-MaxRooms="80">
+            <a href="rooms.jsp">
+                <h3>Hotel 2</h3>
+                <div class="hotel-info">
+                    <p>Hotel Chain 1</p>
+                    <p>Type: Budget</p>
+                    <p>Area: Suburb</p>
+                    <p>Max Rooms: 80</p>
+                </div>
+            </a>
         </div>
-        <div class="filter-item">
-            <label for="hotel-category-filter">Hotel Category:</label>
-            <select id="hotel-category-filter" class="filter-dropdown">
-                <option value=""></option>
-                <option value="budget">Budget</option>
-                <option value="mid-range">Mid-Range</option>
-                <option value="luxury">Luxury</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="total-rooms-filter">Max Total Rooms:</label>
-            <input type="number" id="total-rooms-filter">
-        </div>
-        <div class="filter-item">
-            <button id="search-button">Search</button>
-        </div>
+        <!-- Add more hotel entries here -->
     </div>
 </div>
 
-<div class="hotels-container">
-    <div class="hotel-card">
-        <a href="rooms.jsp" class="rooms-link">
-        <img src="https://via.placeholder.com/150" alt="Hotel 1" class="hotel-image">
-        <span class="hotel-name">Hotel 1</span>
-        </a>
-    </div>
-    <div class="hotel-card">
-        <a href="hotel-details.jsp?id=2" class="hotel-link">
-            <img src="https://via.placeholder.com/150" alt="Hotel 2" class="hotel-image">
-            <span class="hotel-name">Hotel 2</span>
-        </a>
-    </div>
-    <div class="hotel-card">
-        <a href="hotel-details.jsp?id=3" class="hotel-link">
-            <img src="https://via.placeholder.com/150" alt="Hotel 3" class="hotel-image">
-            <span class="hotel-name">Hotel 3</span>
-        </a>
-    </div>
-    <!-- Add more hotel cards here -->
-</div>
+<script>
+    function filterHotels() {
+        const hotelChainFilter = document.getElementById('Hotel-Chain').value;
+        const typeFilter = document.getElementById('type').value;
+        const areaFilter = document.getElementById('Area').value;
+        const maxRoomsFilter = document.getElementById('Max-Rooms').value;
+
+        const hotels = document.querySelectorAll('.hotel');
+
+        hotels.forEach(hotel => {
+            const hotelChain = parseInt(hotel.getAttribute('data-HotelChain'));
+            const type = parseInt(hotel.getAttribute('data-type'));
+            const area = parseInt(hotel.getAttribute('data-Area'));
+            const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'));
+
+            const hotelChainPass = hotelChainFilter == 0 || hotelChain == hotelChainFilter;
+            const typePass = typeFilter == 0 || type == typeFilter;
+            const areaPass = areaFilter == 0 || area == areaFilter;
+            const maxRoomsPass = maxRoomsFilter == 0 ||
+                (maxRoomsFilter == 1 && maxRooms < 50) ||
+                (maxRoomsFilter == 2 && maxRooms >= 50 && maxRooms <= 100) ||
+                (maxRoomsFilter == 3 && maxRooms > 100);
+
+            if (hotelChainPass && typePass && areaPass && maxRoomsPass) {
+                hotel.style.display = 'block';
+            } else {
+                hotel.style.display = 'none';
+            }
+        });
+    }
+
+    // Initial filtering
+    filterHotels();
+</script>
 
 </body>
 </html>
