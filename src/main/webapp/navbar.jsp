@@ -127,7 +127,7 @@
                  <% if (session.getAttribute("username") != null) { %>
                     <a href="logout">Logout</a>
                  <% } else { %>
-                     <a href="signin.jsp">Sign In</a>
+                     <a href="login.jsp">Log In</a>
                      <a href="register.jsp">Register</a>
                  <% } %>
              </div>

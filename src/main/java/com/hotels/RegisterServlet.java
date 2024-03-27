@@ -20,6 +20,7 @@ public class RegisterServlet extends HttpServlet {
         String address = request.getParameter("address");
         String typeOfId = request.getParameter("type of ID");
 
+
         Customer newCustomer = new Customer(fullName, username, password, address, typeOfId, email);
 
         CustomerService addCustomer = new CustomerService();

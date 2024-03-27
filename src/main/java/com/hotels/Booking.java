@@ -49,6 +49,9 @@ public class Booking {
 
 
     // Getters
+    public int getHotelID() {
+        return hotelID;
+    }
     public int getBookingID() {
         return BookingID;
     }

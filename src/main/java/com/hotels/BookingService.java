@@ -55,7 +55,7 @@ public class BookingService {
      * @return List of bookings from database
      * @throws Exception when trying to connect to database
      */
-    public List<Booking> getBookings(int customerID) throws Exception {
+    public List<Booking> getBookings(Integer customerID) throws Exception {
 
         // sql queries
         String sql = "SELECT * FROM booking";
@@ -79,14 +79,14 @@ public class BookingService {
 
 
             // iterate through the result set
-            while (rs.next()) {
+            while (rs2.next()) {
                 // create new booking object
                 Booking booking = new Booking(
-                        rs.getInt("HotelID"),
-                        rs.getDouble("PricePaid"),
-                        rs.getInt("CustomerID"),
-                        rs.getDate("CheckIn"),
-                        rs.getDate("Checkout")
+                        rs2.getInt("HotelID"),
+                        rs2.getDouble("PricePaid"),
+                        rs2.getInt("CustomerID"),
+                        rs2.getDate("CheckIn"),
+                        rs2.getDate("Checkout")
                 );
 
                 // append booking in bookings list

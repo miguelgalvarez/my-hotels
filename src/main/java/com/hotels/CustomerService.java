@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -17,12 +18,27 @@ public class CustomerService {
      */
     public Boolean createCustomer(Customer customer) throws Exception {
 
+       //retrieving attributes from customer object
+       String fullName = customer.getFullName();
+       String username = customer.getCustomerUsername();
+       String password = customer.getCustomerPassword();
+       java.sql.Date dateOfRegistration = customer.getDateOfRegistration();
+       String address = customer.getAddress();
+       String email = customer.getCustomerEmail();
+       String IDPresented = customer.getIDPresented();
+
         //testing
-        System.out.println(customer.getFullName());
-        System.out.println(customer.getCustomerUsername());
-        System.out.println(customer.getCustomerPassword());
-        System.out.println(customer.getDateOfRegistration());
-        System.out.println(customer.getAddress());
+        System.out.println(fullName);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(dateOfRegistration);
+        System.out.println(address);
+
+        //verifying that a username does not already exist
+        RegisterService registerService = new RegisterService();
+        if (registerService.usernameExists(username)) {
+            return false;
+        }
 
         //turn password into hash code to store securely
         String hashedPassword = BCrypt.hashpw(customer.getCustomerPassword(), BCrypt.gensalt());
@@ -32,14 +48,15 @@ public class CustomerService {
 
         // Insert data into the database
         try (Connection connection = db.getConnection()) {
-            String sql = "INSERT INTO customer (FullName, Username, Password, CustomerEmail, Address, IDPresented) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO customer (FullName, customerusername, customerpassword, dateofregistration, CustomerEmail, Address, IDPresented) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, customer.getFullName());
-                statement.setString(2, customer.getCustomerUsername());
+                statement.setString(1, fullName);
+                statement.setString(2, username);
                 statement.setString(3, hashedPassword);
-                statement.setString(4, customer.getCustomerEmail());
-                statement.setString(5, customer.getAddress());
-                statement.setString(6, customer.getIDPresented());
+                statement.setDate(4, dateOfRegistration);
+                statement.setString(5, email);
+                statement.setString(6, address);
+                statement.setString(7, IDPresented);
 
                 int result = statement.executeUpdate();
 
@@ -53,6 +70,40 @@ public class CustomerService {
         }
 
         return false; //default case
+    }
+
+    public boolean validateCustomer(Customer customer) throws Exception{
+
+        ConnectionDB db = new ConnectionDB();
+
+        String username = customer.getCustomerUsername();
+        String password = customer.getCustomerPassword();
+
+        try (Connection connection = db.getConnection()) {
+            String sql = "SELECT customerpassword FROM customer WHERE customerusername = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+
+                ResultSet rs = statement.executeQuery();
+                if (rs.next()) {
+                    String storedHash = rs.getString("customerpassword");
+                    if (BCrypt.checkpw(password, storedHash)) {
+                        return true;
+                    } else {
+                        // Password incorrect
+                        return false;
+                    }
+                } else {
+                    // Username does not exist
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
     /**
      * Method to get all customers from the database
@@ -151,6 +202,32 @@ public class CustomerService {
 
         return message;
     }
+
+    public Integer fetchCustomerID(String username) {
+        Integer customerID = null; // Default to null if not found
+        String sql = "SELECT CustomerID FROM customer WHERE CustomerUsername = ?;";
+
+        ConnectionDB db = new ConnectionDB();
+
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) { // If there is a result, get the first (and should be the only) CustomerID
+                    customerID = rs.getInt("CustomerID");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return customerID; // Return the found CustomerID or null
+    }
+
 }
 
 

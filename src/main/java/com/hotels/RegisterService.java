@@ -9,7 +9,7 @@ public class RegisterService {
     public boolean usernameExists(String username) throws Exception {
         ConnectionDB db = new ConnectionDB();
         // this query returns a single row containing either true or false (row is named username_exists)
-        String sql = "SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = ?) AS username_exists;";
+        String sql = "SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = ?) AS username_exists;";
         // try connect to database, catch any exceptions
         try (Connection con = db.getConnection()) {
             // prepare the statement
@@ -22,14 +22,6 @@ public class RegisterService {
             if (rs.next()){
                 return rs.getBoolean("username_exists");
             }
-
-            //close the result set
-            rs.close();
-
-            // close the statement
-            stmt.close();
-            con.close();
-            db.close();
 
             // return false if the username does not exist
             return false;

@@ -1,4 +1,6 @@
 <%@ page import="java.util.ArrayList,java.util.List" %>
+<%@ page import="com.hotels.BookingService" %>
+<%@ page import="com.hotels.Booking" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,42 +116,24 @@
     <% if (session.getAttribute("username") != null) { %>
         <%-- User is logged in, display bookings --%>
         <%
-            // Enhanced Booking class with additional details
-            class Booking {
-                String bookingId;
-                String hotelName;
-                String checkInDate;
-                String checkOutDate;
-                double pricePaid;
-                int numOfRooms;
-                public Booking(String bookingId, String hotelName, String checkInDate, String checkOutDate, double pricePaid, int numOfRooms) {
-                    this.bookingId = bookingId;
-                    this.hotelName = hotelName;
-                    this.checkInDate = checkInDate;
-                    this.checkOutDate = checkOutDate;
-                    this.pricePaid = pricePaid;
-                    this.numOfRooms = numOfRooms;
-                }
-            }
+            BookingService bookingServe = new BookingService();
+
+            Integer customerID = (Integer) session.getAttribute("customerID");
 
             //getting all bookings of a customer
-            List<Booking> bookings = new ArrayList<>();
+            List<Booking> bookings = bookingServe.getBookings(customerID);
 
-            bookings.add(new Booking("000312", "Hotel Sunshine", "2024-03-01", "2024-03-05", 299.99, 2));
-            bookings.add(new Booking("03312", "Sea View Resort", "2024-04-15", "2024-04-20", 499.99, 1));
-
-            // Displaying enhanced bookings
+            // Displaying bookings
             for (Booking booking : bookings) {
         %>
             <div class="booking-card">
                 <div class="booking-info">
-                    <div class="hotel-name"><%= booking.hotelName %></div>
-                    <div class="details">Booking ID: <%= booking.bookingId %></div>
-                    <div class="details">Check-in: <%= booking.checkInDate %></div>
-                    <div class="details">Check-out: <%= booking.checkOutDate %></div>
-                    <div class="details">Number of Rooms: <%= booking.numOfRooms %></div>
+                    <div class="hotel-name">Hotel: <%= booking.getHotelID()%></div>
+                    <div class="details">Booking ID: <%= booking.getBookingID() %></div>
+                    <div class="details">Check-in: <%= booking.getCheckIn() %></div>
+                    <div class="details">Check-out: <%= booking.getCheckOut() %></div>
                 </div>
-                <div class="price">$<%= booking.pricePaid %></div>
+                <div class="price">$<%= booking.getPricePaid() %></div>
             </div>
         <%
             }
@@ -160,7 +144,7 @@
             Please log in or register to view your bookings.
         </div>
         <div class="auth-buttons">
-            <a href="signin.jsp" class = "login-btn">Log In</a>
+            <a href="login.jsp" class = "login-btn">Log In</a>
             <a href="register.jsp" class="register-btn">Register</a>
         </div>
     <% } %>

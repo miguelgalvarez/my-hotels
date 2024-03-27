@@ -61,11 +61,15 @@ public class Customer {
         this.fullName = fullName;
         this.customerusername = customerusername;
         this.customerpassword = customerpassword;
-        //this.dateOfRegistration = new java.sql.Date(System.currentTimeMillis());
+        this.dateOfRegistration = new java.sql.Date(System.currentTimeMillis());
         this.address = address;
         this.IDPresented = IDPresented;
         this.customeremail = customeremail;
+    }
 
+    public Customer(String username, String password) {
+        this.customerusername = username;
+        this.customerpassword = password;
     }
 
     // Getters

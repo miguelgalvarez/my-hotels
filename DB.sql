@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
 	CustomerID serial PRIMARY KEY,
 	CustomerUsername varchar(45) NOT NULL,
-	CustomerPassword varchar(45) NOT NULL,
+	CustomerPassword varchar(255) NOT NULL,
 	DateOfRegistration date NOT NULL,
 	Address varchar(45) NOT NULL,
 	FullName varchar(45) NOT NULL,

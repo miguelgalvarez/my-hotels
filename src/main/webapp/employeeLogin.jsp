@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Sign In</title>
+    <title>Employee Log In</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -65,11 +65,11 @@
 <jsp:include page = "navbar.jsp" />
 
 <div class="container">
-    <h2>Employee Sign In</h2>
+    <h2>Employee Log In</h2>
     <form action="employee.jsp" method="post">
         <input type="text" name="full name" placeholder="Full Name" required>
         <input type="text" name="SSN" placeholder="SSN" required>
-        <input type="submit" value="Sign In">
+        <input type="submit" value="Log In">
     </form>
 </div>
 

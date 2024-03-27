@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign In</title>
+    <title>Log In</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -110,53 +110,17 @@
 
 <jsp:include page = "navbar.jsp" />
 
-    <%
-    String message = (String) session.getAttribute("message");
-    if(message != null){
-        session.removeAttribute("message");
-    %>
-        <div id="popup-message" class="popup" style="display: none;">
-            <div class="popup-content">
-                <span class="close-btn" onclick="closePopup()">&times;</span>
-                <p><%= message %></p>
-            </div>
-        </div>
-    <%
-    }
-    %>
-
-    <script>
-    window.onload = function() {
-        // Automatically show the popup
-        var popup = document.getElementById("popup-message");
-        if (popup) {
-            popup.style.display = 'block';
-        }
-
-        // Automatically close the popup after 1 second
-        setTimeout(function() {
-            closePopup();
-        }, 1000);
-    };
-
-    // Function to close the popup
-    function closePopup() {
-        var popup = document.getElementById("popup-message");
-        if (popup) {
-            popup.style.display = 'none';
-        }
-    }
-    </script>
+<jsp:include page = "popup.jsp" />
 
 <div class="container">
-    <h2>Sign In</h2>
+    <h2>Log In</h2>
     <form action="login" method="post">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Sign In">
+        <input type="submit" value="Log In">
     </form>
     <div class="employee-signin">
-        <a href="employeeSignin.jsp">Employee Sign In</a>
+        <a href="employeeLogin.jsp">Employee Log In</a>
     </div>
 </div>
 

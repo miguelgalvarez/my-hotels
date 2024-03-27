@@ -18,41 +18,24 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");
-        String providedPassword = request.getParameter("password");
+        String password = request.getParameter("password");
 
-        ConnectionDB db = new ConnectionDB();
-        try (Connection connection = db.getConnection()) { // Assume Database.getConnection() is your method to get a DB connection
-            String sql = "SELECT password FROM customer WHERE username = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, username);
+        Customer newCustomer = new Customer(username, password);
+        CustomerService customerService = new CustomerService();
 
-                ResultSet rs = statement.executeQuery();
-                if (rs.next()) {
-                    String storedHash = rs.getString("password");
-                    if (BCrypt.checkpw(providedPassword, storedHash)) {
-                        // Login success
-                        request.getSession().setAttribute("username", username);// Simple session management
+        try {
+            boolean success = customerService.validateCustomer(newCustomer);
 
+            if (success) {
+                request.getSession().setAttribute("username", username);
+                request.getSession().setAttribute("customerID", customerService.fetchCustomerID(username)); //query username to get customer ID and add it to session
 
-                        /*query username to get customer ID and add it to session */
-
-
-
-                        request.getSession().setAttribute("message", "Login successful!");
-                        response.sendRedirect("index.jsp");
-                    } else {
-                        // Password incorrect
-                        request.getSession().setAttribute("message", "Invalid username or password.");
-                        response.sendRedirect("signin.jsp");
-                    }
-                } else {
-                    // Username does not exist
-                    request.getSession().setAttribute("message", "Invalid username or password.");
-                    response.sendRedirect("signin.jsp");
-                }
+                request.getSession().setAttribute("message", "Login successful!");
+                response.sendRedirect("index.jsp");
+            } else {
+                request.getSession().setAttribute("message", "Invalid username or password.");
+                response.sendRedirect("login.jsp");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
