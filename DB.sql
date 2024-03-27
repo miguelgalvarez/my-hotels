@@ -79,6 +79,32 @@ CREATE TABLE renting (
 	CheckOut date NOT NULL
 );
 
+DROP TABLE IF EXISTS booking_archive;
+CREATE TABLE booking_archive (
+    BookingID INT,
+    CustomerID INT,
+    HotelID INT,
+    PricePaid DOUBLE PRECISION NOT NULL,
+    CheckIn DATE NOT NULL,
+    CheckOut DATE NOT NULL,
+    ArchivalTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ArchivalReason TEXT,
+    PRIMARY KEY (BookingID, ArchivalTimestamp)
+);
+
+DROP TABLE IF EXISTS renting_archive;
+CREATE TABLE renting_archive (
+    RentingID INT,
+    CustomerID INT,
+    RoomID INT,
+    CheckIn DATE NOT NULL,
+    CheckOut DATE NOT NULL,
+    ArchivalTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ArchivalReason TEXT,
+    PRIMARY KEY (RentingID, ArchivalTimestamp)
+);
+
+
 -- ----------------------------
 -- Records of hotel chains
 -- ----------------------------
@@ -149,3 +175,5 @@ SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = 'john_doe') AS us
 SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';
 SELECT * FROM hotel
 SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = 'john') AS username_exists;
+SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelID = 2;
+
