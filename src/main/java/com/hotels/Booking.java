@@ -9,7 +9,7 @@ import java.util.Date;
 public class Booking {
 
     private int BookingID;
-    private BigDecimal hotelID;
+    private int hotelID;
     private double pricePaid;
     private int customerID;
     private Date checkIn;
@@ -22,7 +22,7 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int BookingID, BigDecimal hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int BookingID, int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
         this.hotelID = hotelID;
         this.pricePaid = pricePaid;
@@ -40,7 +40,7 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(BigDecimal hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.hotelID = hotelID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
@@ -57,7 +57,7 @@ public class Booking {
     public double getPricePaid() {
         return pricePaid;
     }
-    public BigDecimal getHotelID() {return hotelID;}
+    public int getHotelID() {return hotelID;}
 
     public int getCustomerID() {return customerID;}
     public Date getCheckIn() {
