@@ -128,7 +128,7 @@
         %>
             <div class="booking-card">
                 <div class="booking-info">
-                    <div class="hotel-name">Hotel: <%= booking.getHotelID()%></div>
+                    <div class="hotel-name">Hotel: <%= bookingServe.getHotelName(booking.getHotelID())%></div>
                     <div class="details">Booking ID: <%= booking.getBookingID() %></div>
                     <div class="details">Check-in: <%= booking.getCheckIn() %></div>
                     <div class="details">Check-out: <%= booking.getCheckOut() %></div>
