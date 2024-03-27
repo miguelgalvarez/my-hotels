@@ -8,6 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingService {
+
+    public String getHotelName(int HotelID) throws Exception {
+        ConnectionDB db = new ConnectionDB();
+        // this query returns
+        String sql = "SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelID = ?;";
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare the statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,HotelID);
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // Processing the result and returning true if there is a row returned from the query
+            if (rs.next()){
+                return rs.getString("hotelname");
+            }
+
+            // return false if the username does not exist
+            return null;
+        } catch (Exception e) {
+            // throw any errors occurred
+            throw new Exception(e.getMessage());
+        }
+    }
     /**
      * Method to create a booking and add it to the database
      * This method takes a booking object as its parameter

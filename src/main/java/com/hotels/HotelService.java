@@ -15,7 +15,6 @@ public class HotelService {
      * @throws Exception when trying to connect to database
      */
     public List<Hotel> getHotels() throws Exception {
-        System.out.println("yipee");
         // sql query
         String sql = "SELECT * FROM hotel;";
         // database connection object
@@ -26,7 +25,6 @@ public class HotelService {
 
         // try connect to database, catch any exceptions
         try (Connection con = db.getConnection()) {
-            System.out.println("yipee");
             // prepare the statement
             PreparedStatement stmt = con.prepareStatement(sql);
             // get the results from executing the query
@@ -35,7 +33,6 @@ public class HotelService {
 
             // iterate through the result set
             while (rs.next()) {
-                System.out.println("yipee");
                 // create new hotel object
                 Hotel hotel = new Hotel(
                         rs.getDouble("Rating"),
