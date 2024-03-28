@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RentingService {
     public boolean bookingTOrenting(int roomID) {
@@ -105,7 +107,40 @@ public class RentingService {
 
         return false;
     }
+    /**
+     * Method to get all rentings from the database.
+     *
+     * @return List of all rentings from the database.
+     * @throws Exception when trying to connect to database or query execution fails.
+     */
+    public List<Renting> getAllRentings() throws Exception {
+        List<Renting> rentings = new ArrayList<>();
+        String sql = "SELECT * FROM renting";
+        ConnectionDB db = new ConnectionDB();
 
+        try (Connection con = db.getConnection()) {
+            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Renting renting = new Renting(
+                            rs.getInt("RentingID"),
+                            rs.getInt("CustomerID"),
+                            rs.getInt("RoomID"),
+                            rs.getDate("CheckIn"),
+                            rs.getDate("CheckOut")
+                    );
+                    rentings.add(renting);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to retrieve rentings: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred: " + e.getMessage());
+        }
+
+        return rentings;
+    }
     public String deleteRenting(int RentingID) throws Exception {
         Connection con = null;
         String message = "";

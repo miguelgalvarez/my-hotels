@@ -3,6 +3,7 @@
 <head>
     <%@ page import="java.util.List" %>
     <%@ page import="com.hotels.BookingService, com.hotels.Booking" %>
+    <%@ page import="com.hotels.RentingService, com.hotels.Renting" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management</title>
@@ -115,17 +116,20 @@
                     BookingService bookingService = new BookingService();
                     List<Booking> bookings = bookingService.getAllBookings();
                     for(Booking booking : bookings) {
+
+                    String status = booking.getPayment() ? "Paid" : "Unpaid";
                         %>
                                 <tr>
+
                                     <td><%= booking.getBookingID() %></td>
                                     <td><%= booking.getCustomerID() %></td>
                                     <td><%= booking.getCheckIn().toString() %></td>
                                     <td><%= booking.getCheckOut().toString() %></td>
                                     <td><%= String.format("$%.2f", booking.getPricePaid()) %></td>
-                                    <td><%= "Paid" %></td>
+                                    <td><%= status %></td>
 
                                     <td>
-                                    <% if (booking.getPricePaid() == 0) { %>
+                                    <% if (!booking.getPayment()) { %>
                                         <button onclick="makePayment('<%= booking.getBookingID() %>')">Process Payment</button>
                                     <% } else { %>
                                         <button onclick="convertToRenting('<%= booking.getBookingID() %>')">Convert to Renting</button>
@@ -150,8 +154,24 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Renting data will be dynamically inserted here -->
-            </tbody>
+        <%
+            RentingService rentingService = new RentingService();
+            List<Renting> rentings = rentingService.getAllRentings();
+        %>
+        <% for(Renting renting : rentings) { %>
+            <tr>
+                <td><%= renting.getRentingID() %></td>
+                <td><%= renting.getCustomerID() %></td>
+                <td><%= renting.getCheckIn().toString() %></td>
+                <td><%= renting.getCheckOut().toString() %></td>
+                <td>
+                    <button onclick="deleteRenting('<%= renting.getRentingID() %>')">Delete Renting</button>
+                </td>
+            </tr>
+        <% } %>
+
+    </tbody>
+</table>            </tbody>
         </table>
     </div>
 
@@ -193,9 +213,12 @@
             }
         };
 
-        function convertToRenting(bookingID) {
-            bookingService.deleteBooking(bookingID);
-        }
+<%@ page import="com.hotels.BookingService" %>
+<script>
+    var bookingService = new BookingService();
+
+</script>
+
     </script>
 </body>
 </html>
