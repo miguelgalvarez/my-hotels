@@ -192,3 +192,4 @@ SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = 'john') AS userna
 SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelID = 2;
 SELECT * FROM booking WHERE RoomID = 4
 INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = 4
+UPDATE booking SET Payment = true WHERE BookingID = '1';
