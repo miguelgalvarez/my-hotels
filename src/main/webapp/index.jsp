@@ -127,7 +127,7 @@
     <h2 class="location-title">Where Would You Like to Stay?</h2>
     <div class="locations-container">
         <div class="city-card">
-            <a href="hotels.jsp?city=Toronto" class="city-link">
+            <a href="employee.jsp?city=Toronto" class="city-link">
                 <img src="assets/toronto.jpeg" alt="Toronto" class="city-image">
                 <span class="city-name">Toronto</span>
                 <span class="available-rooms">200 Available Rooms!</span>
