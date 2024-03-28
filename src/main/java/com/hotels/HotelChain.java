@@ -7,6 +7,7 @@ package com.hotels;
 public class HotelChain {
 
     private int chainID;
+    private String hotelChainName;
 
     private int phoneNumber;
 
@@ -25,8 +26,9 @@ public class HotelChain {
      * @param address address of hotel chain
      * @param email email of hotel chain
      */
-    public HotelChain(int chainID, int phoneNumber, int numHotels, String address, String email) {
+    public HotelChain(int chainID, String hotelChainName, int phoneNumber, int numHotels, String address, String email) {
         this.chainID = chainID;
+        this.hotelChainName = hotelChainName;
         this.phoneNumber = phoneNumber;
         this.numHotels = numHotels;
         this.address = address;
@@ -41,8 +43,9 @@ public class HotelChain {
      * @param address address of hotel chain
      * @param email email of hotel chain
      */
-    public HotelChain(int phoneNumber, int numHotels, String address, String email) {
+    public HotelChain(int phoneNumber, String hotelChainName, int numHotels, String address, String email) {
         this.phoneNumber = phoneNumber;
+        this.hotelChainName = hotelChainName;
         this.numHotels = numHotels;
         this.address = address;
         this.email = email;
@@ -50,6 +53,7 @@ public class HotelChain {
 
     /* Getters */
     public int getID() {return this.chainID; }
+    public String getHotelChainName() {return this.hotelChainName;}
     public int getPhoneNumber() {return this.phoneNumber; }
     public int getNumHotels() {return this.numHotels; }
     public String getAddress() {return this.address; }

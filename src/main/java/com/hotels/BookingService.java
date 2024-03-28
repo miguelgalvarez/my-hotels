@@ -76,7 +76,7 @@ public class BookingService {
     }
 
     /**
-     * Method to get all bookings from the database
+     * Method to get bookings from the database from a specific customer
      *
      * @return List of bookings from database
      * @throws Exception when trying to connect to database
@@ -136,6 +136,60 @@ public class BookingService {
     }
 
     /**
+     * Method to get all bookings from the database
+     *
+     * @return List of bookings from database
+     * @throws Exception when trying to connect to database
+     */
+    public List<Booking> getAllBookings(Integer customerID) throws Exception {
+
+        // sql queries
+        String sql = "SELECT * FROM booking";
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // data structure to keep all bookings retrieved from database
+        List<Booking> bookings = new ArrayList<>();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare the statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+            // iterate through the result set
+            while (rs.next()) {
+                // create new booking object
+                Booking booking = new Booking(
+                        rs.getInt("BookingID"),
+                        rs.getInt("HotelID"),
+                        rs.getDouble("PricePaid"),
+                        rs.getInt("CustomerID"),
+                        rs.getDate("CheckIn"),
+                        rs.getDate("Checkout")
+                );
+
+                // append booking in bookings list
+                bookings.add(booking);
+            }
+
+            //close the result set
+            rs.close();
+            // close the statement
+            stmt.close();
+            con.close();
+            db.close();
+
+            // return the bookings retrieved from database
+            return bookings;
+        } catch (Exception e) {
+            // throw any errors occurred
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
      * Method to delete by ID a booking
      *
      * @param BookingID is the ID of the booking to be deleted from database
@@ -147,7 +201,9 @@ public class BookingService {
         String message = "";
 
         // sql query
+        String sql0 = "INSERT INTO booking_archive (BookingID, CustomerID, HotelID, PricePaid, CheckIn, CheckOut) SELECT BookingID, CustomerID, HotelID, PricePaid, CheckIn, CheckOut FROM booking WHERE BookingID = ?;";
         String sql = "DELETE FROM booking WHERE id = ?;";
+
 
         // database connection object
         ConnectionDB db = new ConnectionDB();
@@ -157,12 +213,15 @@ public class BookingService {
             con = db.getConnection();
 
             // prepare statement
+            PreparedStatement stmt0 = con.prepareStatement(sql0);
             PreparedStatement stmt = con.prepareStatement(sql);
 
             // set every ? of statement
+            stmt0.setInt(1, BookingID);
             stmt.setInt(1, BookingID);
 
             // execute the query
+            stmt0.executeUpdate();
             stmt.executeUpdate();
 
             // close the statement
