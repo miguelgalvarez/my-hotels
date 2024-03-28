@@ -63,12 +63,13 @@
 <body>
 
 <jsp:include page = "navbar.jsp" />
+<jsp:include page = "popup.jsp" />
 
 <div class="container">
     <h2>Employee Log In</h2>
-    <form action="employee.jsp" method="post">
+    <form action="employeeLogin" method="post">
         <input type="text" name="full name" placeholder="Full Name" required>
-        <input type="text" name="SSN" placeholder="SSN" required>
+        <input type="text" name="Employee Number" placeholder="Employee Number" required>
         <input type="submit" value="Log In">
     </form>
 </div>

@@ -56,9 +56,8 @@ CREATE TABLE employee (
 	HotelID serial REFERENCES hotel(HotelID),
 	Address varchar(45) NOT NULL,
 	FullName varchar(45) NOT NULL,
-	SSN BIGINT NOT NULL,
-	Role varchar(45) NOT NULL,
-	NumberOfRooms BIGINT NOT NULL
+	EmployeeNumber INT NOT NULL,
+	Role varchar(45) NOT NULL
 );
 
 DROP TABLE IF EXISTS booking;
@@ -168,6 +167,16 @@ VALUES
     (3, 3, 3, 180.00, '2024-06-20', '2024-06-25'),
     (3, 4, 4, 250.00, '2024-07-15', '2024-07-20'),
     (3, 5, 5, 300.00, '2024-08-10', '2024-08-15');
+
+-- ----------------------------
+-- Records of employees
+-- ----------------------------
+INSERT INTO employee (HotelID, Address, FullName, EmployeeNumber, Role) 
+VALUES 
+(1,'123 Main St, Anytown, USA', 'John Doe', '12345', 'manager'),
+(2, '456 Elm St, Othertown, USA', 'Jane Smith', '54321', 'janitor'),
+(3, '789 Oak St, Anycity, USA', 'Bob Jones', '13453', 'receptionist'),
+(4, '101 Pine St, Somecity, USA', 'Alice Davis', '14789', 'concierge');
 
 -- ----------------------------
 -- Test queries

@@ -14,6 +14,8 @@ public class Employee {
 
     private String role;
 
+    private int employeeNumber;
+
 
     /**
      * Constructor to save employee's data (without id)
@@ -24,12 +26,17 @@ public class Employee {
      * @param role the employee's role
      *
      */
-    public Employee(String SSN, String fullName, String address, String role) {
+    public Employee(String SSN, String fullName, String address, String role, int employeeNumber) {
         this.SSN = SSN;
         this.fullName = fullName;
         this.address = address;
         this.role = role;
+        this.employeeNumber = employeeNumber;
+    }
 
+    public Employee(String fullName, int employeeNumber) {
+        this.fullName = fullName;
+        this.employeeNumber = employeeNumber;
     }
 
     // Getters
@@ -49,6 +56,8 @@ public class Employee {
         return role;
     }
 
+    public int getEmployeeNumber(){return employeeNumber;}
+
     // Setters
     public void setSSN(String SSN) {
         this.SSN = SSN;
@@ -65,6 +74,8 @@ public class Employee {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setEmployeeNumber(int employeeNumber) {this.employeeNumber = employeeNumber; }
 
     @Override
     public String toString() {
