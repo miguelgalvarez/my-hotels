@@ -106,7 +106,7 @@ public class RentingService {
         return false;
     }
 
-    public String deleteRenting(Integer RentingID) throws Exception {
+    public String deleteRenting(int RentingID) throws Exception {
         Connection con = null;
         String message = "";
 

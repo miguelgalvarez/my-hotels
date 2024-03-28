@@ -197,7 +197,7 @@ public class BookingService {
      * @return string returned that states if the booking has been deleted or not
      * @throws Exception when trying to connect to database
      */
-    public String deleteBooking(Integer BookingID) throws Exception {
+    public String deleteBooking(int BookingID) throws Exception {
         Connection con = null;
         String message = "";
 
