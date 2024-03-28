@@ -4,6 +4,7 @@
 DROP TABLE IF EXISTS hotelchain;
 CREATE TABLE hotelchain (
 	HotelChainID serial PRIMARY KEY,
+	HotelChainName varchar(45) NOT NULL,
 	HotelChainAddress varchar(45) NOT NULL,
 	PhoneNumber BIGINT NOT NULL,
 	NumberOfHotels INT NOT NULL,
