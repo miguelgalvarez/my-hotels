@@ -34,10 +34,11 @@ public class Hotel {
      * @param email email of hotel
      * @param hotelName name of the hotel
      */
-    public Hotel(int hotelID, int hotelChainID, double rating, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
-        this.hotelID = hotelID;
-        this.hotelChainID = hotelChainID;
+    public Hotel(int hotelID, int hotelChainID, double rating, String hotelArea,String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.rating = rating;
+        this.hotelChainID = hotelChainID;
+        this.hotelArea = hotelArea;
+        this.hotelCategory = hotelCategory;
         this.phoneNumber = phoneNumber;
         this.numRooms = numRooms;
         this.address = address;

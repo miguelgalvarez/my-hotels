@@ -74,6 +74,13 @@
         .hotel-info p {
             margin: 10px 0; /* Added for spacing */
         }
+        a:visited, a:link {
+           color: inherit;
+           text-decoration: none;
+        }
+        a:active {
+            color: inherit;
+        }
     </style>
 </head>
 <body>

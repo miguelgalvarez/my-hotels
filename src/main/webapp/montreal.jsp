@@ -77,6 +77,13 @@
         .hotel-info p {
             margin: 10px 0; /* Added for spacing */
         }
+        a:visited, a:link {
+           color: inherit;
+           text-decoration: none;
+        }
+        a:active {
+            color: inherit;
+        }
     </style>
     </head>
 <body>
@@ -92,20 +99,44 @@
 %>
 <div class="container">
     <div class="filters">
-        <!-- Your filters here -->
+<div class="filters">
+        <h2>Filters</h2>
+        <label for="Hotel-Chain">Hotel Chain:</label>
+        <select id="Hotel-Chain" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Hotel-Chain 1</option>
+            <option value="2">Hotel-Chain 2</option>
+            <option value="3">Hotel-Chain 3</option>
+            <option value="4">Hotel-Chain 4</option>
+            <option value="5">Hotel-Chain 5</option>
+        </select>
+        <label for="Hotel-Type">Hotel Type:</label>
+        <select id="Hotel-Type" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Budget</option>
+            <option value="2">Mid-Range</option>
+            <option value="3">Luxury</option>
+        </select>
+        <label for="Max-Rooms">Max Rooms:</label>
+        <select id="Max-Rooms" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="1">Less than 50</option>
+            <option value="2">50-100</option>
+            <option value="3">More than 100</option>
+        </select>
     </div>
+        </div>
     <div class="hotels">
         <% if (hotels != null) {
             for (Hotel hotel : hotels) {
         %>
-                <div class="hotel" data-HotelChain="<%= hotel.getHotelChainID() %>" data-type="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
+                <div class="hotel" data-HotelChain="<%= hotel.getHotelChainID() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
                     <a href="rooms.jsp">
                         <h3><%= hotel.getHotelName() %></h3>
                         <div class="hotel-info">
                             <p>Hotel Chain: <%= hotel.getHotelChainID() %></p>
-                            <p>Type: <%= hotel.getHotelCategory() %></p>
+                            <p>Hotel Type: <%= hotel.getHotelCategory() %></p>
                             <p>Max Rooms: <%= hotel.getNumRooms() %></p>
-                            <!-- You can add more hotel details here -->
                         </div>
                     </a>
                 </div>
@@ -118,24 +149,24 @@
 <script>
     function filterHotels() {
         const hotelChainFilter = document.getElementById('Hotel-Chain').value;
-        const typeFilter = document.getElementById('type').value;
+        const hotelTypeFilter = document.getElementById('Hotel-Type').value;
         const maxRoomsFilter = document.getElementById('Max-Rooms').value;
 
         const hotels = document.querySelectorAll('.hotel');
 
         hotels.forEach(hotel => {
             const hotelChain = parseInt(hotel.getAttribute('data-HotelChain'));
-            const type = parseInt(hotel.getAttribute('data-type'));
+            const hotelType = parseInt(hotel.getAttribute('data-HotelType'));
             const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'));
 
             const hotelChainPass = hotelChainFilter == 0 || hotelChain == hotelChainFilter;
-            const typePass = typeFilter == 0 || type == typeFilter;
+            const hotelTypePass = hotelTypeFilter == 0 || hotelType == hotelTypeFilter;
             const maxRoomsPass = maxRoomsFilter == 0 ||
                 (maxRoomsFilter == 1 && maxRooms < 50) ||
                 (maxRoomsFilter == 2 && maxRooms >= 50 && maxRooms <= 100) ||
                 (maxRoomsFilter == 3 && maxRooms > 100);
 
-            if (hotelChainPass && typePass && maxRoomsPass) {
+            if (hotelChainPass && hotelTypePass && maxRoomsPass) {
                 hotel.style.display = 'block';
             } else {
                 hotel.style.display = 'none';
