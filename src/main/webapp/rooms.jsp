@@ -1,3 +1,6 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.hotels.Room" %>
+<%@ page import="com.hotels.RoomService" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +16,12 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         .container {
             display: flex;
             padding: 20px;
         }
         .filters {
-            flex: 0 0 200px; /* Fixed width */
+            flex: 0 0 200px;
             background-color: #f9f9f9;
             padding: 20px;
             box-sizing: border-box;
@@ -36,7 +38,7 @@
             background-color: #f9f9f9;
             border-radius: 8px;
             width: 100%;
-            margin-bottom: 10px; /* Added for spacing */
+            margin-bottom: 10px;
         }
         .filters select:hover {
             background-color: #eaeaea;
@@ -72,7 +74,7 @@
             padding: 20px;
         }
         .hotel-info p {
-            margin: 10px 0; /* Added for spacing */
+            margin: 10px 0;
         }
         a:visited, a:link {
            color: inherit;
@@ -86,82 +88,96 @@
 <body>
 <jsp:include page="navbar.jsp" />
 
+<%
+    RoomService roomService = new RoomService();
+    List<Room> rooms = null;
+    try {
+        rooms = roomService.getRooms();
+    } catch (Exception e) {
+        out.println("<p>Error fetching rooms: " + e.getMessage() + "</p>");
+    }
+%>
+
 <div class="container">
     <div class="filters">
         <h2>Filters</h2>
-        <label for="price">Price:</label>
-        <select id="price" class="filter-dropdown" onchange="filterHotels()">
-            <option value="0">Lowest First</option>
-            <option value="1">Highest First</option>
-        </select>
-        <label for="type">Type:</label>
-        <select id="type" class="filter-dropdown" onchange="filterHotels()">
+        <label for="price">Price Range:</label>
+        <select id="price" class="filter-dropdown" onchange="filterRooms()">
             <option value="0">All</option>
-            <option value="1">Single</option>
-            <option value="2">Double</option>
-            <option value="3">Suite</option>
+            <option value="1">Under $99</option>
+            <option value="2">$100 - $200</option>
+            <option value="3">Over $200</option>
         </select>
+
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" class="filter-dropdown" onchange="filterRooms()">
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" class="filter-dropdown" onchange="filterRooms()">
+
         <label for="capacity">Capacity:</label>
-        <select id="capacity" class="filter-dropdown" onchange="filterHotels()">
+        <select id="capacity" class="filter-dropdown" onchange="filterRooms()">
             <option value="0">All</option>
             <option value="1">1 guest</option>
             <option value="2">2 guests</option>
             <option value="3">3 guests</option>
             <option value="4">4 guests</option>
         </select>
-    </div>
+    </div
     <div class="hotels">
-        <div class="hotel" data-price="25000" data-type="2" data-capacity="2">
-            <a href="payment.jsp">
-                <h3>Room 1</h3>
-                <div class="hotel-info">
-                    <p>Price: $25000</p>
-                    <p>Type: Double</p>
-                    <p>Capacity: 2 guests</p>
+        <% if (rooms != null) {
+            for (Room room : rooms) { %>
+                <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>">
+                    <a href="payment.jsp?roomId=<%= room.getRoomID() %>">
+                        <h3>Room <%= room.getRoomID() %></h3>
+                        <div class="hotel-info">
+                            <p>Price: $<%= room.getPrice() %></p>
+                            <p>Capacity: <%= room.getCapacity() %> guests</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="hotel" data-price="100" data-type="3" data-capacity="4">
-            <a href="payment.jsp">
-                <h3>Room 2</h3>
-                <div class="hotel-info">
-                    <p>Price: $100</p>
-                    <p>Type: Suite</p>
-                    <p>Capacity: 4 guests</p>
-                </div>
-            </a>
-        </div>
-        <!-- Add more hotel entries here -->
+        <%    }
+        } %>
     </div>
 </div>
-
 <script>
-    function filterHotels() {
+    function filterRooms() {
         const priceFilter = document.getElementById('price').value;
-        const typeFilter = document.getElementById('type').value;
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
         const capacityFilter = document.getElementById('capacity').value;
 
-        const hotels = document.querySelectorAll('.hotel');
+        const rooms = document.querySelectorAll('.hotel');
 
-        hotels.forEach(hotel => {
-            const price = parseInt(hotel.getAttribute('data-price'));
-            const type = parseInt(hotel.getAttribute('data-type'));
-            const capacity = parseInt(hotel.getAttribute('data-capacity'));
+        rooms.forEach(room => {
+            const price = parseInt(room.getAttribute('data-price'), 10);
+            const capacity = parseInt(room.getAttribute('data-capacity'), 10);
+            let pricePass = false;
 
-            const pricePass = priceFilter == 0 || (priceFilter == 1 && price >= 0) || (priceFilter == 2 && price <= 0);
-            const typePass = typeFilter == 0 || type == typeFilter;
-            const capacityPass = capacityFilter == 0 || capacity == capacityFilter;
+            switch(priceFilter) {
+                case '0': // All prices
+                    pricePass = true;
+                    break;
+                case '1': // Under $99
+                    pricePass = price < 99;
+                    break;
+                case '2': // $100 - $200
+                    pricePass = price >= 100 && price <= 200;
+                    break;
+                case '3': // Over $200
+                    pricePass = price > 200;
+                    break;
+            }
 
-            if (pricePass && typePass && capacityPass) {
-                hotel.style.display = 'block';
+            const capacityPass = capacityFilter === '0' || capacity === parseInt(capacityFilter, 10);
+
+            if (pricePass && capacityPass) {
+                room.style.display = '';
             } else {
-                hotel.style.display = 'none';
+                room.style.display = 'none';
             }
         });
     }
-
-    // Initial filtering
-    filterHotels();
 </script>
 
 </body>
