@@ -202,7 +202,7 @@ public class BookingService {
         String message = "";
 
         // sql query
-        String sql0 = "INSERT INTO booking_archive (BookingID, CustomerID, HotelID, PricePaid, CheckIn, CheckOut) SELECT BookingID, CustomerID, HotelID, PricePaid, CheckIn, CheckOut FROM booking WHERE BookingID = ?;";
+        String sql0 = "INSERT INTO booking_archive (BookingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut) SELECT BookingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut FROM booking WHERE BookingID = ?;";
         String sql = "DELETE FROM booking WHERE id = ?;";
 
 

@@ -111,7 +111,7 @@ public class RentingService {
         String message = "";
 
         // sql query
-        String sql0 = "INSERT INTO renting_archive (RentingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut) SELECT RentingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut FROM renting WHERE RentingID = ?;";
+        String sql0 = "INSERT INTO renting_archive (RentingID, CustomerID, RoomID, CheckIn, CheckOut) SELECT RentingID, CustomerID, RoomID, CheckIn, CheckOut FROM renting WHERE RentingID = ?;";
         String sql = "DELETE FROM booking WHERE id = ?;";
 
 
