@@ -10,6 +10,7 @@ public class Booking {
 
     private int BookingID;
     private int hotelID;
+    private int roomID;
     private double pricePaid;
     private int customerID;
     private Date checkIn;
@@ -22,9 +23,10 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int BookingID, int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int BookingID, int hotelID, int roomID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
         this.hotelID = hotelID;
+        this.roomID = roomID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
         this.checkIn = checkIn;
@@ -40,10 +42,11 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int hotelID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int hotelID, double pricePaid, int customerID, int roomID, Date checkIn, Date checkOut) {
         this.hotelID = hotelID;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
+        this.roomID = roomID;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
     }
@@ -57,6 +60,7 @@ public class Booking {
     public double getPricePaid() {
         return pricePaid;
     }
+    public int getRoomID(){return roomID;}
     public int getHotelID() {return hotelID;}
 
     public int getCustomerID() {return customerID;}

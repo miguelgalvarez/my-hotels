@@ -110,6 +110,7 @@ public class BookingService {
                 Booking booking = new Booking(
                         rs2.getInt("BookingID"),
                         rs2.getInt("HotelID"),
+                        rs2.getInt("RoomID"),
                         rs2.getDouble("PricePaid"),
                         rs2.getInt("CustomerID"),
                         rs2.getDate("CheckIn"),
@@ -164,6 +165,7 @@ public class BookingService {
                 Booking booking = new Booking(
                         rs.getInt("BookingID"),
                         rs.getInt("HotelID"),
+                        rs.getInt("RoomID"),
                         rs.getDouble("PricePaid"),
                         rs.getInt("CustomerID"),
                         rs.getDate("CheckIn"),
