@@ -1,60 +1,50 @@
 package com.hotels;
 
+import java.util.Date;
+
 /**
  * Renting class to store Renting data
  */
 
 public class Renting {
-    private String rentingID;
-    private String period;
-    private int numberOfRooms;
+    private int roomID;
+    private Date checkIn;
+    private Date checkOut;
 
 
     /**
-     * Constructor to save renting's data (without id)
+     * Constructor to save renting's data
      *
-     * @param numberOfRooms the number of rooms in a renting
-     * @param period the period that the customer is staying
+     * @param roomID the room being rented
+     * @param checkIn the check-in date of the renting instance
+     * @param checkOut the check-out date of the renting instance
      *
      */
-    public Renting(String rentingID, String period, int numberOfRooms) {
-        this.rentingID = rentingID;
-        this.numberOfRooms = numberOfRooms;
-        this.period = period;
+    public Renting(int roomID, Date checkIn, Date checkOut) {
+        this.roomID = roomID;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
 
     }
 
     // Getters
-    public String getRentingID() {
-        return rentingID;
+    public int getRoomID() {
+        return roomID;
     }
+    public Date getCheckIn() {return checkIn;}
+    public Date getCheckOut() {return checkOut;}
 
-    public String getPeriod() {
-        return period;
+    public java.sql.Date getCheckInSQL() {
+        return (java.sql.Date) checkIn;
     }
-
-    public int getNumberOfRooms() {
-        return numberOfRooms;
-    }
+    public java.sql.Date getCheckOutSQL(){return (java.sql.Date) checkOut;}
 
     // Setters
-    public void setRentingID(String rentingID) {
-        this.rentingID = rentingID;
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
 
-    public void setPeriod(String period) {
-        this.period = period;
-    }
+    public void checkIn(Date checkIn) {this.checkIn = checkIn;}
+    public void checkOut(Date checkOut) {this.checkOut = checkOut;}
 
-    public void setNumberOfRooms(int numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
-    }
-
-    @Override
-    public String toString() {
-
-        return "<ul>"
-                + "<li>period = " + period + "</li>"
-                + "<li>number of rooms = " + numberOfRooms + "</li>";
-    }
 }

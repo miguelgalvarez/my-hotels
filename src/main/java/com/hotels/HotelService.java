@@ -3,6 +3,7 @@ package com.hotels;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,39 @@ public class HotelService {
             // throw any errors occurred
             throw new Exception(e.getMessage());
         }
+    }
+
+    /**
+     * Method to get the number of rooms in a certain area
+     * This method takes a string (the area in question) as a parameter
+     * @return int that represents the number of rooms in the specified area
+     * @return 0 if null
+     * @throws Exception when trying to connect to database
+     */
+    public int getTotalNumRoomsInArea(String area){
+        //establish connection with DB
+        ConnectionDB db = new ConnectionDB();
+
+        // Insert data into the database
+        try (Connection connection = db.getConnection()) {
+            String sql = "SELECT HotelArea, SUM(NumberOfRooms) AS TotalRooms FROM hotel WHERE HotelArea = ? GROUP BY HotelArea;";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, area);
+
+                ResultSet result = statement.executeQuery();
+
+                if(result.next()){
+                    return result.getInt(area);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL exceptions
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
     }
 
     /**

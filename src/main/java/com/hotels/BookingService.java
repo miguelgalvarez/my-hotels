@@ -36,7 +36,7 @@ public class BookingService {
     /**
      * Method to create a booking and add it to the database
      * This method takes a booking object as its parameter
-     * @return List of bookings from database
+     * @return true if the booking was successfully added to the database
      * @throws Exception when trying to connect to database
      */
 
@@ -83,9 +83,8 @@ public class BookingService {
      */
     public List<Booking> getBookings(Integer customerID) throws Exception {
 
-        // sql queries
-        String sql = "SELECT * FROM booking";
-        String sql1 = "SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = "+customerID+";";
+        // sql query
+        String sql1 = "SELECT * FROM booking WHERE CustomerID = ?;";
         // database connection object
         ConnectionDB db = new ConnectionDB();
 
@@ -95,11 +94,9 @@ public class BookingService {
         // try connect to database, catch any exceptions
         try (Connection con = db.getConnection()) {
             // prepare the statement
-            PreparedStatement stmt = con.prepareStatement(sql);
-            // prepare second statement
             PreparedStatement stmt2 = con.prepareStatement(sql1);
             // get the results from executing the query
-            ResultSet rs = stmt.executeQuery();
+           stmt2.setInt(1, customerID);
 
             ResultSet rs2 = stmt2.executeQuery();
 
@@ -122,9 +119,9 @@ public class BookingService {
             }
 
             //close the result set
-            rs.close();
+            rs2.close();
             // close the statement
-            stmt.close();
+            stmt2.close();
             con.close();
             db.close();
 

@@ -3,6 +3,7 @@ package com.hotels;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RentingService {
     public boolean bookingTOrenting(int roomID) {
@@ -66,6 +67,43 @@ public class RentingService {
             // Handle exception
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    /**
+     * Method to create a renting and add it to the database
+     * This method takes a renting object as its parameter
+     * @return true if the renting was successfully added to the database
+     * @throws Exception when trying to connect to database
+     */
+    public boolean createRenting(Renting renting){
+        //testing
+        System.out.println(renting.getRoomID());
+        System.out.println(renting.getCheckIn());
+        System.out.println(renting.getCheckOut());
+
+        //establish connection with DB
+        ConnectionDB db = new ConnectionDB();
+
+        // Insert data into the database
+        try (Connection connection = db.getConnection()) {
+            String sql = "INSERT INTO renting (RoomID, CheckIn, CheckOut) VALUES (?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, renting.getRoomID());
+                statement.setDate(2, renting.getCheckInSQL());
+                statement.setDate(3, renting.getCheckOutSQL());
+
+                int result = statement.executeUpdate();
+
+                return result > 0; //registration if registration was successful or not
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL exceptions
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
     }
 
     public String deleteRenting(Integer RentingID) throws Exception {
