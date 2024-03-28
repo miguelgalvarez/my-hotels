@@ -66,6 +66,7 @@ CREATE TABLE booking (
 	CustomerID BIGINT REFERENCES customer(CustomerID),
 	HotelID BIGINT REFERENCES hotel(HotelID),
 	RoomID BIGINT REFERENCES room(RoomID),
+	Payment boolean DEFAULT false,
 	PricePaid double precision NOT NULL,
 	CheckIn date NOT NULL,
 	CheckOut date NOT NULL
@@ -85,6 +86,8 @@ CREATE TABLE booking_archive (
     BookingID INT,
     CustomerID INT,
     HotelID INT,
+	RoomID INT,
+	Payment boolean,
     PricePaid DOUBLE PRECISION NOT NULL,
     CheckIn DATE NOT NULL,
     CheckOut DATE NOT NULL,
