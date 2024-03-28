@@ -112,11 +112,11 @@ CREATE TABLE renting_archive (
 -- ----------------------------
 INSERT INTO hotelchain (HotelChainName, PhoneNumber, NumberOfHotels, HotelChainEmail, HotelChainAddress)
 VALUES
-    ('HolidayInn','1234567890', 8, 'chain1@gmail.com','33 Palisade St'),
-    ('HolidayInn', 9, 'chain1@gmail.com','33 Palisade St'),
-    ('HolidayInn', 10, 'chain1@gmail.com','33 Palisade St'),
-    ('HolidayInn', 11, 'chain1@gmail.com','33 Palisade St'),
-    ('HolidayInn', 12, 'chain1@gmail.com','33 Palisade St');
+    ('HolidayInn', '1234567890', 8, 'chain1@gmail.com','33 Palisade St'),
+    ('HolidayInn', '1234567890', 9, 'chain1@gmail.com','33 Palisade St'),
+    ('HolidayInn', '1234567890', 10, 'chain1@gmail.com','33 Palisade St'),
+    ('HolidayInn', '1234567890', 11, 'chain1@gmail.com','33 Palisade St'),
+    ('HolidayInn', '1234567890', 12, 'chain1@gmail.com','33 Palisade St');
 	
 -- ----------------------------
 -- Records of hotel rooms
@@ -161,13 +161,13 @@ VALUES
 -- ----------------------------
 -- Records of bookings
 -- ----------------------------
-INSERT INTO booking (CustomerID, HotelID, PricePaid, CheckIn, CheckOut)
+INSERT INTO booking (CustomerID, HotelID, RoomID, PricePaid, CheckIn, CheckOut)
 VALUES
-    (1, 1, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 2, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 3, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 4, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 5, 300.00, '2024-08-10', '2024-08-15');
+    (1, 1, 1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 2, 2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 3, 3, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 4, 4, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 5, 5, 300.00, '2024-08-10', '2024-08-15');
 
 -- ----------------------------
 -- Test queries
@@ -178,4 +178,5 @@ SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';
 SELECT * FROM hotel
 SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = 'john') AS username_exists;
 SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelID = 2;
-
+SELECT * FROM booking WHERE RoomID = 4
+INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = 4
