@@ -11,6 +11,7 @@ public class Booking {
     private int BookingID;
     private int hotelID;
     private int roomID;
+    private boolean payment;
     private double pricePaid;
     private int customerID;
     private Date checkIn;
@@ -23,10 +24,11 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int BookingID, int hotelID, int roomID, double pricePaid, int customerID, Date checkIn, Date checkOut) {
+    public Booking(int BookingID, int hotelID, int roomID, boolean payment, double pricePaid, int customerID, Date checkIn, Date checkOut) {
         this.BookingID = BookingID;
         this.hotelID = hotelID;
         this.roomID = roomID;
+        this.payment = payment;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
         this.checkIn = checkIn;
@@ -42,8 +44,9 @@ public class Booking {
      * @param checkIn the date that the customer is checking in
      * @param checkOut the date that customer is checking out
      */
-    public Booking(int hotelID, double pricePaid, int customerID, int roomID, Date checkIn, Date checkOut) {
+    public Booking(int hotelID, boolean payment, double pricePaid, int customerID, int roomID, Date checkIn, Date checkOut) {
         this.hotelID = hotelID;
+        this.payment = payment;
         this.pricePaid = pricePaid;
         this.customerID = customerID;
         this.roomID = roomID;
@@ -61,6 +64,7 @@ public class Booking {
         return pricePaid;
     }
     public int getRoomID(){return roomID;}
+    public boolean getPayment(){return payment;}
     public int getHotelID() {return hotelID;}
 
     public int getCustomerID() {return customerID;}
@@ -76,6 +80,7 @@ public class Booking {
     public java.sql.Date getCheckOutSQL() {return (java.sql.Date) checkOut;}
 
     // Setters
+    public void setPayment(boolean payment) {this.payment = payment;}
     public void setBookingID(int BookingID) {
         this.BookingID = BookingID;
     }
