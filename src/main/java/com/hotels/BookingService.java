@@ -142,7 +142,7 @@ public class BookingService {
      * @return List of bookings from database
      * @throws Exception when trying to connect to database
      */
-    public List<Booking> getAllBookings(Integer customerID) throws Exception {
+    public List<Booking> getAllBookings() throws Exception {
 
         // sql queries
         String sql = "SELECT * FROM booking";
