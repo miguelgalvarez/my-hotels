@@ -2,7 +2,7 @@ package com.hotels;
 
 public class Payment {
     private int creditCardNumber;
-    private String cvv;
+    private int cvv;
     private String fullName;
 
     /**
@@ -12,7 +12,7 @@ public class Payment {
      * @param cvv unique cvv number of customer's credit card
      * @param fullName cardholder's full name
      */
-    public Payment(int creditCardNumber, String cvv, String fullName) {
+    public Payment(int creditCardNumber, int cvv, String fullName) {
         this.creditCardNumber = creditCardNumber;
         this.cvv = cvv;
         this.fullName = fullName;
@@ -20,7 +20,7 @@ public class Payment {
 
     /* Getters */
     public int getCreditCardNumber() {return this.creditCardNumber; }
-    public String getCvv() {return this.cvv;}
+    public int getCvv() {return this.cvv;}
     public String getFullName() {return this.fullName;}
 
 }

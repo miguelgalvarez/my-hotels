@@ -10,19 +10,25 @@ public class PaymentService {
      */
     public boolean paymentAccepted(Payment payment){
         int ccNumber = payment.getCreditCardNumber();
-        String cvv = payment.getCvv();
+        int cvv = payment.getCvv();
         String fullName = payment.getFullName();
-
-        // Count the number of digits
+        
         int count = 0;
+        int count2 = 0;
+
         while (ccNumber != 0) {
             // Remove the last digit
             ccNumber /= 10;
             // Increment the count
             count++;
         }
+
+        while(cvv != 0){
+            cvv /= 10;
+            count2++;
+        }
         // Return true if the count is 16, indicating a 16-digit number
-        return ((count == 16) && (!fullName.equals("")) && (cvv.length() == 3));
+        return ((count == 16) && (!fullName.equals("")) && (count2 == 3));
     }
 
     /**
