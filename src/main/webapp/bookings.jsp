@@ -97,7 +97,7 @@
             border-radius: 12px;
             transition: background-color 0.3s;
             box-sizing: border-box;
-            width: 100px;
+            width: 200px;
             text-align: center;
         }
 
@@ -105,11 +105,83 @@
             background-color: #e08502; /* Darker shade for hover state */
         }
 
+        .cancel-booking-btn {
+            padding: 10px 20px;
+            background-color: #ff4d4d; /* Red color for cancel button */
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            float: right; /* Align to the right */
+            margin-top: 20px;
+        }
+
+        .cancel-booking-btn:hover {
+            background-color: #cc0000; /* Darker shade for hover state */
+        }
+
+        .modal {
+            position: fixed;   /* Stay in place */
+            left: 0;
+            top: 0;
+            width: 100%;       /* Full width */
+            height: 100%;      /* Full height */
+            overflow: auto;    /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: none;     /* Initially hidden */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #888;
+            width: 30%;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .auth-button.cancel-confirm-btn {
+            background-color: #ff4d4d; /* Red color */
+        }
+
+        .auth-button.cancel-confirm-btn:hover {
+            background-color: #cc0000; /* A darker shade of red for hover state */
+        }
+
+        .auth-button.close-modal-btn {
+            background-color: #4CAF50; /* Green color */
+        }
+
+        .auth-button.close-modal-btn:hover {
+            background-color: #388E3C; /* A darker shade of green for hover state */
+        }
+
+
     </style>
 </head>
 <body>
 
 <jsp:include page="navbar.jsp" />
+<jsp:include page="popup.jsp" />
 
 <div class="container">
     <h2 class="booking-title">Your Bookings</h2>
@@ -134,6 +206,20 @@
                     <div class="details">Check-out: <%= booking.getCheckOut() %></div>
                 </div>
                 <div class="price">$<%= booking.getPricePaid() %></div>
+                <button class="cancel-booking-btn" data-booking-id="<%= booking.getBookingID() %>">Cancel Booking</button>
+            </div>
+
+            <!-- Cancellation Confirmation Modal -->
+            <div id="cancelConfirmationModal" class="modal" style = "display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Confirm Cancellation</h2>
+                    <p>Are you sure you want to cancel your booking?</p>
+                    <div class="auth-buttons">
+                        <a href="bookings.jsp" class="auth-button cancel-confirm-btn" data-booking-id="<%= booking.getBookingID() %>">Yes, Cancel It</a>
+                        <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                    </div>
+                </div>
             </div>
         <%
             }
@@ -148,7 +234,74 @@
             <a href="register.jsp" class="register-btn">Register</a>
         </div>
     <% } %>
+
+
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cancelButtons = document.querySelectorAll('.cancel-booking-btn');
+        const modal = document.getElementById('cancelConfirmationModal');
+        const yesButton = modal.querySelector('.cancel-confirm-btn');
+        const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
+
+        // Function to open modal
+        function openModal(bookingId) {
+            yesButton.setAttribute('data-booking-id', bookingId);
+            modal.style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const bookingId = this.getAttribute('data-booking-id');
+                openModal(bookingId);
+            });
+        });
+
+        yesButton.addEventListener('click', function() {
+            const bookingId = this.getAttribute('data-booking-id');
+            fetch('deleteBooking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'BookingID=' + bookingId
+            })
+            .then(response => response.text())
+            .then(data => {
+                window.location.href = 'bookings.jsp'; // Redirect to the bookings page
+            })
+
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            closeModal(); // Close the modal
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent link action
+                closeModal();
+            });
+        });
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+    });
+
+</script>
 
 </body>
 </html>
+
+
