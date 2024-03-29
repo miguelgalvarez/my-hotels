@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RentingService {
-    public boolean bookingToRenting(int roomID) {
-        String sql0 = "SELECT * FROM booking WHERE RoomID = ?";
-        String sql1 = "INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = ?";
+    public boolean bookingToRenting(int bookingID) {
+        String sql0 = "SELECT * FROM booking WHERE BookingID = ?";
+        String sql1 = "INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE BookingID = ?";
         // deleting booking after converting it to renting
-        String sql2 = "DELETE FROM booking WHERE RoomID = ?";
+        String sql2 = "DELETE FROM booking WHERE BookingID = ?";
         ConnectionDB db = new ConnectionDB();
         try (Connection con = db.getConnection()) {
             // Start a transaction
@@ -20,12 +20,12 @@ public class RentingService {
 
             // Prepare the statements
             PreparedStatement stmt0 = con.prepareStatement(sql0);
-            stmt0.setInt(1, roomID);
+            stmt0.setInt(1, bookingID);
             PreparedStatement stmt1 = con.prepareStatement(sql1);
-            stmt1.setInt(1, roomID);
+            stmt1.setInt(1, bookingID);
             // deleting booking statement
             PreparedStatement stmt2 = con.prepareStatement(sql2);
-            stmt2.setInt(1, roomID);
+            stmt2.setInt(1, bookingID);
 
             // Execute query to retrieve booking info
             ResultSet rs = stmt0.executeQuery();
