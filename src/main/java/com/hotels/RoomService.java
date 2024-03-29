@@ -37,6 +37,7 @@ public class RoomService {
             while (rs.next()) {
                 // create new room object
                 Room room = new Room(
+                        rs.getInt("RoomID"),
                         rs.getDouble("Price"),
                         rs.getInt("HotelID"),
                         rs.getInt("Capacity"),

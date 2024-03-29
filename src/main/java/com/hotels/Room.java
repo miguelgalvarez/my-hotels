@@ -53,7 +53,8 @@ public class Room {
      * @param roomView the type of view that a room has
      * @param roomExtension if a room can have an extension
      */
-    public Room(double price, int HotelID, int capacity, String amenities, String roomView, boolean roomExtension) {
+    public Room(int RoomID, double price, int HotelID, int capacity, String amenities, String roomView, boolean roomExtension) {
+        this.RoomID = RoomID;
         this.price = price;
         this.HotelID = HotelID;
         this.capacity = capacity;

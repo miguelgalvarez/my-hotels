@@ -129,7 +129,7 @@
             for (Room room : rooms) { %>
                 <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>">
                     <a href="payment.jsp?roomId=<%= room.getRoomID() %>">
-                        <h3>Room <%= room.getRoomID() %></h3>
+                        <h3>Room <%= room.getID() %></h3>
                         <div class="hotel-info">
                             <p>Price: $<%= room.getPrice() %></p>
                             <p>Capacity: <%= room.getCapacity() %> guests</p>
