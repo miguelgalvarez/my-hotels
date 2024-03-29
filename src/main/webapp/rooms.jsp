@@ -107,7 +107,7 @@
     <div class="filters">
         <h2>Filters</h2>
         <label for="price">Price Range:</label>
-        <select id="price" class="filter-dropdown" onchange="filterRooms()">
+        <select id="price" class="filter-dropdown">
             <option value="0">All</option>
             <option value="1">Under $99</option>
             <option value="2">$100 - $200</option>
@@ -115,20 +115,21 @@
         </select>
 
         <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" class="filter-dropdown" onchange="filterRooms()">
+        <input type="date" id="start-date" class="filter-dropdown">
 
         <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" class="filter-dropdown" onchange="filterRooms()">
+        <input type="date" id="end-date" class="filter-dropdown">
 
         <label for="capacity">Capacity:</label>
-        <select id="capacity" class="filter-dropdown" onchange="filterRooms()">
+        <select id="capacity" class="filter-dropdown">
             <option value="0">All</option>
             <option value="1">1 guest</option>
             <option value="2">2 guests</option>
             <option value="3">3 guests</option>
             <option value="4">4 guests</option>
         </select>
-    </div
+        <button onclick="filterRooms()">Search</button>
+    </div>
     <div class="hotels">
         <% if (rooms != null) {
             for (Room room : rooms) { %>
@@ -136,7 +137,7 @@
                     <a href="payment.jsp?roomId=<%= room.getRoomID() %>">
                         <h3>Room <%= room.getID() %></h3>
                         <div class="hotel-info">
-                            <p>Price: $<%= room.getPrice() %></p>
+                            <p>Price Per Day: $<%= room.getPrice() %></p>
                             <p>Capacity: <%= room.getCapacity() %> guests</p>
                             <p>Amenities: <%= room.getAmeneties() %></p>
                         </div>
@@ -147,6 +148,27 @@
     </div>
 </div>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+
+        const startDate = document.getElementById('start-date');
+        const endDate = document.getElementById('end-date');
+
+        startDate.setAttribute('min', today); // Ensure start date can't be before today
+        endDate.setAttribute('min', today); // Ensure end date can't be before today
+
+        startDate.value = today; // Initialize start date with today's date
+        endDate.value = today; // Initialize end date with today's date
+
+        startDate.addEventListener('change', function() {
+            endDate.setAttribute('min', startDate.value);
+
+            if (endDate.value < startDate.value) {
+                endDate.value = startDate.value;
+            }
+        });
+    });
+
     function filterRooms() {
         const priceFilter = document.getElementById('price').value;
         const startDate = document.getElementById('start-date').value;
@@ -156,6 +178,26 @@
         const rooms = document.querySelectorAll('.hotel');
 
         rooms.forEach(room => {
+            const roomId = parseInt(room.getAttribute('data-roomId'), 10);
+
+            //need to change this to get rooms and rentings for the
+            const bookingsForRoom = booking[roomId] || [];
+            const rentingsForRoom = renting[roomId] || [];
+
+            let dateAvailable = true;
+            for (const booking of bookingsForRoom) {
+                if (!(endDate < booking.start || startDate > booking.end)) {
+                    dateAvailable = false;
+                    break;
+                }
+            }
+            for (const renting of rentingsForRoom) {
+                if (!(endDate < renting.start || startDate > renting.end)) {
+                    dateAvailable = false;
+                    break;
+                }
+            }
+
             const price = parseInt(room.getAttribute('data-price'), 10);
             const capacity = parseInt(room.getAttribute('data-capacity'), 10);
             let pricePass = false;
@@ -177,7 +219,7 @@
 
             const capacityPass = capacityFilter === '0' || capacity === parseInt(capacityFilter, 10);
 
-            if (pricePass && capacityPass) {
+            if (dateAvailable && pricePass && capacityPass) {
                 room.style.display = '';
             } else {
                 room.style.display = 'none';
