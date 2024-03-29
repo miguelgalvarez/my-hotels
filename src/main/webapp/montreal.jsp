@@ -131,7 +131,7 @@
             for (Hotel hotel : hotels) {
         %>
                 <div class="hotel" data-HotelChain="<%= hotel.getHotelChainID() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
-                    <a href="rooms.jsp">
+                        <a href="rooms.jsp?hotelId=<%= hotel.getID() %>">
                         <h3><%= hotel.getHotelName() %></h3>
                         <div class="hotel-info">
                             <p>Hotel Chain: <%= hotel.getHotelChainID() %></p>

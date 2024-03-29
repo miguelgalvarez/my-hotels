@@ -89,10 +89,11 @@
 <jsp:include page="navbar.jsp" />
 
 <%
+    int hotelId = Integer.parseInt(request.getParameter("hotelId"));
     RoomService roomService = new RoomService();
     List<Room> rooms = null;
     try {
-        rooms = roomService.getRooms();
+        rooms = roomService.getRooms(hotelId);
     } catch (Exception e) {
         out.println("<p>Error fetching rooms: " + e.getMessage() + "</p>");
     }
