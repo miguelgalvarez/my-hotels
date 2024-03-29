@@ -37,7 +37,6 @@
 
 <%
 String message = (String) session.getAttribute("message");
-System.out.println("message from popup is " + message);
 if(message != null){
     session.removeAttribute("message");
 %>
