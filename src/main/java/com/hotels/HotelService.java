@@ -86,7 +86,7 @@ public class HotelService {
                 ResultSet result = statement.executeQuery();
 
                 if(result.next()){
-                    return result.getInt(area);
+                    return result.getInt("totalrooms");
                 }
             }
         } catch (SQLException e) {
@@ -96,7 +96,7 @@ public class HotelService {
             throw new RuntimeException(e);
         }
 
-        return 69;
+        return 0;
     }
 
     /**
