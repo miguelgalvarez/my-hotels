@@ -76,6 +76,65 @@ public class BookingService {
     }
 
     /**
+     * Method to get bookings from the database from a specific roomID
+     *
+     * @return List of bookings from database
+     * @throws Exception when trying to connect to database
+     */
+    public List<Booking> getBookings(int roomID) throws Exception {
+
+        // sql query
+        String sql1 = "SELECT * FROM booking WHERE RoomID = ?;";
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // data structure to keep all bookings retrieved from database
+        List<Booking> bookings = new ArrayList<>();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare the statement
+            PreparedStatement stmt2 = con.prepareStatement(sql1);
+            // get the results from executing the query
+            stmt2.setInt(1, roomID);
+
+            ResultSet rs2 = stmt2.executeQuery();
+
+
+            // iterate through the result set
+            while (rs2.next()) {
+                // create new booking object
+                Booking booking = new Booking(
+                        rs2.getInt("BookingID"),
+                        rs2.getInt("HotelID"),
+                        rs2.getInt("RoomID"),
+                        rs2.getBoolean("Payment"),
+                        rs2.getDouble("PricePaid"),
+                        rs2.getInt("CustomerID"),
+                        rs2.getDate("CheckIn"),
+                        rs2.getDate("Checkout")
+                );
+
+                // append booking in bookings list
+                bookings.add(booking);
+            }
+
+            //close the result set
+            rs2.close();
+            // close the statement
+            stmt2.close();
+            con.close();
+            db.close();
+
+            // return the bookings retrieved from database
+            return bookings;
+        } catch (Exception e) {
+            // throw any errors occurred
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
      * Method to get bookings from the database from a specific customer
      *
      * @return List of bookings from database

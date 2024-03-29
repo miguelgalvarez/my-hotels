@@ -149,7 +149,7 @@
             </a>
         </div>
         <div class="city-card">
-            <a href="hotels.jsp?city=Vancouver" class="city-link">
+            <a href="vancouver.jsp" class="city-link">
                 <img src="assets/vancouver.jpeg" alt="Vancouver" class="city-image">
                 <span class="city-name">Vancouver</span>
                 <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Vancouver") %> Available Rooms!</span>

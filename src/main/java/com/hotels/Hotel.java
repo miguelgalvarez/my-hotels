@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Hotel {
     private int hotelID;
     private int hotelChainID;
+    private String hotelChainName;
     private String hotelCategory;
     private String hotelArea;
     private double rating;
@@ -34,10 +35,10 @@ public class Hotel {
      * @param email email of hotel
      * @param hotelName name of the hotel
      */
-    public Hotel(int hotelID, int hotelChainID, double rating, String hotelArea,String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
+    public Hotel(int hotelID, String hotelChainName, double rating, String hotelArea,String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.hotelID = hotelID;
         this.rating = rating;
-        this.hotelChainID = hotelChainID;
+        this.hotelChainName = hotelChainName;
         this.hotelArea = hotelArea;
         this.hotelCategory = hotelCategory;
         this.phoneNumber = phoneNumber;
@@ -56,7 +57,7 @@ public class Hotel {
      * @param address address of hotel
      * @param email email of hotel
      */
-    public Hotel(double rating, int hotelChainID, String hotelArea, String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
+    public Hotel(int hotelID, int hotelChainID, double rating, String hotelArea, String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
         this.rating = rating;
         this.hotelChainID = hotelChainID;
         this.hotelArea = hotelArea;
@@ -81,6 +82,7 @@ public class Hotel {
     public String getEmail() {return this.email; }
 
     public String getHotelName() {return this.hotelName;}
+    public String getHotelChainName() {return this.hotelChainName;}
 
     /* Setters */
     public void setHotelID(int hotelID) {this.hotelID = hotelID; }

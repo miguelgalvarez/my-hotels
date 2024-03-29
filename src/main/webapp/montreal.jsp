@@ -92,7 +92,7 @@
     HotelService service = new HotelService();
     List<Hotel> hotels = null;
     try {
-        hotels = service.getHotels(); // Fetch the list of hotels from your database
+        hotels = service.getHotels("Montreal"); // Fetch the list of hotels from your database
     } catch (Exception e) {
         out.println("<p>Error fetching hotels: " + e.getMessage() + "</p>");
     }
@@ -130,13 +130,13 @@
         <% if (hotels != null) {
             for (Hotel hotel : hotels) {
         %>
-                <div class="hotel" data-HotelChain="<%= hotel.getHotelChainID() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
+                <div class="hotel" data-HotelChain="<%= hotel.getHotelChainName() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
                         <a href="rooms.jsp?hotelId=<%= hotel.getID() %>">
                         <h3><%= hotel.getHotelName() %></h3>
                         <div class="hotel-info">
-                            <p>Hotel Chain: <%= hotel.getHotelChainID() %></p>
+                            <p>Hotel Chain: <%= hotel.getHotelChainName() %></p>
                             <p>Hotel Type: <%= hotel.getHotelCategory() %></p>
-                            <p>Max Rooms: <%= hotel.getNumRooms() %></p>
+                            <p>Available Rooms: <%= hotel.getNumRooms() %></p>
                         </div>
                     </a>
                 </div>

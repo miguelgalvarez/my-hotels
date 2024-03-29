@@ -68,6 +68,65 @@ public class HotelService {
     }
 
     /**
+     * Method to get all hotels from a specific area from the database
+     *
+     * @return List of hotels from a specific area from the database
+     * @throws Exception when trying to connect to database
+     */
+    public List<Hotel> getHotels(String area) throws Exception {
+        // sql query
+        String sql = "SELECT hotel.*, hotelchain.HotelChainName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelArea = ?;";
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // data structure to keep all hotels retrieved from database
+        List<Hotel> hotels = new ArrayList<>();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare the statement
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,area);
+            // get the results from executing the query
+            ResultSet rs = stmt.executeQuery();
+
+
+            // iterate through the result set
+            while (rs.next()) {
+                // create new hotel object
+                Hotel hotel = new Hotel(
+                        rs.getInt("HotelID"),
+                        rs.getString("HotelChainName"),
+                        rs.getDouble("Rating"),
+                        rs.getString("HotelArea"),
+                        rs.getString("HotelCategory"),
+                        rs.getBigDecimal("HotelPhoneNumber"),
+                        rs.getInt("NumberOfRooms"),
+                        rs.getString("Address"),
+                        rs.getString("HotelEmail"),
+                        rs.getString("HotelName")
+                );
+
+                // append hotel in hotels list
+                hotels.add(hotel);
+            }
+
+            //close the result set
+            rs.close();
+            // close the statement
+            stmt.close();
+            con.close();
+            db.close();
+
+            // return the hotels retrieved from database
+            return hotels;
+        } catch (Exception e) {
+            // throw any errors occurred
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    /**
      * Method to get the number of rooms in a certain area
      * This method takes a string (the area in question) as a parameter
      * @return int that represents the number of rooms in the specified area
