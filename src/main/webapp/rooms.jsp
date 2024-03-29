@@ -1,11 +1,9 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.hotels.Room" %>
-<%@ page import="com.hotels.RoomService" %>
+<%@ page import="java.util.List, java.util.ArrayList, java.text.SimpleDateFormat" %>
+<%@ page import="com.hotels.Room, com.hotels.RoomService, com.hotels.BookingService, com.hotels.Booking" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Montreal Hotels</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -28,6 +26,8 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            margin-right: 20px;
+
         }
         .filters h2 {
             font-size: 24px;
@@ -40,7 +40,17 @@
             width: 100%;
             margin-bottom: 10px;
         }
-        .filters select:hover {
+
+        .filters input {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            width: 90%;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        .filters select:hover, .filters input:hover {
             background-color: #eaeaea;
         }
         .hotels {
@@ -58,7 +68,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            max-height: 200px; /* Adjust the maximum height as needed */
+            max-height: 200px;
         }
         .hotel:hover {
             transform: translateY(-5px);
@@ -73,9 +83,8 @@
         }
         .hotel-info {
             padding: 20px;
-            overflow: auto; /* Add scrollbar if content exceeds max height */
-            max-height: 100px; /* Adjust the max-height as needed */
-            overflow: auto; /* Add scrollbar if content exceeds max-height */
+            overflow: auto;
+            max-height: 100px;
         }
         .hotel-info p {
             margin: 10px 0;
@@ -95,11 +104,31 @@
 <%
     int hotelId = Integer.parseInt(request.getParameter("hotelId"));
     RoomService roomService = new RoomService();
+    BookingService bookingService = new BookingService();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     List<Room> rooms = null;
+    StringBuilder bookingsJson = new StringBuilder("[");
+
     try {
         rooms = roomService.getRooms(hotelId);
+        List<Booking> bookings = new ArrayList<>();
+        if(rooms != null && !rooms.isEmpty()) {
+            for(Room room : rooms) {
+                List<Booking> roomBookings = bookingService.getBookings(room.getRoomID());
+                for (Booking booking : roomBookings) {
+                    if(bookingsJson.length() > 1) {
+                        bookingsJson.append(",");
+                    }
+                    bookingsJson.append(String.format(
+                        "{\"roomID\":%d, \"checkIn\":\"%s\", \"checkOut\":\"%s\"}",
+                        booking.getRoomID(), sdf.format(booking.getCheckIn()), sdf.format(booking.getCheckOut())
+                    ));
+                }
+            }
+        }
+        bookingsJson.append("]");
     } catch (Exception e) {
-        out.println("<p>Error fetching rooms: " + e.getMessage() + "</p>");
+        out.println("<p>Error fetching rooms or bookings: " + e.getMessage() + "</p>");
     }
 %>
 
@@ -133,113 +162,80 @@
     <div class="hotels">
         <% if (rooms != null) {
             for (Room room : rooms) { %>
-                <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>">
-                    <a onclick="redirectToPayment(<%= room.getRoomID() %>)">
-                        <h3>Room <%= room.getID() %></h3>
-                        <div class="hotel-info">
-                            <p>Price Per Day: $<%= room.getPrice() %></p>
-                            <p>Capacity: <%= room.getCapacity() %> guests</p>
-                            <p>Amenities: <%= room.getAmeneties() %></p>
-                        </div>
-                    </a>
+                <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
+                    <h3>Room <%= room.getID() %></h3>
+                    <div class="hotel-info">
+                        <p>Price Per Day: $<%= room.getPrice() %></p>
+                        <p>Capacity: <%= room.getCapacity() %> guests</p>
+                        <p>Amenities: <%= room.getAmeneties() %></p>
+                    </div>
                 </div>
         <%    }
         } %>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
+<script>
+    var bookingsData = <%=bookingsJson.toString()%>;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
         const startDate = document.getElementById('start-date');
         const endDate = document.getElementById('end-date');
 
-        startDate.setAttribute('min', today); // Ensure start date can't be before today
-        endDate.setAttribute('min', today); // Ensure end date can't be before today
+        startDate.setAttribute('min', today);
+        endDate.setAttribute('min', today);
 
         startDate.value = today;
         endDate.value = today;
 
         startDate.addEventListener('change', function() {
             endDate.setAttribute('min', startDate.value);
-
             if (endDate.value < startDate.value) {
                 endDate.value = startDate.value;
             }
         });
     });
+
     function redirectToPayment(roomId) {
         const startDate = document.getElementById('start-date').value;
         const endDate = document.getElementById('end-date').value;
-
-        // Calculate the number of days
         const start = new Date(startDate);
         const end = new Date(endDate);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        // Construct the URL for the payment page with parameters
         const url = `payment.jsp?roomId=${roomId}&numberOfDays=${diffDays}`;
-
-        // Redirect to the payment page
         window.location.href = url;
     }
 
     function filterRooms() {
         const priceFilter = document.getElementById('price').value;
-        const startDate = document.getElementById('start-date').value;
-        const endDate = document.getElementById('end-date').value;
+        const startDate = new Date(document.getElementById('start-date').value);
+        const endDate = new Date(document.getElementById('end-date').value);
         const capacityFilter = document.getElementById('capacity').value;
-
         const rooms = document.querySelectorAll('.hotel');
 
         rooms.forEach(room => {
             const roomId = parseInt(room.getAttribute('data-roomId'), 10);
-
-            //need to change this to get rooms and rentings for the
-            const bookingsForRoom = serviceBooking.getBookings(roomId) || [];
-            const rentingsForRoom = serviceBooking.getRentings(roomId)  || [];
-
-            let dateAvailable = true;
-            for (const booking of bookingsForRoom) {
-                if (!(endDate < booking.getCheckIn() || startDate > booking.getCheckOut())) {
-                    dateAvailable = false;
-                    break;
-                }
-            }
-            for (const renting of rentingsForRoom) {
-                if (!(endDate < renting.start || startDate > renting.end)) {
-                    dateAvailable = false;
-                    break;
-                }
-            }
-
             const price = parseInt(room.getAttribute('data-price'), 10);
             const capacity = parseInt(room.getAttribute('data-capacity'), 10);
-            let pricePass = false;
+            const roomBookings = bookingsData.filter(booking => booking.roomID === roomId);
+            let dateAvailable = !roomBookings.some(booking => {
+                const bookingStart = new Date(booking.checkIn);
+                const bookingEnd = new Date(booking.checkOut);
+                return bookingStart < endDate && bookingEnd > startDate;
+            });
 
+            let pricePass = false;
             switch(priceFilter) {
-                case '0': // All prices
-                    pricePass = true;
-                    break;
-                case '1': // Under $99
-                    pricePass = price < 99;
-                    break;
-                case '2': // $100 - $200
-                    pricePass = price >= 100 && price <= 200;
-                    break;
-                case '3': // Over $200
-                    pricePass = price > 200;
-                    break;
+                case '0': pricePass = true; break;
+                case '1': pricePass = price < 99; break;
+                case '2': pricePass = price >= 100 && price <= 200; break;
+                case '3': pricePass = price > 200; break;
             }
 
             const capacityPass = capacityFilter === '0' || capacity === parseInt(capacityFilter, 10);
-
-            if (dateAvailable && pricePass && capacityPass) {
-                room.style.display = '';
-            } else {
-                room.style.display = 'none';
-            }
+            room.style.display = (dateAvailable && pricePass && capacityPass) ? '' : 'none';
         });
     }
 </script>
