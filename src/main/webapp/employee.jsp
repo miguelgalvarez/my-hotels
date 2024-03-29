@@ -189,12 +189,16 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const convertToRentingButton = document.querySelectorAll('.cancel-booking-btn');
+
+        }
         function convertToRenting(roomID) {
-            bookingService.bookingTOrenting(roomID);
+            RentingService.bookingTOrenting(roomID);
         }
 
-        function deleteRenting(deleteBooking) {
-            bookingService.deleteBooking(bookingID);
+        function deleteRenting(rentingID) {
+
         }
 
         function makePayment(bookingID) {
