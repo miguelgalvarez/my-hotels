@@ -20,7 +20,6 @@ public class DeleteBookingServlet extends HttpServlet {
         try {
             String message = bookingService.deleteBooking(bookingId);
             request.getSession().setAttribute("message", message);
-            System.out.println("message set");
         } catch (Exception e) {
             request.getSession().setAttribute("message", "Error deleting booking: " + e.getMessage());
         } finally {

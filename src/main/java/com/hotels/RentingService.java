@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RentingService {
-    public boolean bookingTOrenting(int roomID) {
+    public boolean bookingToRenting(int roomID) {
         String sql0 = "SELECT * FROM booking WHERE RoomID = ?";
         String sql1 = "INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = ?";
         // deleting booking after converting it to renting
