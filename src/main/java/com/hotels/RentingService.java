@@ -12,7 +12,7 @@ public class RentingService {
         String sql0 = "SELECT * FROM booking WHERE RoomID = ?";
         String sql1 = "INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = ?";
         // deleting booking after converting it to renting
-        // String sql2 = "DELETE FROM booking WHERE RoomID = ?";
+        String sql2 = "DELETE FROM booking WHERE RoomID = ?";
         ConnectionDB db = new ConnectionDB();
         try (Connection con = db.getConnection()) {
             // Start a transaction
@@ -24,8 +24,8 @@ public class RentingService {
             PreparedStatement stmt1 = con.prepareStatement(sql1);
             stmt1.setInt(1, roomID);
             // deleting booking statement
-            // PreparedStatement stmt2 = con.prepareStatement(sql2);
-            // stmt2.setInt(1, room.getRoomID());
+            PreparedStatement stmt2 = con.prepareStatement(sql2);
+            stmt2.setInt(1, roomID);
 
             // Execute query to retrieve booking info
             ResultSet rs = stmt0.executeQuery();
@@ -33,18 +33,10 @@ public class RentingService {
                 // Insert into renting table
                 stmt1.executeUpdate();
                 // Delete from booking table
-                // stmt2.executeUpdate();
+                stmt2.executeUpdate();
 
                 // Commit transaction
                 con.commit();
-
-                // Close resources
-                rs.close();
-                stmt0.close();
-                stmt1.close();
-                //stmt2.close();
-                con.close();
-                db.close();
 
                 // Return true to indicate successful transfer
                 return true;
@@ -52,14 +44,6 @@ public class RentingService {
                 // No booking found for the specified room
                 // Rollback transaction
                 con.rollback();
-
-                // Close resources
-                rs.close();
-                stmt0.close();
-                stmt1.close();
-                //stmt2.close();
-                con.close();
-                db.close();
 
                 // Return false to indicate failure
                 return false;

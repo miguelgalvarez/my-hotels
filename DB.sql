@@ -193,51 +193,25 @@ VALUES
 -- ----------------------------
 -- Test queries
 -- ----------------------------
-SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = 3;
-SELECT EXISTS (SELECT 1 FROM customer WHERE CustomerUsername = 'john_doe') AS username_exists;
-SELECT CustomerID FROM customer WHERE CustomerUsername = 'john_doe';
-SELECT * FROM hotel
-SELECT EXISTS (SELECT 1 FROM customer WHERE customerusername = 'john') AS username_exists;
-SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelchain.HotelChainID WHERE hotel.HotelID = 2;
-SELECT * FROM booking WHERE RoomID = 4
-INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = 4
-UPDATE booking SET Payment = true WHERE BookingID = '1';
 
-SELECT HotelArea, COUNT(*) AS NumberOfHotels
-FROM hotel
-GROUP BY HotelArea;
-
-SELECT
-    HotelArea,
-    COUNT(*) AS NumberOfHotels,
-    SUM(NumberOfRooms) AS TotalRooms
-FROM
-    hotel
-GROUP BY
-    HotelArea;
 	
-SELECT
-    HotelArea,
-    SUM(NumberOfRooms) AS TotalRooms
-FROM
-    hotel
-WHERE
-    HotelArea = 'Montreal'
-GROUP BY
-    HotelArea;
+-- -----------------------------------------
+-- Queries for TA to use
+-- -----------------------------------------
 
-SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = 3
-SELECT * FROM booking WHERE CustomerID = 3
+-- ----------------------------
+-- Queries to create the views
+-- ----------------------------
+---> NumberAvailableRooms (view 1)
+SELECT hotelarea, sum(numberofrooms) AS totalrooms FROM hotel WHERE hotelarea::text = 'Montreal'::text OR hotelarea::text = 'Toronto'::text OR hotelarea::text = 'Vancouver'::text GROUP BY hotelarea;
+---> AggregatedCapacity view (view 2)
+SELECT h.hotelid, h.hotelname, sum(r.capacity) AS totalcapacity FROM hotel h JOIN room r ON h.hotelid = r.hotelid GROUP BY h.hotelid, h.hotelname;
 
-SELECT
-    HotelArea,
-    SUM(NumberOfRooms) AS TotalRooms
-FROM
-    hotel
-WHERE
-    HotelArea = 'Montreal' OR HotelArea = 'Toronto' OR HotelArea = 'Vancouver'
-GROUP BY
-    HotelArea;
+-- ----------------------------
+-- Indexing queries
+-- ----------------------------
+-- Create an index on the HotelCategory column
+CREATE INDEX idx_hotel_category ON hotel (HotelCategory);
 
 
 
