@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%@ page import="java.util.List" %>
+<%@ page import="com.hotels.BookingService, com.hotels.Booking" %>
+<%@ page import="com.hotels.RentingService, com.hotels.Renting" %>
+<%@ page import="com.hotels.HotelService" %>
+
     <meta charset="UTF-8">
     <title>Choose Your Destination</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -122,6 +127,9 @@
 <jsp:include page="navbar.jsp" />
 
 <jsp:include page="popup.jsp" />
+<%
+    HotelService hotelService = new HotelService();
+%>
 
 <div class="container">
     <h2 class="location-title">Where Would You Like to Stay?</h2>
@@ -130,21 +138,21 @@
             <a href="employee.jsp?city=Toronto" class="city-link">
                 <img src="assets/toronto.jpeg" alt="Toronto" class="city-image">
                 <span class="city-name">Toronto</span>
-                <span class="available-rooms">200 Available Rooms!</span>
+                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Toronto") %> Available Rooms!</span>
             </a>
         </div>
         <div class="city-card">
             <a href="montreal.jsp" class="city-link">
                 <img src="assets/montreal.jpeg" alt="Montreal" class="city-image">
                 <span class="city-name">Montreal</span>
-                <span class="available-rooms">150 Available Rooms!</span>
+                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Montreal") %> Available Rooms!</span>
             </a>
         </div>
         <div class="city-card">
             <a href="hotels.jsp?city=Vancouver" class="city-link">
                 <img src="assets/vancouver.jpeg" alt="Vancouver" class="city-image">
                 <span class="city-name">Vancouver</span>
-                <span class="available-rooms">180 Available Rooms!</span>
+                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Vancouver") %> Available Rooms!</span>
             </a>
         </div>
     </div>

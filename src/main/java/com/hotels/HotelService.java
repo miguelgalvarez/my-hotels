@@ -96,7 +96,7 @@ public class HotelService {
             throw new RuntimeException(e);
         }
 
-        return 0;
+        return 69;
     }
 
     /**
