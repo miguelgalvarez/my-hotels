@@ -125,6 +125,62 @@ public class RentingService {
 
         return rentings;
     }
+
+    /**
+     * Method to get bookings from the database from a specific roomID
+     *
+     * @return List of bookings from database
+     * @throws Exception when trying to connect to database
+     */
+    public List<Renting> getRentings(int roomID) throws Exception {
+
+        // sql query
+        String sql1 = "SELECT * FROM renting WHERE RoomID = ?;";
+        // database connection object
+        ConnectionDB db = new ConnectionDB();
+
+        // data structure to keep all bookings retrieved from database
+        List<Renting> rentings = new ArrayList<>();
+
+        // try connect to database, catch any exceptions
+        try (Connection con = db.getConnection()) {
+            // prepare the statement
+            PreparedStatement stmt2 = con.prepareStatement(sql1);
+            // get the results from executing the query
+            stmt2.setInt(1, roomID);
+
+            ResultSet rs2 = stmt2.executeQuery();
+
+
+            // iterate through the result set
+            while (rs2.next()) {
+                // create new booking object
+                Renting renting = new Renting(
+                        rs2.getInt("RentingID"),
+                        rs2.getInt("CustomerID"),
+                        rs2.getInt("RoomID"),
+                        rs2.getDate("CheckIn"),
+                        rs2.getDate("CheckOut")
+                );
+
+                // append booking in bookings list
+                rentings.add(renting);
+            }
+
+            //close the result set
+            rs2.close();
+            // close the statement
+            stmt2.close();
+            con.close();
+            db.close();
+
+            // return the bookings retrieved from database
+            return rentings;
+        } catch (Exception e) {
+            // throw any errors occurred
+            throw new Exception(e.getMessage());
+        }
+    }
     public String deleteRenting(int RentingID) throws Exception {
         String message = "";
 
