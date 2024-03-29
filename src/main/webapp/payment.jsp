@@ -48,14 +48,18 @@
 <div class="payment-container">
     <h1>Payment Screen</h1>
     <!-- Payment form inputs -->
-    <form>
+    <form id="payment-form" method="POST" action="PaymentServlet">
         <label for="credit-card-number">Credit Card Number:</label>
         <input type="text" id="credit-card-number" required><br><br>
         <label for="cvv">CVV:</label>
         <input type="text" id="cvv" required><br><br>
         <label for="expiry-date">Expiry Date:</label>
         <input type="text" id="expiry-date" required><br><br>
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" required><br><br>
         <button type="submit">Submit Payment</button>
+        <input type="hidden" id="room-id" name="roomId" value="">
+        <input type="hidden" id="number-of-days" name="numberOfDays" value="">
     </form>
     <button class="back-button" onclick="goBack()">Back</button>
 </div>

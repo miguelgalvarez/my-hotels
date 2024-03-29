@@ -134,7 +134,7 @@
         <% if (rooms != null) {
             for (Room room : rooms) { %>
                 <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>">
-                    <a href="payment.jsp?roomId=<%= room.getRoomID() %>">
+                    <a onclick="redirectToPayment(<%= room.getRoomID() %>)">
                         <h3>Room <%= room.getID() %></h3>
                         <div class="hotel-info">
                             <p>Price Per Day: $<%= room.getPrice() %></p>
@@ -157,8 +157,8 @@
         startDate.setAttribute('min', today); // Ensure start date can't be before today
         endDate.setAttribute('min', today); // Ensure end date can't be before today
 
-        startDate.value = today; // Initialize start date with today's date
-        endDate.value = today; // Initialize end date with today's date
+        startDate.value = today;
+        endDate.value = today;
 
         startDate.addEventListener('change', function() {
             endDate.setAttribute('min', startDate.value);
@@ -168,6 +168,22 @@
             }
         });
     });
+    function redirectToPayment(roomId) {
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+
+        // Calculate the number of days
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        // Construct the URL for the payment page with parameters
+        const url = `payment.jsp?roomId=${roomId}&numberOfDays=${diffDays}`;
+
+        // Redirect to the payment page
+        window.location.href = url;
+    }
 
     function filterRooms() {
         const priceFilter = document.getElementById('price').value;
@@ -181,12 +197,12 @@
             const roomId = parseInt(room.getAttribute('data-roomId'), 10);
 
             //need to change this to get rooms and rentings for the
-            const bookingsForRoom = booking[roomId] || [];
-            const rentingsForRoom = renting[roomId] || [];
+            const bookingsForRoom = serviceBooking.getBookings(roomId) || [];
+            const rentingsForRoom = serviceBooking.getRentings(roomId)  || [];
 
             let dateAvailable = true;
             for (const booking of bookingsForRoom) {
-                if (!(endDate < booking.start || startDate > booking.end)) {
+                if (!(endDate < booking.getCheckIn() || startDate > booking.getCheckOut())) {
                     dateAvailable = false;
                     break;
                 }
