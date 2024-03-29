@@ -199,18 +199,18 @@ public class RentingService {
 
             // prepare statement
             PreparedStatement stmt0 = con.prepareStatement(sql0);
-            PreparedStatement stmt = con.prepareStatement(sql2);
             PreparedStatement stmt2 = con.prepareStatement(sql1);
+            PreparedStatement stmt = con.prepareStatement(sql2);
 
             // set every ? of statement
             stmt0.setInt(1, RentingID);
-            stmt.setInt(1, RentingID);
             stmt2.setInt(1, RentingID);
+            stmt.setInt(1, RentingID);
 
             // execute the query
             stmt0.executeUpdate();
-            stmt.executeUpdate();
             stmt2.executeUpdate();
+            stmt.executeUpdate();
 
         } catch (Exception e) {
             message = "Error while deleting Renting: " + e.getMessage();
