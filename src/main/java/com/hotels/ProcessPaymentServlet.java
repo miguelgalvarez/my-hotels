@@ -1,32 +1,35 @@
 package com.hotels;
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
-
-@WebServlet("/convertToRenting")
-public class ConvertToRentingServlet extends HttpServlet {
+@WebServlet("/processPayment")
+public class ProcessPaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String bookingIDstr = request.getParameter("bookingID");
         int bookingID = Integer.parseInt(bookingIDstr);
 
+        PaymentService paymentService = new PaymentService();
+
         try {
-            RentingService rentingService = new RentingService();
-            boolean success = rentingService.bookingToRenting(bookingID);
+            boolean success = paymentService.updatePaymentStatus(bookingID);
+
             if (success) {
-                request.getSession().setAttribute("message", "Booking successfully converted to renting");
+                request.getSession().setAttribute("message", "Payment successfully processed");
             } else {
-                request.getSession().setAttribute("message", "Booking failed to convert to renting");
+                request.getSession().setAttribute("message", "Payment Failed");
             }
         } catch (Exception e) {
-            request.getSession().setAttribute("message", "Error converting booking: " + e.getMessage());
+            request.getSession().setAttribute("message", "Error with Payment" + e.getMessage());
+        } finally {
+            response.sendRedirect("employee.jsp");
         }
-        response.sendRedirect("employee.jsp");
     }
 }
-

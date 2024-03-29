@@ -77,7 +77,7 @@
             background-color: #f29602;
             color: white;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 5px;
             transition: background-color 0.3s;
             box-sizing: border-box;
             width: 200px;
@@ -105,7 +105,7 @@
             padding: 20px;
             border: 2px solid #888;
             width: 30%;
-            border-radius: 6px;
+            border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             margin-top: 100px;
@@ -135,11 +135,11 @@
         }
 
         .auth-button.close-modal-btn {
-            background-color: #4CAF50; /* Green color */
+            background-color: #a3a3a3; /* grey color */
         }
 
         .auth-button.close-modal-btn:hover {
-            background-color: #388E3C; /* A darker shade of green for hover state */
+            background-color: #8c8b8b; /* A darker shade of grey for hover state */
         }
     </style>
 </head>
@@ -172,7 +172,6 @@
                     String status = booking.getPayment() ? "Paid" : "Unpaid";
                         %>
                                 <tr>
-
                                     <td><%= booking.getBookingID() %></td>
                                     <td><%= booking.getCustomerID() %></td>
                                     <td><%= booking.getCheckIn().toString() %></td>
@@ -181,12 +180,43 @@
                                     <td><%= status %></td>
                                     <td>
                                     <% if (!booking.getPayment()) { %>
-                                        <button onclick="makePayment('<%= booking.getBookingID() %>')">Process Payment</button>
+                                        <button class="process-payment-btn" data-booking-id="<%= booking.getBookingID() %>">Process Payment</button>
+
+                                        <!-- Payment Confirmation Modal -->
+                                        <div id="paymentConfirmationModal" class="modal" style = "display: none;">
+                                            <div class="modal-content">
+                                                <span class="close">&times;</span>
+                                                <h2>Confirm Payment</h2>
+                                                <p>Are you sure you want to process the payment?</p>
+                                                <form action="processPayment" method="POST">
+                                                    <!-- Hidden input for rentingID, value will be set dynamically with JavaScript -->
+                                                    <input type="hidden" name="bookingID" id= "bookingID" value= <%= booking.getBookingID() %>>
+                                                    <div class="auth-buttons">
+                                                        <button type="submit" class="auth-button payment-confirm-btn">Yes, Process It</button>
+                                                        <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
                                     <% } else { %>
-                                        <form action="convertToRenting" method="post">
-                                            <input type="hidden" name="roomID" value= <%= booking.getRoomID() %>>
-                                            <button type="submit">Convert To Renting</button>
-                                        </form>
+                                        <button class="convert-renting-btn" data-booking-id="<%= booking.getBookingID() %>">Convert To Renting</button>
+                                        <!-- Payment Confirmation Modal -->
+                                        <div id="convertRentingConfirmation" class="modal" style = "display: none;">
+                                            <div class="modal-content">
+                                                <span class="close">&times;</span>
+                                                <h2>Confirm Booking to Renting</h2>
+                                                <p>Are you sure you want to convert the booking to a renting?</p>
+                                                <form action="convertToRenting" method="POST">
+                                                    <!-- Hidden input for rentingID, value will be set dynamically with JavaScript -->
+                                                    <input type="hidden" name="bookingID" id= "bookingID" value= <%= booking.getBookingID() %>>
+                                                    <div class="auth-buttons">
+                                                        <button type="submit" class="auth-button convert-renting-confirm-btn">Yes, Convert It</button>
+                                                        <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     <% } %>
                                     </td>
                                 </tr>
@@ -231,7 +261,7 @@
                         <p>Are you sure you want to delete the renting?</p>
                         <form action="deleteRenting" method="POST">
                             <!-- Hidden input for rentingID, value will be set dynamically with JavaScript -->
-                            <input type="hidden" name="rentingID" id= "rentingID" value= <%= renting.getRentingID() %>>
+                            <input type="hidden" name="bookingID" id= "bookingID" value= <%= renting.getRentingID() %>>
                             <div class="auth-buttons">
                                 <button type="submit" class="auth-button delete-confirm-btn">Yes, Delete It</button>
                                 <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
@@ -246,59 +276,77 @@
         </table>
     </div>
 
-    <!-- Modal for Processing Payment -->
-    <div id="processPaymentModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Process Payment</h2>
-            <form id="processPaymentForm">
-                <!-- Assume necessary fields are included -->
-                <p><input type="number" placeholder="Amount" name="amount"></p>
-                <p><button type="submit">Submit</button></p>
-            </form>
-        </div>
-    </div>
-
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const deleteButtons = document.querySelectorAll('.delete-renting-btn');
-        const modal = document.getElementById('deleteConfirmationModal');
-        //const yesButton = modal.querySelector('.delete-confirm-btn');
-        const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
+   document.addEventListener("DOMContentLoaded", function() {
+       // For Delete Renting
+       const deleteButtons = document.querySelectorAll('.delete-renting-btn');
+       const deleteModal = document.getElementById('deleteConfirmationModal');
 
-        // Function to open modal
-        function openModal(rentingID) {
-            document.getElementById('rentingID').value = rentingID;
-            modal.style.display = 'block';
-        }
+       // For Process Payment
+       const paymentButtons = document.querySelectorAll('.process-payment-btn');
+       const paymentModal = document.getElementById('paymentConfirmationModal');
 
-        // Function to close modal
-        function closeModal() {
-            modal.style.display = 'none';
-        }
+      // For Convert Renting
+      const convertButtons = document.querySelectorAll('.convert-renting-btn');
+      const convertModal = document.getElementById('convertRentingConfirmation');
 
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const rentingID = this.getAttribute('data-renting-id');
-                openModal(rentingID);
-            });
-        });
+       const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
 
+       // Open Modal Generic Function
+       function openModal(modal, idInput, id) {
+           document.getElementById(idInput).value = id; // Set the ID in the form's hidden input
+           modal.style.display = 'block'; // Display the modal
+       }
 
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent link action
-                closeModal();
-            });
-        });
+       // Function to close modal
+       function closeModal() {
+           // Hide both modals
+           deleteModal.style.display = 'none';
+           paymentModal.style.display = 'none';
+           convertModal.style.display = 'none';
+
+       }
+
+       // Attach event listeners to Delete buttons
+       deleteButtons.forEach(button => {
+           button.addEventListener('click', function() {
+               const rentingID = this.getAttribute('data-renting-id');
+               openModal(deleteModal, 'rentingID', rentingID);
+           });
+       });
+
+       // Attach event listeners to Payment buttons
+       paymentButtons.forEach(button => {
+           button.addEventListener('click', function() {
+               const bookingID = this.getAttribute('data-booking-id');
+               openModal(paymentModal, 'bookingID', bookingID);
+           });
+       });
+
+       // Attach event listeners to Convert buttons
+      convertButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              const bookingID = this.getAttribute('data-booking-id');
+              openModal(convertModal, 'bookingID', bookingID);
+          });
+      });
+
+       // Close modals on close button click or when clicking outside the modal
+       closeModalButtons.forEach(button => {
+           button.addEventListener('click', function(event) {
+               event.preventDefault(); // Prevent default action for links, if any
+               closeModal();
+           });
+       });
 
         // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        };
-    });
+       window.onclick = function(event) {
+           if (event.target == deleteModal || event.target == paymentModal || event.target == convertModal) {
+               closeModal();
+           }
+       };
+   });
+
 </script>
 
 </body>
