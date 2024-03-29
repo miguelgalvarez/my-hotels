@@ -132,7 +132,7 @@
                                     <% if (!booking.getPayment()) { %>
                                         <button onclick="makePayment('<%= booking.getBookingID() %>')">Process Payment</button>
                                     <% } else { %>
-                                        <button onclick="convertToRenting('<%= booking.getBookingID() %>')">Convert to Renting</button>
+                                        <button onclick="convertToRenting('<%= booking.getRoomID() %>')">Convert to Renting</button>
                                     <% } %>
                                     </td>
                                 </tr>
@@ -189,8 +189,12 @@
     </div>
 
     <script>
-        function convertToRenting(bookingID) {
+        function convertToRenting(roomID) {
+            bookingService.bookingTOrenting(roomID);
+        }
 
+        function deleteRenting(deleteBooking) {
+            bookingService.deleteBooking(bookingID);
         }
 
         function makePayment(bookingID) {
@@ -214,13 +218,6 @@
                 document.getElementById('processPaymentModal').style.display = 'none';
             }
         };
-
-<%@ page import="com.hotels.BookingService" %>
-<script>
-    var bookingService = new BookingService();
-
-</script>
-
     </script>
 </body>
 </html>
