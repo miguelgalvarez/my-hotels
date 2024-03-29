@@ -58,6 +58,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
+            max-height: 200px; /* Adjust the maximum height as needed */
         }
         .hotel:hover {
             transform: translateY(-5px);
@@ -72,6 +73,9 @@
         }
         .hotel-info {
             padding: 20px;
+            overflow: auto; /* Add scrollbar if content exceeds max height */
+            max-height: 100px; /* Adjust the max-height as needed */
+            overflow: auto; /* Add scrollbar if content exceeds max-height */
         }
         .hotel-info p {
             margin: 10px 0;
@@ -134,6 +138,7 @@
                         <div class="hotel-info">
                             <p>Price: $<%= room.getPrice() %></p>
                             <p>Capacity: <%= room.getCapacity() %> guests</p>
+                            <p>Amenities: <%= room.getAmeneties() %></p>
                         </div>
                     </a>
                 </div>
