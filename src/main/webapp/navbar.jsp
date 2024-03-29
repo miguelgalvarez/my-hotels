@@ -1,5 +1,11 @@
 <!-- navbar.jsp -->
 <style>
+
+        :root {
+            --main-colour: #2596be; /* Blue color */
+            --lighter-colour: #36bbeb;
+          }
+
          body {
                 font-family: 'Poppins', sans-serif;
                 background-color: #f4f4f4;
@@ -8,7 +14,7 @@
                 box-sizing: border-box;
         }
         .navbar {
-            background-color: #f29602; /* background color for navbar (FFAF45) (0056b3) (f29602)*/
+            background-color: var(--main-colour); /* background color for navbar (FFAF45) (0056b3) (f29602)*/
             overflow: hidden;
             padding: 0 20px;
 
@@ -24,11 +30,9 @@
             border-radius: 16px; /* Rounded edges for the container */
         }
         .navbar a:hover {
-            background-color: #FFAF45; /* Lighter orange on hover */
+            background-color: var(--lighter-colour); /* Lighter blue on hover */
             /*padding: 12px 12px; /* reduced padding on hover */
             /*margin: 4px 4px; /* adjusted margin to compensate for the reduced padding */
-
-            text-shadow: 0 0 0 2px #FFAF45;
 
         }
         .navbar .profile {
@@ -89,7 +93,7 @@
 
         /* Change dropdown links style on hover */
         .dropdown-content a:hover {
-            background-color: #FFAF45; /* Light grey background on hover */
+            background-color: var(--lighter-colour); /* Light grey background on hover */
         }
 
         .welcome-text {

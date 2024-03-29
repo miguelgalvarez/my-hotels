@@ -6,6 +6,11 @@
     <title>Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-colour: #2596be; /* Blue color */
+            --lighter-colour: #36bbeb;
+            --darker-colour: #1f7999;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -49,13 +54,13 @@
             border: none;
             border-radius: 8px;
             color: white;
-            background-color: #f29602;
+            background-color: var(--main-colour);
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #db8502;
+            background-color: var(--darker-colour);
         }
 
         //popup message window
