@@ -189,12 +189,14 @@
     </div>
 
     <script>
-        function makePayment(bookingID) {
-            // Code to handle payment
-            // You might want to display the payment modal here
-            document.getElementById('processPaymentModal').style.display = 'block';
+        function convertToRenting(bookingID) {
+
         }
 
+        function makePayment(bookingID) {
+            // Code to handle payment
+            document.getElementById('processPaymentModal').style.display = 'block';
+        }
         // Close modal functionality (if you haven't implemented it already)
         document.querySelector('.close').addEventListener('click', function() {
             document.getElementById('processPaymentModal').style.display = 'none';
