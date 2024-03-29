@@ -1,5 +1,6 @@
-<!-- popup.jsp -->
+<!-- employeePopup.jsp -->
 <style>
+
     /*popup window */
     .popup {
         position: fixed;
@@ -15,12 +16,13 @@
     }
 
     .popup-content {
-        background-color: #fce5b8;
+        font-family: 'Arial', sans-serif;
+        background-color: #dedcdc;
+        border-radius: 6px;
         padding: 5px;
         margin-left: 450px;
         margin-right: 450px;
         margin-top: 30px;
-        border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         text-align: center;
         font-size: 20px
@@ -35,6 +37,7 @@
 
 <%
 String message = (String) session.getAttribute("message");
+System.out.println("message from popup is " + message);
 if(message != null){
     session.removeAttribute("message");
 %>

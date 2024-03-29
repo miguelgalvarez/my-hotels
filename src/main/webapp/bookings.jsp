@@ -78,7 +78,6 @@
             flex: 1;
         }
 
-        /*login/register buttons*/
 
         .auth-buttons {
             display: flex;
@@ -298,7 +297,6 @@
             }
         };
     });
-
 </script>
 
 </body>

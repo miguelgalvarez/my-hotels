@@ -126,20 +126,18 @@ public class RentingService {
         return rentings;
     }
     public String deleteRenting(int RentingID) throws Exception {
-        Connection con = null;
         String message = "";
 
         // sql query
         String sql0 = "INSERT INTO renting_archive (RentingID, CustomerID, RoomID, CheckIn, CheckOut) SELECT RentingID, CustomerID, RoomID, CheckIn, CheckOut FROM renting WHERE RentingID = ?;";
-        String sql = "DELETE FROM booking WHERE id = ?;";
+        String sql = "DELETE FROM renting WHERE RentingID = ?;";
 
 
         // database connection object
         ConnectionDB db = new ConnectionDB();
 
         // try connect to database, catch any exceptions
-        try {
-            con = db.getConnection();
+        try (Connection con = db.getConnection()){
 
             // prepare statement
             PreparedStatement stmt0 = con.prepareStatement(sql0);
@@ -153,16 +151,11 @@ public class RentingService {
             stmt0.executeUpdate();
             stmt.executeUpdate();
 
-            // close the statement
-            stmt.close();
-
         } catch (Exception e) {
-            message = "Error while deleting Booking: " + e.getMessage();
+            message = "Error while deleting Renting: " + e.getMessage();
         } finally {
-            if (con != null) con.close();
-            if (message.equals("")) message = "Booking successfully deleted!";
+            if (message.equals("")) message = "Renting successfully deleted!";
         }
-
         return message;
     }
 

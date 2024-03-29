@@ -59,44 +59,93 @@
         button:hover {
             background-color: #45a049;
         }
+
+
+
+
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+
+        }
+
+        .auth-buttons a {
+            padding: 10px 20px;
+            background-color: #f29602;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            width: 200px;
+            text-align: center;
+        }
+
+        .auth-buttons a:hover {
+            background-color: #e08502; /* Darker shade for hover state */
+        }
+
+        .modal {
+            position: fixed;   /* Stay in place */
+            left: 0;
+            top: 0;
+            width: 100%;       /* Full width */
+            height: 100%;      /* Full height */
+            overflow: auto;    /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: none;     /* Initially hidden */
+        }
+
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
+            margin: auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            border-radius: 8px;
+            border: 2px solid #888;
+            width: 30%;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 100px;
         }
+
+        /* The Close Button */
         .close {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
+
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
         }
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
+
+        .auth-button.delete-confirm-btn {
+            background-color: #ff4d4d; /* Red color */
+        }
+
+        .auth-button.delete-confirm-btn:hover {
+            background-color: #cc0000; /* A darker shade of red for hover state */
+        }
+
+        .auth-button.close-modal-btn {
+            background-color: #4CAF50; /* Green color */
+        }
+
+        .auth-button.close-modal-btn:hover {
+            background-color: #388E3C; /* A darker shade of green for hover state */
         }
     </style>
 </head>
 <body>
 
-<jsp:include page="popup.jsp" />
+<jsp:include page="employeePopup.jsp" />
 
     <div class="container">
         <h1>Employee Management</h1>
@@ -134,7 +183,10 @@
                                     <% if (!booking.getPayment()) { %>
                                         <button onclick="makePayment('<%= booking.getBookingID() %>')">Process Payment</button>
                                     <% } else { %>
-                                        <button onclick="convertToRenting('<%= booking.getRoomID() %>')">Convert to Renting</button>
+                                        <form action="convertToRenting" method="post">
+                                            <input type="hidden" name="roomID" value= <%= booking.getRoomID() %>>
+                                            <button type="submit">Convert To Renting</button>
+                                        </form>
                                     <% } %>
                                     </td>
                                 </tr>
@@ -167,9 +219,23 @@
                 <td><%= renting.getCheckIn().toString() %></td>
                 <td><%= renting.getCheckOut().toString() %></td>
                 <td>
-                    <button onclick="deleteRenting('<%= renting.getRentingID() %>')">Delete Renting</button>
+                    <button class="delete-renting-btn" data-renting-id="<%= renting.getRentingID() %>">Delete Renting</button>
                 </td>
             </tr>
+
+             <!-- Cancellation Confirmation Modal -->
+                <div id="deleteConfirmationModal" class="modal" style = "display: none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Confirm Deletion</h2>
+                        <p>Are you sure you want to delete the renting?</p>
+                        <div class="auth-buttons">
+                            <a href="employee.jsp" class="auth-button delete-confirm-btn" data-renting-id="<%= renting.getRentingID() %>">Yes, Delete It</a>
+                            <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                        </div>
+                    </div>
+                </div>
+
         <% } %>
 
     </tbody>
@@ -190,61 +256,68 @@
         </div>
     </div>
 
-    <script>
-        function convertToRenting(roomID) {
-            var contextPath = "<%= request.getContextPath() %>";
-            fetch(contextPath + '/convertToRenting', {
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteButtons = document.querySelectorAll('.delete-renting-btn');
+        const modal = document.getElementById('deleteConfirmationModal');
+        const yesButton = modal.querySelector('.delete-confirm-btn');
+        const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
+
+        // Function to open modal
+        function openModal(rentingID) {
+            yesButton.setAttribute('data-renting-id', rentingID);
+            modal.style.display = 'block';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const rentingID = this.getAttribute('data-renting-id');
+                openModal(rentingID);
+            });
+        });
+
+        yesButton.addEventListener('click', function() {
+            const rentingID = this.getAttribute('data-renting-id');
+            fetch('deleteRenting', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: 'roomID=' + roomID
+                body: 'rentingID=' + rentingID
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json(); // Process the response as JSON
-            })
+            .then(response => response.text())
             .then(data => {
-                if(data.success) {
-                    alert(data.message); // Show success message
-                } else {
-                    alert("Error: " + data.message); // Show error message
-                }
-                window.location.reload();
+                window.location.href = 'employee.jsp'; // Redirect to the employee page
             })
+
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
 
-
-        //function deleteRenting(rentingID) {
-        //}
-
-        function makePayment(bookingID) {
-            // Code to handle payment
-            document.getElementById('processPaymentModal').style.display = 'block';
-        }
-        // Close modal functionality (if you haven't implemented it already)
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('processPaymentModal').style.display = 'none';
+            closeModal(); // Close the modal
         });
 
-        // Example function to handle form submit (Needs to be implemented)
-        document.getElementById('processPaymentForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Implement payment processing here
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent link action
+                closeModal();
+            });
         });
 
-        // Close modal when clicking outside the modal (if not already implemented)
+        // Close modal when clicking outside of it
         window.onclick = function(event) {
-            if (event.target == document.getElementById('processPaymentModal')) {
-                document.getElementById('processPaymentModal').style.display = 'none';
+            if (event.target == modal) {
+                closeModal();
             }
         };
-    </script>
+    });
+</script>
 
 </body>
 </html>
