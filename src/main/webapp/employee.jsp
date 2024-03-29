@@ -253,7 +253,7 @@
                 </td>
             </tr>
 
-             <!-- Cancellation Confirmation Modal -->
+             <!-- Deletion Confirmation Modal -->
                 <div id="deleteConfirmationModal" class="modal" style = "display: none;">
                     <div class="modal-content">
                         <span class="close">&times;</span>
@@ -261,7 +261,7 @@
                         <p>Are you sure you want to delete the renting?</p>
                         <form action="deleteRenting" method="POST">
                             <!-- Hidden input for rentingID, value will be set dynamically with JavaScript -->
-                            <input type="hidden" name="bookingID" id= "bookingID" value= <%= renting.getRentingID() %>>
+                            <input type="hidden" name="rentingID" id= "rentingID" value= <%= renting.getRentingID() %>>
                             <div class="auth-buttons">
                                 <button type="submit" class="auth-button delete-confirm-btn">Yes, Delete It</button>
                                 <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
