@@ -186,7 +186,9 @@ public class RentingService {
 
         // sql query
         String sql0 = "INSERT INTO renting_archive (RentingID, CustomerID, RoomID, CheckIn, CheckOut) SELECT RentingID, CustomerID, RoomID, CheckIn, CheckOut FROM renting WHERE RentingID = ?;";
-        String sql = "DELETE FROM renting WHERE RentingID = ?;";
+        // sql1 is our nested query
+        String sql1 = "UPDATE hotel SET NumberOfRooms = NumberOfRooms + 1 WHERE HotelID = (SELECT hotel.HotelID FROM renting INNER JOIN room ON renting.RoomID = room.RoomID INNER JOIN hotel ON room.HotelID = hotel.HotelID WHERE renting.RentingID = ?);";
+        String sql2 = "DELETE FROM renting WHERE RentingID = ?;";
 
 
         // database connection object
@@ -197,14 +199,17 @@ public class RentingService {
 
             // prepare statement
             PreparedStatement stmt0 = con.prepareStatement(sql0);
-            PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt2 = con.prepareStatement(sql1);
+            PreparedStatement stmt = con.prepareStatement(sql2);
 
             // set every ? of statement
             stmt0.setInt(1, RentingID);
+            stmt2.setInt(1, RentingID);
             stmt.setInt(1, RentingID);
 
             // execute the query
             stmt0.executeUpdate();
+            stmt2.executeUpdate();
             stmt.executeUpdate();
 
         } catch (Exception e) {

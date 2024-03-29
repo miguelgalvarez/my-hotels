@@ -10,6 +10,13 @@
     <title>Choose Your Destination</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+
+        :root {
+            --main-colour: #2596be; /* Blue color */
+            --lighter-colour: #36bbeb;
+            --darker-colour: #1f7999;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -76,7 +83,7 @@
             display: block;
             text-align: center;
             padding: 15px 0;
-            background-color: #f29602;
+            background-color: var(--main-colour);
             color: white;
             font-size: 18px;
         }

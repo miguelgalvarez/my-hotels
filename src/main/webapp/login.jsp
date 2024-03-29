@@ -6,6 +6,12 @@
     <title>Log In</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-colour: #2596be; /* Blue color */
+            --lighter-colour: #36bbeb;
+            --darker-colour: #1f7999;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -49,13 +55,13 @@
             border: none;
             border-radius: 8px;
             color: white;
-            background-color: #f29602;
+            background-color: var(--main-colour);
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #db8502;
+            background-color: var(--darker-colour);
         }
 
         .employee-signin {
@@ -64,17 +70,17 @@
         }
 
         .employee-signin a {
-            color: #f29602;
+            color: var(--main-colour);
             text-decoration: none;
             padding: 8px 15px;
-            border: 2px solid #f29602; /* Outline added */
+            border: 2px solid (--main-colour); /* Outline added */
             border-radius: 8px; /* Rounded corners for a button-like appearance */
             display: inline-block; /* Allows padding and border to take effect */
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .employee-signin a:hover {
-            background-color: #f29602; /* Fill color on hover */
+            background-color: var(--main-colour)/* Fill color on hover */
             color: white; /* Text color change for better visibility */
         }
 

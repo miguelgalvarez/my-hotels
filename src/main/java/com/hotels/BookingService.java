@@ -55,15 +55,22 @@ public class BookingService {
         // Insert data into the database
         try (Connection connection = db.getConnection()) {
             String sql = "INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
+            String sql2 = "UPDATE hotel SET NumberOfRooms = NumberOfRooms - 1 WHERE HotelID = ?;";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                // statement 1
                 statement.setInt(1, booking.getCustomerID());
                 statement.setDouble(2, booking.getPricePaid());
                 statement.setDate(3, booking.getCheckInSQL());
                 statement.setDate(4, booking.getCheckOutSQL());
 
-                int result = statement.executeUpdate();
+                // statement 2
+                PreparedStatement statement2 = connection.prepareStatement(sql2);
+                statement2.setInt(1, booking.getHotelID());
 
-                return result > 0; //registration if registration was successful or not
+                int result = statement.executeUpdate();
+                int result2 = statement2.executeUpdate();
+
+                return ((result > 0) && (result2 > 0)); //registration if registration was successful or not
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -262,6 +269,7 @@ public class BookingService {
 
         // sql query
         String sql0 = "INSERT INTO booking_archive (BookingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut) SELECT BookingID, CustomerID, HotelID, RoomID, Payment, PricePaid, CheckIn, CheckOut FROM booking WHERE BookingID = ?;";
+        String sql1 = "UPDATE hotel SET NumberOfRooms = NumberOfRooms + 1 WHERE HotelID = (SELECT hotel.HotelID FROM booking INNER JOIN room ON booking.RoomID = room.RoomID INNER JOIN hotel ON room.HotelID = hotel.HotelID WHERE booking.BookingID = ?);";
         String sql = "DELETE FROM booking WHERE BookingID = ?;";
 
 
@@ -275,18 +283,22 @@ public class BookingService {
             // prepare statement
             PreparedStatement stmt0 = con.prepareStatement(sql0);
             PreparedStatement stmt = con.prepareStatement(sql);
+            PreparedStatement stmt2 = con.prepareStatement(sql1);
 
             // set every ? of statement
             stmt0.setInt(1, BookingID);
             stmt.setInt(1, BookingID);
+            stmt2.setInt(1, BookingID);
 
             // execute the query
             stmt0.executeUpdate();
             stmt.executeUpdate();
+            stmt2.executeUpdate();
 
             // close the statement
+            stmt0.close();
             stmt.close();
-
+            stmt2.close();
         } catch (Exception e) {
             message = "Error while deleting Booking: " + e.getMessage();
         } finally {

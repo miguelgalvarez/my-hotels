@@ -9,6 +9,12 @@
     <title>Your Hotel Bookings</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-colour: #2596be; /* Blue color */
+            --lighter-colour: #36bbeb;
+            --darker-colour: #1f7999;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -53,7 +59,7 @@
 
         .hotel-name {
             font-size: 22px;
-            color: #f29602;
+            color: var(--main-colour);
             margin-bottom: 10px;
         }
 
@@ -90,7 +96,7 @@
 
         .auth-buttons a {
             padding: 10px 20px;
-            background-color: #f29602;
+            background-color: var(--main-colour);
             color: white;
             text-decoration: none;
             border-radius: 12px;
@@ -101,7 +107,7 @@
         }
 
         .auth-buttons a:hover {
-            background-color: #e08502; /* Darker shade for hover state */
+            background-color: var(--darker-colour); /* Darker shade for hover state */
         }
 
         .cancel-booking-btn {
