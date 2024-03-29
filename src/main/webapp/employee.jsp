@@ -95,6 +95,9 @@
     </style>
 </head>
 <body>
+
+<jsp:include page="popup.jsp" />
+
     <div class="container">
         <h1>Employee Management</h1>
 
@@ -127,7 +130,6 @@
                                     <td><%= booking.getCheckOut().toString() %></td>
                                     <td><%= String.format("$%.2f", booking.getPricePaid()) %></td>
                                     <td><%= status %></td>
-
                                     <td>
                                     <% if (!booking.getPayment()) { %>
                                         <button onclick="makePayment('<%= booking.getBookingID() %>')">Process Payment</button>
@@ -189,17 +191,37 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const convertToRentingButton = document.querySelectorAll('.cancel-booking-btn');
-
-        }
         function convertToRenting(roomID) {
-            RentingService.bookingTOrenting(roomID);
+            var contextPath = "<%= request.getContextPath() %>";
+            fetch(contextPath + '/convertToRenting', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'roomID=' + roomID
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Process the response as JSON
+            })
+            .then(data => {
+                if(data.success) {
+                    alert(data.message); // Show success message
+                } else {
+                    alert("Error: " + data.message); // Show error message
+                }
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
 
-        function deleteRenting(rentingID) {
 
-        }
+        //function deleteRenting(rentingID) {
+        //}
 
         function makePayment(bookingID) {
             // Code to handle payment
@@ -223,5 +245,6 @@
             }
         };
     </script>
+
 </body>
 </html>

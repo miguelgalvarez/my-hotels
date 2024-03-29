@@ -205,7 +205,7 @@
                     <div class="details">Check-in: <%= booking.getCheckIn() %></div>
                     <div class="details">Check-out: <%= booking.getCheckOut() %></div>
                 </div>
-                <div class="price">$<%= booking.getPricePaid() %></div>
+                <div class="price">$<%= String.format("%.2f", booking.getPricePaid()) %></div>
                 <button class="cancel-booking-btn" data-booking-id="<%= booking.getBookingID() %>">Cancel Booking</button>
             </div>
 
