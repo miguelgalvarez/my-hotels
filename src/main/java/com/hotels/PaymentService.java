@@ -12,6 +12,7 @@ public class PaymentService {
         int ccNumber = payment.getCreditCardNumber();
         int cvv = payment.getCvv();
         String fullName = payment.getFullName();
+        String expDate = payment.getExpDate();
 
         int count = 0;
         int count2 = 0;
@@ -28,7 +29,7 @@ public class PaymentService {
             count2++;
         }
         // Return true if the count is 16, indicating a 16-digit number
-        return ((count == 16) && (!fullName.equals("")) && (count2 == 3));
+        return ((count == 16) && (!fullName.equals("")) && (count2 == 3) && (expDate.length() == 4 || expDate.length() == 5));
     }
 
     /**

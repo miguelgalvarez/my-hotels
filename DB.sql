@@ -123,16 +123,16 @@ VALUES
 -- ----------------------------
 -- Records of hotel rooms
 -- ----------------------------
-INSERT INTO Room (Price, Capacity, Amenities, RoomView, RoomExtension, Damages, RoomNumber)
+INSERT INTO Room (HotelID, Price, Capacity, Amenities, RoomView, RoomExtension, Damages, RoomNumber)
 VALUES
-    (100.00, 2, 'Amenities 1', 'Sea view', FALSE, 'No damages', 101),
-    (120.00, 4, 'Amenities 2', 'City view', TRUE, 'Minor damages', 102),
+    (1, 100.00, 2, 'Amenities 1', 'Sea view', FALSE, 'No damages', 101),
+    (2, 120.00, 4, 'Amenities 2', 'City view', TRUE, 'Minor damages', 102),
 
-    (80.00, 1, 'Amenities 3', 'Mountain view', FALSE, 'No damages', 201),
-    (150.00, 3, 'Amenities 4', 'Ocean view', TRUE, 'Minor damages', 202),
+    (3, 80.00, 1, 'Amenities 3', 'Mountain view', FALSE, 'No damages', 201),
+    (4, 150.00, 3, 'Amenities 4', 'Ocean view', TRUE, 'Minor damages', 202),
 
-    (200.00, 2, 'Amenities 5', 'Pool view', FALSE, 'No damages', 301),
-    (180.00, 4, 'Amenities 6', 'Garden view', TRUE, 'No damages', 302);
+    (5, 200.00, 2, 'Amenities 5', 'Pool view', FALSE, 'No damages', 301),
+    (6, 180.00, 4, 'Amenities 6', 'Garden view', TRUE, 'No damages', 302);
 
 -- ----------------------------
 -- Records of hotels
@@ -210,8 +210,15 @@ SELECT h.hotelid, h.hotelname, sum(r.capacity) AS totalcapacity FROM hotel h JOI
 -- ----------------------------
 -- Indexing queries
 -- ----------------------------
--- Create an index on the HotelCategory column
+---> Creating an single column index on HotelCategory (single-column index)
 CREATE INDEX idx_hotel_category ON hotel (HotelCategory);
+
+---> Creating an multi column index on the Hotel to make my join sql statements more efficient
+CREATE INDEX idx_hotelchainid_hotelid ON hotel (HotelChainID, HotelID);
+
+---> Creating a single column index on the booking table for the roomid column. 
+---> I have many queries that search for RoomID therefore having this index will make searching more efficient. 
+CREATE INDEX idx_booking_room_id ON booking (RoomID);
 
 
 

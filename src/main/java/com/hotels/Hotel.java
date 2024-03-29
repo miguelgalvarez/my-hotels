@@ -35,6 +35,7 @@ public class Hotel {
      * @param hotelName name of the hotel
      */
     public Hotel(int hotelID, int hotelChainID, double rating, String hotelArea,String hotelCategory, BigDecimal phoneNumber, int numRooms, String address, String email, String hotelName) {
+        this.hotelID = hotelID;
         this.rating = rating;
         this.hotelChainID = hotelChainID;
         this.hotelArea = hotelArea;

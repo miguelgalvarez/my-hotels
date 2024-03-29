@@ -36,8 +36,9 @@ public class HotelService {
             while (rs.next()) {
                 // create new hotel object
                 Hotel hotel = new Hotel(
-                        rs.getDouble("Rating"),
+                        rs.getInt("HotelID"),
                         rs.getInt("HotelChainID"),
+                        rs.getDouble("Rating"),
                         rs.getString("HotelArea"),
                         rs.getString("HotelCategory"),
                         rs.getBigDecimal("HotelPhoneNumber"),

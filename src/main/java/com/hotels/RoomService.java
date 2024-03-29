@@ -15,7 +15,6 @@ public class RoomService {
      * @throws Exception when trying to connect to database
      */
     public List<Room> getRooms(int hotelID) throws Exception {
-
         // sql query
         String sql = "SELECT * FROM room WHERE hotelid = ?";
         // database connection object
