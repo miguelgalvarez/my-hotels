@@ -77,7 +77,7 @@
             background-color: #f29602;
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 6px;
             transition: background-color 0.3s;
             box-sizing: border-box;
             width: 200px;
@@ -229,13 +229,16 @@
                         <span class="close">&times;</span>
                         <h2>Confirm Deletion</h2>
                         <p>Are you sure you want to delete the renting?</p>
-                        <div class="auth-buttons">
-                            <a href="employee.jsp" class="auth-button delete-confirm-btn" data-renting-id="<%= renting.getRentingID() %>">Yes, Delete It</a>
-                            <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
-                        </div>
+                        <form action="deleteRenting" method="POST">
+                            <!-- Hidden input for rentingID, value will be set dynamically with JavaScript -->
+                            <input type="hidden" name="rentingID" id= "rentingID" value= <%= renting.getRentingID() %>>
+                            <div class="auth-buttons">
+                                <button type="submit" class="auth-button delete-confirm-btn">Yes, Delete It</button>
+                                <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
         <% } %>
 
     </tbody>
@@ -256,17 +259,16 @@
         </div>
     </div>
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const deleteButtons = document.querySelectorAll('.delete-renting-btn');
         const modal = document.getElementById('deleteConfirmationModal');
-        const yesButton = modal.querySelector('.delete-confirm-btn');
+        //const yesButton = modal.querySelector('.delete-confirm-btn');
         const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
 
         // Function to open modal
         function openModal(rentingID) {
-            yesButton.setAttribute('data-renting-id', rentingID);
+            document.getElementById('rentingID').value = rentingID;
             modal.style.display = 'block';
         }
 
@@ -282,26 +284,6 @@
             });
         });
 
-        yesButton.addEventListener('click', function() {
-            const rentingID = this.getAttribute('data-renting-id');
-            fetch('deleteRenting', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'rentingID=' + rentingID
-            })
-            .then(response => response.text())
-            .then(data => {
-                window.location.href = 'employee.jsp'; // Redirect to the employee page
-            })
-
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-            closeModal(); // Close the modal
-        });
 
         closeModalButtons.forEach(button => {
             button.addEventListener('click', function(event) {
