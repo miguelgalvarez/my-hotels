@@ -162,7 +162,7 @@
     <div class="hotels">
         <% if (rooms != null) {
             for (Room room : rooms) { %>
-                <div class="hotel" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
+                <div class="hotel" onclick="redirectToPayment(<%= room.getRoomID() %>)" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
                     <h3>Room <%= room.getID() %></h3>
                     <div class="hotel-info">
                         <p>Price Per Day: $<%= room.getPrice() %></p>
