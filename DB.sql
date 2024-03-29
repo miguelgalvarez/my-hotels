@@ -202,3 +202,42 @@ SELECT hotel.HotelName FROM hotel JOIN hotelchain ON hotel.HotelChainID = hotelc
 SELECT * FROM booking WHERE RoomID = 4
 INSERT INTO renting (CustomerID, RoomID, CheckIn, CheckOut) SELECT CustomerID, RoomID, CheckIn, CheckOut FROM booking WHERE RoomID = 4
 UPDATE booking SET Payment = true WHERE BookingID = '1';
+
+SELECT HotelArea, COUNT(*) AS NumberOfHotels
+FROM hotel
+GROUP BY HotelArea;
+
+SELECT
+    HotelArea,
+    COUNT(*) AS NumberOfHotels,
+    SUM(NumberOfRooms) AS TotalRooms
+FROM
+    hotel
+GROUP BY
+    HotelArea;
+	
+SELECT
+    HotelArea,
+    SUM(NumberOfRooms) AS TotalRooms
+FROM
+    hotel
+WHERE
+    HotelArea = 'Montreal'
+GROUP BY
+    HotelArea;
+
+SELECT booking.* FROM booking JOIN customer ON booking.CustomerID = customer.CustomerID WHERE customer.CustomerID = 3
+SELECT * FROM booking WHERE CustomerID = 3
+
+SELECT
+    HotelArea,
+    SUM(NumberOfRooms) AS TotalRooms
+FROM
+    hotel
+WHERE
+    HotelArea = 'Montreal' OR HotelArea = 'Toronto' OR HotelArea = 'Vancouver'
+GROUP BY
+    HotelArea;
+
+
+
