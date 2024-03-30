@@ -179,7 +179,7 @@
 
         <label for="capacity">Capacity:</label>
         <select id="capacity" class="filter-dropdown">
-            <option value="0">All</option>
+            <option value="1">All</option>
             <option value="1">1 guest</option>
             <option value="2">2 guests</option>
             <option value="3">3 guests</option>
@@ -206,38 +206,38 @@
 
 <script>
     var bookingsData = <%=bookingsJson.toString()%>;
-document.addEventListener('DOMContentLoaded', function () {
-    const today = new Date();
-    const oneWeekFromToday = new Date(today);
-    oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
-    const oneDayAfterOneWeekFromToday = new Date(oneWeekFromToday);
-    oneDayAfterOneWeekFromToday.setDate(oneDayAfterOneWeekFromToday.getDate() + 1); // Setting this as one day after one week from today
+        document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date();
+        const oneWeekFromToday = new Date(today);
+        oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
+        const oneDayAfterOneWeekFromToday = new Date(oneWeekFromToday);
+        oneDayAfterOneWeekFromToday.setDate(oneDayAfterOneWeekFromToday.getDate() + 1); // Setting this as one day after one week from today
 
-    const startDate = document.getElementById('start-date');
-    const endDate = document.getElementById('end-date');
+        const startDate = document.getElementById('start-date');
+        const endDate = document.getElementById('end-date');
 
-    // Setting the minimum selectable dates
-    startDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
-    endDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
+        // Setting the minimum selectable dates
+        startDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
+        endDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
 
-    // Set the start date to one week from today and the end date to one day after that by default
-    startDate.value = oneWeekFromToday.toISOString().split('T')[0];
-    endDate.value = oneDayAfterOneWeekFromToday.toISOString().split('T')[0];
+        // Set the start date to one week from today and the end date to one day after that by default
+        startDate.value = oneWeekFromToday.toISOString().split('T')[0];
+        endDate.value = oneDayAfterOneWeekFromToday.toISOString().split('T')[0];
 
-    startDate.addEventListener('change', function() {
-        const selectedStartDate = new Date(startDate.value);
-        const dayAfterSelectedStartDate = new Date(selectedStartDate);
-        dayAfterSelectedStartDate.setDate(dayAfterSelectedStartDate.getDate() + 1);
+        startDate.addEventListener('change', function() {
+            const selectedStartDate = new Date(startDate.value);
+            const dayAfterSelectedStartDate = new Date(selectedStartDate);
+            dayAfterSelectedStartDate.setDate(dayAfterSelectedStartDate.getDate() + 1);
 
-        endDate.setAttribute('min', dayAfterSelectedStartDate.toISOString().split('T')[0]);
+            endDate.setAttribute('min', dayAfterSelectedStartDate.toISOString().split('T')[0]);
 
-        // Automatically adjust the end date to be at least one day after the start date
-        // if the current end date is less than or equal to the new start date
-        if (new Date(endDate.value) <= selectedStartDate) {
-            endDate.value = dayAfterSelectedStartDate.toISOString().split('T')[0];
-        }
+            // Automatically adjust the end date to be at least one day after the start date
+            // if the current end date is less than or equal to the new start date
+            if (new Date(endDate.value) <= selectedStartDate) {
+                endDate.value = dayAfterSelectedStartDate.toISOString().split('T')[0];
+            }
+        });
     });
-});
 
 
     function checkLoginStatus(roomID, price, amenities) {
