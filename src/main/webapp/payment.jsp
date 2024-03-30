@@ -56,11 +56,11 @@
     <!-- Payment form inputs -->
     <form id="payment-form" method="POST" action="PaymentServlet">
         <label for="credit-card-number">Credit Card Number:</label>
-        <input type="text" id="credit-card-number" required><br><br>
+        <input type="text" id="credit-card-number" name="credit-card-number" placeholder="XXXXXXXXXXXXXXXX" required><br><br>
         <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" required><br><br>
+        <input type="text" id="cvv" name="cvv" placeholder="XXX" required><br><br>
         <label for="expiry-date">Expiry Date:</label>
-        <input type="text" id="expiry-date" required><br><br>
+        <input type="text" id="expiry-date" placeholder="XXXX" required><br><br>
         <label for="full-name">Full Name:</label>
         <input type="text" id="full-name" required><br><br>
         <button type="submit">Submit Payment</button>

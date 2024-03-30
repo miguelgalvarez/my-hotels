@@ -22,7 +22,7 @@ public class PaymentServlet extends HttpServlet {
         String fullName = request.getParameter("fullName"); // Assume this is also collected in the form
 
         // Create a Payment object
-        Payment payment = new Payment(creditCardNumber, cvv, expDate, fullName);
+        Payment payment = new Payment(123, 123, expDate, fullName);
 
         // Validate the payment
         PaymentService paymentService = new PaymentService();
@@ -58,16 +58,16 @@ public class PaymentServlet extends HttpServlet {
                     response.sendRedirect("index.jsp");
                 } else {
                     // Handle the case where booking couldn't be created
-                    response.sendRedirect("paymentScreen.jsp?error=Booking failed");
+                    response.sendRedirect("payment.jsp?error=Booking failed");
                 }
             } catch (Exception e) {
                 // Log the exception and redirect to an error page
                 e.printStackTrace(); // Consider logging this properly
-                response.sendRedirect("paymentScreen.jsp?error=Payment failed");
+                response.sendRedirect("payment.jsp?error=Payment failed");
             }
 
         } else {
-            response.sendRedirect("paymentScreen.jsp?error=Payment failed");
+            response.sendRedirect("payment.jsp?error=Payment failed");
         }
     }
 }
