@@ -177,9 +177,9 @@
         <label for="end-date">Check Out Date:</label>
         <input type="date" id="end-date" class="filter-dropdown">
 
-        <label for="capacity">Capacity:</label>
+        <label for="capacity">Number of Guests:</label>
         <select id="capacity" class="filter-dropdown">
-            <option value="1">All</option>
+            <option value="0">All</option>
             <option value="1">1 guest</option>
             <option value="2">2 guests</option>
             <option value="3">3 guests</option>
@@ -255,47 +255,57 @@
     function redirectToPayment(roomID, price, amenities) {
         const startDate = document.getElementById('start-date').value;
         const endDate = document.getElementById('end-date').value;
-        const capacity = document.getElementById('capacity').value;
+        let capacityFilter = document.getElementById('capacity').value;
+
+        // Default to 1 guest if 'All' is selected
+        const numberOfGuests = capacityFilter === "0" ? "1" : capacityFilter;
+
         const start = new Date(startDate);
         const end = new Date(endDate);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         const encodedAmenities = encodeURIComponent(amenities);
         const cost = price * diffDays;
-        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${capacity}&amenities=${encodedAmenities}&cost=${cost}`;
+        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${numberOfGuests}&amenities=${encodedAmenities}&cost=${cost}`;
+
         window.location.href = url;
     }
 
-    function filterRooms() {
-        const priceFilter = document.getElementById('price').value;
-        const startDate = new Date(document.getElementById('start-date').value);
-        const endDate = new Date(document.getElementById('end-date').value);
-        const capacityFilter = document.getElementById('capacity').value;
-        const rooms = document.querySelectorAll('.hotel');
 
-        rooms.forEach(room => {
-            const roomID = parseInt(room.getAttribute('data-roomID'), 10);
-            const price = parseInt(room.getAttribute('data-price'), 10);
-            const capacity = parseInt(room.getAttribute('data-capacity'), 10);
-            const roomBookings = bookingsData.filter(booking => booking.roomID === roomID);
-            let dateAvailable = !roomBookings.some(booking => {
-                const bookingStart = new Date(booking.checkIn);
-                const bookingEnd = new Date(booking.checkOut);
-                return bookingStart < endDate && bookingEnd > startDate;
-            });
+function filterRooms() {
+    const priceFilter = document.getElementById('price').value;
+    const startDate = new Date(document.getElementById('start-date').value);
+    const endDate = new Date(document.getElementById('end-date').value);
+    let capacityFilter = document.getElementById('capacity').value;
+    const rooms = document.querySelectorAll('.hotel');
 
-            let pricePass = false;
-            switch(priceFilter) {
-                case '0': pricePass = true; break;
-                case '1': pricePass = price < 99; break;
-                case '2': pricePass = price >= 100 && price <= 200; break;
-                case '3': pricePass = price > 200; break;
-            }
+    capacityFilter = capacityFilter === "0" ? "4" : capacityFilter;
 
-            const capacityPass = capacityFilter === '0' || capacity === parseInt(capacityFilter, 10);
-            room.style.display = (dateAvailable && pricePass && capacityPass) ? '' : 'none';
+    rooms.forEach(room => {
+        const roomID = parseInt(room.getAttribute('data-roomID'), 10);
+        const price = parseInt(room.getAttribute('data-price'), 10);
+        const capacity = parseInt(room.getAttribute('data-capacity'), 10);
+        const roomBookings = bookingsData.filter(booking => booking.roomID === roomID);
+        let dateAvailable = !roomBookings.some(booking => {
+            const bookingStart = new Date(booking.checkIn);
+            const bookingEnd = new Date(booking.checkOut);
+            return bookingStart < endDate && bookingEnd > startDate;
         });
-    }
+
+        let pricePass = false;
+        switch(priceFilter) {
+            case '0': pricePass = true; break;
+            case '1': pricePass = price < 99; break;
+            case '2': pricePass = price >= 100 && price <= 200; break;
+            case '3': pricePass = price > 200; break;
+        }
+
+        const capacityPass = capacity <= parseInt(capacityFilter, 10);
+
+        room.style.display = (dateAvailable && pricePass && capacityPass) ? '' : 'none';
+    });
+}
+
 </script>
 
 </body>
