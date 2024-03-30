@@ -4,6 +4,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.math.BigInteger;
 import java.sql.Date;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -16,13 +18,13 @@ import java.text.SimpleDateFormat;
 public class PaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Extract payment details from the request
-        int creditCardNumber = Integer.parseInt(request.getParameter("creditCardNumber"));
+        BigInteger creditCardNumber = new BigInteger(request.getParameter("credit-card-number"));
         int cvv = Integer.parseInt(request.getParameter("cvv"));
         String expDate = request.getParameter("expiryDate");
         String fullName = request.getParameter("fullName"); // Assume this is also collected in the form
 
         // Create a Payment object
-        Payment payment = new Payment(123, 123, expDate, fullName);
+        Payment payment = new Payment(creditCardNumber, cvv, expDate, fullName);
 
         // Validate the payment
         PaymentService paymentService = new PaymentService();

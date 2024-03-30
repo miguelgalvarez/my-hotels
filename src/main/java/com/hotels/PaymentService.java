@@ -1,4 +1,5 @@
 package com.hotels;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,27 +10,20 @@ public class PaymentService {
      * @param payment object that is created based on the input that the user puts when doing payment
      */
     public boolean paymentAccepted(Payment payment){
-        int ccNumber = payment.getCreditCardNumber();
+        BigInteger ccNumber = payment.getCreditCardNumber();
         int cvv = payment.getCvv();
         String fullName = payment.getFullName();
         String expDate = payment.getExpDate();
 
-        int count = 0;
         int count2 = 0;
 
-        while (ccNumber != 0) {
-            // Remove the last digit
-            ccNumber /= 10;
-            // Increment the count
-            count++;
-        }
 
         while(cvv != 0){
             cvv /= 10;
             count2++;
         }
         // Return true if the count is 16, indicating a 16-digit number
-        return ((count == 16) && (!fullName.equals("")) && (count2 == 3) && (expDate.length() == 4 || expDate.length() == 5));
+        return ((ccNumber.bitLength() == 16) && (!fullName.equals("")) && (count2 == 3) && (expDate.length() == 4 || expDate.length() == 5));
     }
 
     /**

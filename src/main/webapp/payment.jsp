@@ -60,9 +60,9 @@
         <label for="cvv">CVV:</label>
         <input type="text" id="cvv" name="cvv" placeholder="XXX" required><br><br>
         <label for="expiry-date">Expiry Date:</label>
-        <input type="text" id="expiry-date" placeholder="XXXX" required><br><br>
+        <input type="text" id="expiry-date" name="expiryDate" placeholder="XXXX" required><br><br>
         <label for="full-name">Full Name:</label>
-        <input type="text" id="full-name" required><br><br>
+        <input type="text" id="full-name" name = "fullName" required><br><br>
         <button type="submit">Submit Payment</button>
         <input type="hidden" id="room-id" name="roomId" value="">
         <input type="hidden" id="number-of-days" name="numberOfDays" value="">

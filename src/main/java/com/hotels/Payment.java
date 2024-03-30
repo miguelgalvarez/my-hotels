@@ -1,7 +1,7 @@
 package com.hotels;
-
+import java.math.BigInteger;
 public class Payment {
-    private int creditCardNumber;
+    private BigInteger creditCardNumber;
     private int cvv;
     private String expDate;
     private String fullName;
@@ -13,7 +13,7 @@ public class Payment {
      * @param cvv unique cvv number of customer's credit card
      * @param fullName cardholder's full name
      */
-    public Payment(int creditCardNumber, int cvv, String expDate, String fullName) {
+    public Payment(BigInteger creditCardNumber, int cvv, String expDate, String fullName) {
         this.creditCardNumber = creditCardNumber;
         this.cvv = cvv;
         this.expDate = expDate;
@@ -21,7 +21,7 @@ public class Payment {
     }
 
     /* Getters */
-    public int getCreditCardNumber() {return this.creditCardNumber; }
+    public BigInteger getCreditCardNumber() {return this.creditCardNumber; }
     public int getCvv() {return this.cvv;}
     public String getExpDate(){return this.expDate;}
     public String getFullName() {return this.fullName;}
