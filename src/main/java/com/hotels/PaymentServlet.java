@@ -37,7 +37,7 @@ public class PaymentServlet extends HttpServlet {
 
         if (paymentAccepted) {
             // If payment is valid, proceed to create the booking
-            int roomId = Integer.parseInt(request.getParameter("roomId"));
+            int roomId = Integer.parseInt(request.getParameter("roomID"));
             int numberOfDays = Integer.parseInt(request.getParameter("numberOfDays"));
             int pricePaid = numberOfDays*Integer.parseInt(request.getParameter("price"));
             int customerID = (int) request.getSession().getAttribute("customerID");
@@ -48,8 +48,8 @@ public class PaymentServlet extends HttpServlet {
             Date checkInDate = null;
             Date checkOutDate = null;
             try {
-                checkInDate = new Date(dateFormat.parse(request.getParameter("checkInDate")).getTime());
-                checkOutDate = new Date(dateFormat.parse(request.getParameter("checkInDate")).getTime());
+                checkInDate = new Date(dateFormat.parse(request.getParameter("checkIN")).getTime());
+                checkOutDate = new Date(dateFormat.parse(request.getParameter("checkOut")).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }

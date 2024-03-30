@@ -190,7 +190,7 @@
     <div class="hotels">
         <% if (rooms != null) {
             for (Room room : rooms) { %>
-                <div class="hotel" onclick="checkLoginStatus(<%=room.getRoomID()%>)" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
+                <div class="hotel" onclick="checkLoginStatus(<%=room.getRoomID()%>, <%=room.getPrice()%>)" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomID="<%= room.getRoomID() %>">
                     <h3>Room <%= room.getID() %></h3>
                     <div class="hotel-info">
                         <p>Price Per Day: $<%= room.getPrice() %></p>
@@ -239,11 +239,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-    function checkLoginStatus(roomID) {
+    function checkLoginStatus(roomID, price) {
         const userStatus = document.querySelector('meta[name="user-status"]').getAttribute('content');
 
         if (userStatus === "logged-in") {
-            redirectToPayment(roomID); // User is logged in, proceed to payment
+            redirectToPayment(roomID, price); // User is logged in, proceed to payment
         } else {
             // Encode the current URL and append it as a query parameter
             const currentUrl = encodeURIComponent(window.location.href);
@@ -251,14 +251,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function redirectToPayment(roomId) {
+    function redirectToPayment(roomID, price) {
         const startDate = document.getElementById('start-date').value;
         const endDate = document.getElementById('end-date').value;
         const start = new Date(startDate);
         const end = new Date(endDate);
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const url = `payment.jsp?roomId=${roomId}&numberOfDays=${diffDays}`;
+        const url = `payment.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}`;
         window.location.href = url;
     }
 
@@ -270,10 +270,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const rooms = document.querySelectorAll('.hotel');
 
         rooms.forEach(room => {
-            const roomId = parseInt(room.getAttribute('data-roomId'), 10);
+            const roomID = parseInt(room.getAttribute('data-roomID'), 10);
             const price = parseInt(room.getAttribute('data-price'), 10);
             const capacity = parseInt(room.getAttribute('data-capacity'), 10);
-            const roomBookings = bookingsData.filter(booking => booking.roomID === roomId);
+            const roomBookings = bookingsData.filter(booking => booking.roomID === roomID);
             let dateAvailable = !roomBookings.some(booking => {
                 const bookingStart = new Date(booking.checkIn);
                 const bookingEnd = new Date(booking.checkOut);

@@ -42,6 +42,12 @@ public class BookingService {
 
     public boolean createBooking(Booking booking) throws Exception {
 
+        boolean canCreate = canAddBooking(booking.getCustomerID());
+
+        if (!canCreate) {
+            return false;
+        }
+
         //testing
         System.out.println(booking.getPricePaid());
         System.out.println(booking.getHotelID());
@@ -54,7 +60,7 @@ public class BookingService {
 
         // Insert data into the database
         try (Connection connection = db.getConnection()) {
-            String sql = "INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO booking (CustomerID, PricePaid, CheckIn, CheckOut, HotelID, roomID) VALUES (?, ?, ?, ?, ?, ?)";
             String sql2 = "UPDATE hotel SET NumberOfRooms = NumberOfRooms - 1 WHERE HotelID = ?;";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 // statement 1
@@ -62,6 +68,8 @@ public class BookingService {
                 statement.setDouble(2, booking.getPricePaid());
                 statement.setDate(3, booking.getCheckInSQL());
                 statement.setDate(4, booking.getCheckOutSQL());
+                statement.setInt(5, booking.getHotelID());
+                statement.setInt(6, booking.getRoomID());
 
                 // statement 2
                 PreparedStatement statement2 = connection.prepareStatement(sql2);
@@ -311,7 +319,7 @@ public class BookingService {
      * @return true if customer has less than 5 bookings and false otherwise
      * @throws Exception when trying to connect to database
      */
-    public boolean canAddBooking(int customerID){
+    public static boolean canAddBooking(int customerID){
         //establish connection with DB
         ConnectionDB db = new ConnectionDB();
 

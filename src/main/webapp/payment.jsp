@@ -23,6 +23,11 @@
             height: 100vh;
         }
 
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
         .payment-container {
             background-color: white;
             padding: 20px;
@@ -31,6 +36,7 @@
             max-width: 400px;
             width: 100%;
             margin: 20px;
+
         }
 
         .back-button {
@@ -47,6 +53,36 @@
         .back-button:hover {
             background-color: var(--darker-colour);
         }
+
+        input[type="text"]  {
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        input[type="submit"] {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            background-color: var(--main-colour);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: var(--darker-colour);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
@@ -63,9 +99,12 @@
         <input type="text" id="expiry-date" name="expiryDate" placeholder="XXXX" required><br><br>
         <label for="full-name">Full Name:</label>
         <input type="text" id="full-name" name = "fullName" required><br><br>
-        <button type="submit">Submit Payment</button>
-        <input type="hidden" id="room-id" name="roomId" value="<%= request.getParameter("data-roomId") %>">
+        <input type="submit" value="Submit Payment">
+        <input type="hidden" id="room-id" name="roomID" value="<%= request.getParameter("roomID") %>">
         <input type="hidden" id="number-of-days" name="numberOfDays" value="<%= request.getParameter("numberOfDays") %>">
+        <input type="hidden" id="price" name="price" value="<%= request.getParameter("price") %>">
+        <input type="hidden" id="checkIN" name="checkIN" value="<%= request.getParameter("checkIN") %>">
+        <input type="hidden" id="checkOut" name="checkOut" value="<%= request.getParameter("checkOut") %>">
     </form>
     <button class="back-button" onclick="goBack()">Back</button>
 </div>

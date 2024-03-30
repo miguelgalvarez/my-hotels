@@ -58,6 +58,7 @@ public class PaymentService {
         String sql = "SELECT HotelID from room WHERE RoomID = ?";
         ConnectionDB db = new ConnectionDB();
         try (Connection con = db.getConnection();
+
              PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, roomID);
 
