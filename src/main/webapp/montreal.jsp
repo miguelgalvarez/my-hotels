@@ -39,11 +39,13 @@
             background-color: #f9f9f9;
             border-radius: 8px;
             width: 100%;
-            margin-bottom: 10px; /* Added for spacing */
+            margin-bottom: 10px;
         }
         .filters select:hover {
-            background-color: #eaeaea;
+            background-color: #0056b3;
         }
+
+
         .hotels {
             flex: 1;
             display: flex;
@@ -117,7 +119,7 @@
             <option value="2">Mid-Range</option>
             <option value="3">Luxury</option>
         </select>
-        <label for="Max-Rooms">Max Rooms:</label>
+        <label for="Max-Rooms">Total Number Of Rooms:</label>
         <select id="Max-Rooms" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
             <option value="1">Less than 50</option>

@@ -19,28 +19,33 @@
             padding: 20px;
         }
         .filters {
-            flex: 0 0 200px;
+            flex: 0 0 250px; /* Updated width for more space */
             background-color: #f9f9f9;
             padding: 20px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px; /* Adjusted gap for a neater look */
             margin-right: 20px;
-
         }
         .filters h2 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .filters label, .filters select {
-            padding: 10px;
-            background-color: #f9f9f9;
+        .filters label {
+            font-size: 16px; /* Larger font size for clarity */
+            font-weight: 600;
+            color: #333; /* Dark color for better contrast */
+            margin-bottom: 5px;
+        }
+        .filters select,  .filters button {
+            padding: 12px;
+            border: 2px solid;
             border-radius: 8px;
             width: 100%;
+            font-size: 16px;
             margin-bottom: 10px;
         }
-
         .filters input {
             padding: 10px;
             background-color: #f9f9f9;
@@ -49,9 +54,19 @@
             margin-bottom: 10px;
             margin-right: 10px;
         }
-
+        .filters button {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .filters button:hover {
+            background-color: #0056b3;
+        }
         .filters select:hover, .filters input:hover {
-            background-color: #eaeaea;
+            background-color: #d0e7ff; /* Slightly darker blue on hover for inputs */
         }
         .hotels {
             flex: 1;
@@ -143,10 +158,10 @@
             <option value="3">Over $200</option>
         </select>
 
-        <label for="start-date">Start Date:</label>
+        <label for="start-date">Check In Date:</label>
         <input type="date" id="start-date" class="filter-dropdown">
 
-        <label for="end-date">End Date:</label>
+        <label for="end-date">Check Out Date:</label>
         <input type="date" id="end-date" class="filter-dropdown">
 
         <label for="capacity">Capacity:</label>
@@ -179,23 +194,35 @@
     var bookingsData = <%=bookingsJson.toString()%>;
 
     document.addEventListener('DOMContentLoaded', function () {
-        const today = new Date().toISOString().split('T')[0];
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1); // Setting 'tomorrow' as one day after today
+
         const startDate = document.getElementById('start-date');
         const endDate = document.getElementById('end-date');
 
-        startDate.setAttribute('min', today);
-        endDate.setAttribute('min', today);
+        startDate.setAttribute('min', today.toISOString().split('T')[0]);
+        endDate.setAttribute('min', tomorrow.toISOString().split('T')[0]);
 
-        startDate.value = today;
-        endDate.value = today;
+        // Set the start date to today and the end date to tomorrow by default
+        startDate.value = today.toISOString().split('T')[0];
+        endDate.value = tomorrow.toISOString().split('T')[0];
 
         startDate.addEventListener('change', function() {
-            endDate.setAttribute('min', startDate.value);
-            if (endDate.value < startDate.value) {
-                endDate.value = startDate.value;
+            const selectedStartDate = new Date(startDate.value);
+            const dayAfterStartDate = new Date(selectedStartDate);
+            dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
+
+            endDate.setAttribute('min', dayAfterStartDate.toISOString().split('T')[0]);
+
+            // Automatically adjust the end date to be the day after the start date
+            // if the current end date is less than or equal to the new start date
+            if (new Date(endDate.value) <= selectedStartDate) {
+                endDate.value = dayAfterStartDate.toISOString().split('T')[0];
             }
         });
     });
+
 
     function redirectToPayment(roomId) {
         const startDate = document.getElementById('start-date').value;
