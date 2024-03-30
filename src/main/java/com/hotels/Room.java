@@ -67,7 +67,7 @@ public class Room {
     public int getID() {return this.RoomID; }
     public double getPrice() {return this.price; }
     public int getCapacity() {return this.capacity; }
-    public String getAmeneties() {return this.amenities; }
+    public String getAmenities() {return this.amenities; }
     public String getRoomView() {return this.roomView; }
     public boolean getRoomExtension() {return this.roomExtension; }
     public String getDamages() {return this.damages;}
