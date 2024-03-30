@@ -219,6 +219,3 @@ CREATE INDEX idx_hotelchainid_hotelid ON hotel (HotelChainID, HotelID);
 ---> Creating a single column index on the booking table for the roomid column. 
 ---> I have many queries that search for RoomID therefore having this index will make searching more efficient. 
 CREATE INDEX idx_booking_room_id ON booking (RoomID);
-
-
-
