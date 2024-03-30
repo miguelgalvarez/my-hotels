@@ -42,11 +42,11 @@ public class BookingService {
 
     public boolean createBooking(Booking booking) throws Exception {
 
-        /*boolean canCreate = canAddBooking(booking.getCustomerID());
+        boolean canCreate = canAddBooking(booking.getCustomerID());
 
         if (!canCreate) {
             return false;
-        }*/
+        }
 
         //testing
         System.out.println(booking.getPricePaid());
@@ -78,7 +78,7 @@ public class BookingService {
                 int result = statement.executeUpdate();
                 int result2 = statement2.executeUpdate();
 
-                return ((result > 0) && (result2 > 0));
+                return ((result > 0) && (result2 > 0)); //registration if registration was successful or not
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -55,7 +55,7 @@
     <div class="summary-detail">Check-out Date: <span class="highlight"><%= request.getParameter("checkOut") %></span></div>
 
     <!-- Optionally, add a button or link for the user to perform actions like edit or print the booking -->
-    <a href="payment.jsp?roomID=<%= URLEncoder.encode(request.getParameter("roomID"), "UTF-8") %>&numberOfDays=<%= URLEncoder.encode(request.getParameter("numberOfDays"), "UTF-8") %>&cost=<%= URLEncoder.encode(request.getParameter("cost"), "UTF-8") %>&capacity=<%= URLEncoder.encode(request.getParameter("capacity"), "UTF-8") %>&amenities=<%= URLEncoder.encode(request.getParameter("amenities"), "UTF-8") %>&checkIN=<%= URLEncoder.encode(request.getParameter("checkIN"), "UTF-8") %>&checkOut=<%= URLEncoder.encode(request.getParameter("checkOut"), "UTF-8") %>" class="payment-button">Continue to Payment</a>
+    <a href="payment.jsp?numberOfDays=<%= URLEncoder.encode(request.getParameter("numberOfDays"), "UTF-8") %>&price=<%= URLEncoder.encode(request.getParameter("price"), "UTF-8") %>&capacity=<%= URLEncoder.encode(request.getParameter("capacity"), "UTF-8") %>&amenities=<%= URLEncoder.encode(request.getParameter("amenities"), "UTF-8") %>&checkInDate=<%= URLEncoder.encode(request.getParameter("checkIN"), "UTF-8") %>&checkOutDate=<%= URLEncoder.encode(request.getParameter("checkOut"), "UTF-8") %>" class="payment-button">Continue to Payment</a>
 
 </div>
 </body>

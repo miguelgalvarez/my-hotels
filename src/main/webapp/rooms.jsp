@@ -206,16 +206,12 @@
 
 <script>
     var bookingsData = <%=bookingsJson.toString()%>;
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-    window.onload = filterRooms;
-
-    const today = new Date();
-    const oneWeekFromToday = new Date(today);
-    oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
-    const oneDayAfterOneWeekFromToday = new Date(oneWeekFromToday);
-    oneDayAfterOneWeekFromToday.setDate(oneDayAfterOneWeekFromToday.getDate() + 1); // Setting this as one day after one week from today
+        document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date();
+        const oneWeekFromToday = new Date(today);
+        oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
+        const oneDayAfterOneWeekFromToday = new Date(oneWeekFromToday);
+        oneDayAfterOneWeekFromToday.setDate(oneDayAfterOneWeekFromToday.getDate() + 1); // Setting this as one day after one week from today
 
         const startDate = document.getElementById('start-date');
         const endDate = document.getElementById('end-date');
