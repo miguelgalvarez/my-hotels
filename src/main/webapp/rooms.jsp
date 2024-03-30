@@ -205,36 +205,39 @@
 
 <script>
     var bookingsData = <%=bookingsJson.toString()%>;
+document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date();
+    const oneWeekFromToday = new Date(today);
+    oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
+    const oneDayAfterOneWeekFromToday = new Date(oneWeekFromToday);
+    oneDayAfterOneWeekFromToday.setDate(oneDayAfterOneWeekFromToday.getDate() + 1); // Setting this as one day after one week from today
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1); // Setting 'tomorrow' as one day after today
+    const startDate = document.getElementById('start-date');
+    const endDate = document.getElementById('end-date');
 
-        const startDate = document.getElementById('start-date');
-        const endDate = document.getElementById('end-date');
+    // Setting the minimum selectable dates
+    startDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
+    endDate.setAttribute('min', oneWeekFromToday.toISOString().split('T')[0]);
 
-        startDate.setAttribute('min', today.toISOString().split('T')[0]);
-        endDate.setAttribute('min', tomorrow.toISOString().split('T')[0]);
+    // Set the start date to one week from today and the end date to one day after that by default
+    startDate.value = oneWeekFromToday.toISOString().split('T')[0];
+    endDate.value = oneDayAfterOneWeekFromToday.toISOString().split('T')[0];
 
-        // Set the start date to today and the end date to tomorrow by default
-        startDate.value = today.toISOString().split('T')[0];
-        endDate.value = tomorrow.toISOString().split('T')[0];
+    startDate.addEventListener('change', function() {
+        const selectedStartDate = new Date(startDate.value);
+        const dayAfterSelectedStartDate = new Date(selectedStartDate);
+        dayAfterSelectedStartDate.setDate(dayAfterSelectedStartDate.getDate() + 1);
 
-        startDate.addEventListener('change', function() {
-            const selectedStartDate = new Date(startDate.value);
-            const dayAfterStartDate = new Date(selectedStartDate);
-            dayAfterStartDate.setDate(dayAfterStartDate.getDate() + 1);
+        endDate.setAttribute('min', dayAfterSelectedStartDate.toISOString().split('T')[0]);
 
-            endDate.setAttribute('min', dayAfterStartDate.toISOString().split('T')[0]);
-
-            // Automatically adjust the end date to be the day after the start date
-            // if the current end date is less than or equal to the new start date
-            if (new Date(endDate.value) <= selectedStartDate) {
-                endDate.value = dayAfterStartDate.toISOString().split('T')[0];
-            }
-        });
+        // Automatically adjust the end date to be at least one day after the start date
+        // if the current end date is less than or equal to the new start date
+        if (new Date(endDate.value) <= selectedStartDate) {
+            endDate.value = dayAfterSelectedStartDate.toISOString().split('T')[0];
+        }
     });
+});
+
 
     function checkLoginStatus(roomID) {
         const userStatus = document.querySelector('meta[name="user-status"]').getAttribute('content');
