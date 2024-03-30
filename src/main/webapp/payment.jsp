@@ -5,6 +5,12 @@
     <title>Payment Screen</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-colour: #2596be;
+            --lighter-colour: #36bbeb;
+            --darker-colour: #1f7999;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -30,7 +36,7 @@
         .back-button {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #f29602;
+            background-color: var(--main-colour);
             color: white;
             border: none;
             border-radius: 4px;

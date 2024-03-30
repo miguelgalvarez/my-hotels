@@ -117,8 +117,8 @@
      <a href="/my-hotels" class="logo">myHotels</a>
      <a href="#stays">Stays</a>
      <a href="bookings.jsp">Bookings</a>
-     <a href="#about">About</a>
-     <a href="#contact">Contact</a>
+     <a href="about.jsp">About</a>
+     <a href="contact.jsp">Contact</a>
 
      <div class="right-section">
          <% if (session.getAttribute("username") != null) { %>
