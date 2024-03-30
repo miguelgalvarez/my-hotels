@@ -115,8 +115,8 @@ CREATE TABLE renting_archive (
 INSERT INTO hotelchain (HotelChainName, PhoneNumber, NumberOfHotels, HotelChainEmail, HotelChainAddress)
 VALUES
     ('White Lotus', '1234567890', 8, 'chain1@gmail.com','33 Palisade St'),
-    ('HolidayInn', '1234567890', 9, 'chain1@gmail.com','34 Palisade St'),
-    ('HolidayInn', '1234567890', 10, 'chain1@gmail.com','35 Palisade St'),
+    ('Hotel Chain 2', '1234567890', 9, 'chain1@gmail.com','34 Palisade St'),
+    ('Hotel Chain 3', '1234567890', 10, 'chain1@gmail.com','35 Palisade St'),
     ('HolidayInn', '1234567890', 11, 'chain1@gmail.com','36 Palisade St'),
     ('HolidayInn', '1234567890', 12, 'chain1@gmail.com','37 Palisade St');
 	
@@ -391,24 +391,24 @@ VALUES
     (2,'hotel16@gmail.com', 'Toronto', 'Luxury','Holiday Inn Luxury', '6789012345', 4, 18, 'Hotel 16 Address'),
 
     -- Hotels for Chain 3
-    (3,'hotel17@gmail.com', 'Toronto', 'Budget','Chain 3 Budget', '1234567890', 3, 12, 'Hotel 17 Address'),
-    (3,'hotel18@gmail.com', 'Vancouver', 'Luxury','Chain 3 Luxury', '2345678901', 4, 22, 'Hotel 18 Address'),
-    (3,'hotel19@gmail.com', 'Montreal', 'Luxury','Chain 3 Deluxe', '3456789012', 4, 10, 'Hotel 19 Address'),
-    (3,'hotel20@gmail.com', 'Montreal', 'Budget','Chain 3 Budget', '4567890123', 3, 15, 'Hotel 20 Address'),
-    (3,'hotel21@gmail.com', 'Toronto', 'Luxury','Chain 3 Luxury', '5678901234', 5, 12, 'Hotel 21 Address'),
-    (3,'hotel22@gmail.com', 'Toronto', 'Budget','Chain 3 Budget', '6789012345', 4, 20, 'Hotel 22 Address'),
-    (3,'hotel23@gmail.com', 'Toronto', 'Luxury','Chain 3 Luxury', '7890123456', 3, 8, 'Hotel 23 Address'),
-    (3,'hotel24@gmail.com', 'Vancouver', 'Luxury','Chain 3 Luxury', '8901234567', 4, 18, 'Hotel 24 Address'),
+    (3,'hotel17@gmail.com', 'Toronto', 'Budget','Hotel 3 Budget', '1234567890', 3, 12, 'Hotel 17 Address'),
+    (3,'hotel18@gmail.com', 'Vancouver', 'Luxury','Hotel 3 Luxury', '2345678901', 4, 22, 'Hotel 18 Address'),
+    (3,'hotel19@gmail.com', 'Montreal', 'Luxury','Hotel 3 Deluxe', '3456789012', 4, 10, 'Hotel 19 Address'),
+    (3,'hotel20@gmail.com', 'Montreal', 'Budget','Hotel 3 Budget', '4567890123', 3, 15, 'Hotel 20 Address'),
+    (3,'hotel21@gmail.com', 'Toronto', 'Luxury','Hotel 3 Luxury', '5678901234', 5, 12, 'Hotel 21 Address'),
+    (3,'hotel22@gmail.com', 'Toronto', 'Budget','Hotel 3 Budget', '6789012345', 4, 20, 'Hotel 22 Address'),
+    (3,'hotel23@gmail.com', 'Toronto', 'Luxury','Hotel 3 Luxury', '7890123456', 3, 8, 'Hotel 23 Address'),
+    (3,'hotel24@gmail.com', 'Vancouver', 'Luxury','Hotel 3 Luxury', '8901234567', 4, 18, 'Hotel 24 Address'),
 
     -- Hotels for Chain 4
-    (4,'hotel25@gmail.com', 'Vancouver', 'Budget','Chain 4 Budget', '9012345678', 3, 12, 'Hotel 25 Address'),
-    (4,'hotel26@gmail.com', 'Vancouver', 'Luxury','Chain 4 Luxury', '0123456789', 4, 22, 'Hotel 26 Address'),
-    (4,'hotel27@gmail.com', 'Montreal', 'Luxury','Chain 4 Deluxe', '1234567890', 4, 10, 'Hotel 27 Address'),
-    (4,'hotel28@gmail.com', 'Montreal', 'Budget','Chain 4 Budget', '2345678901', 3, 15, 'Hotel 28 Address'),
-    (4,'hotel29@gmail.com', 'Toronto', 'Luxury','Chain 4 Luxury', '3456789012', 5, 12, 'Hotel 29 Address'),
-    (4,'hotel30@gmail.com', 'Toronto', 'Budget','Chain 4 Budget', '4567890123', 4, 20, 'Hotel 30 Address'),
-    (4,'hotel31@gmail.com', 'Toronto', 'Luxury','Chain 4 Luxury', '5678901234', 3, 8, 'Hotel 31 Address'),
-    (4,'hotel32@gmail.com', 'Vancouver', 'Luxury','Chain 4 Luxury', '6789012345', 4, 18, 'Hotel 32 Address'),
+    (4,'hotel25@gmail.com', 'Vancouver', 'Budget','Hotel 4 Budget', '9012345678', 3, 12, 'Hotel 25 Address'),
+    (4,'hotel26@gmail.com', 'Vancouver', 'Luxury','Hotel 4 Luxury', '0123456789', 4, 22, 'Hotel 26 Address'),
+    (4,'hotel27@gmail.com', 'Montreal', 'Luxury','Hotel 4 Deluxe', '1234567890', 4, 10, 'Hotel 27 Address'),
+    (4,'hotel28@gmail.com', 'Montreal', 'Budget','Hotel 4 Budget', '2345678901', 3, 15, 'Hotel 28 Address'),
+    (4,'hotel29@gmail.com', 'Toronto', 'Luxury','Hotel 4 Luxury', '3456789012', 5, 12, 'Hotel 29 Address'),
+    (4,'hotel30@gmail.com', 'Toronto', 'Budget','Hotel 4 Budget', '4567890123', 4, 20, 'Hotel 30 Address'),
+    (4,'hotel31@gmail.com', 'Toronto', 'Luxury','Hotel 4 Luxury', '5678901234', 3, 8, 'Hotel 31 Address'),
+    (4,'hotel32@gmail.com', 'Vancouver', 'Luxury','Hotel 4 Luxury', '6789012345', 4, 18, 'Hotel 32 Address'),
 
     -- Hotels for Chain 5
     (5,'hotel33@gmail.com', 'Montreal', 'Budget','Chain 5 Budget', '7890123456', 3, 12, 'Hotel 33 Address'),
@@ -435,11 +435,23 @@ VALUES
 -- ----------------------------
 INSERT INTO booking (CustomerID, HotelID, RoomID, PricePaid, CheckIn, CheckOut)
 VALUES
-    (1, 1, 1, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 2, 2, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 3, 3, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 4, 4, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 5, 5, 0, '2024-08-10', '2024-08-15');
+    (1, 1, 211, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 2, 214, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 3, 213, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 4, 214, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 5, 225, 5000.00, '2024-08-10', '2024-08-30'),
+
+    (1, 6, 221, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 7, 222, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 8, 322, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 9, 224, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 10, 215, 5000.00, '2024-08-10', '2024-08-30'),
+
+    (1, 11, 1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 12, 2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 13, 3, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 14, 4, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 15, 5, 5000.00, '2024-08-10', '2024-08-30');
 -- ----------------------------
 -- Records of renting
 -- ----------------------------
@@ -489,3 +501,6 @@ CREATE INDEX idx_hotelchainid_hotelid ON hotel (HotelChainID, HotelID);
 ---> Creating a single column index on the booking table for the roomid column. 
 ---> I have many queries that search for RoomID therefore having this index will make searching more efficient. 
 CREATE INDEX idx_booking_room_id ON booking (RoomID);
+
+
+
