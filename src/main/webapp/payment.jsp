@@ -56,7 +56,7 @@
     <!-- Payment form inputs -->
     <form id="payment-form" method="POST" action="PaymentServlet">
         <label for="credit-card-number">Credit Card Number:</label>
-        <input type="text" id="credit-card-number" name="credit-card-number" placeholder="XXXXXXXXXXXXXXXX" required><br><br>
+        <input type="text" id="credit-card-number" name="credit-card-number" placeholder="XXXXXXXXXXXXXXXX"required><br><br>
         <label for="cvv">CVV:</label>
         <input type="text" id="cvv" name="cvv" placeholder="XXX" required><br><br>
         <label for="expiry-date">Expiry Date:</label>

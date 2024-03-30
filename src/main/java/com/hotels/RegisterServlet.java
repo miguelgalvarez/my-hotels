@@ -2,6 +2,8 @@ package com.hotels;
 
 
 import java.io.IOException;
+import java.net.URLDecoder;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,7 +33,13 @@ public class RegisterServlet extends HttpServlet {
             if (success) {
                 request.getSession().setAttribute("username", username);
                 request.getSession().setAttribute("message", "Registration successful!");
-                response.sendRedirect("index.jsp");
+
+                String returnUrl = request.getParameter("returnUrl");
+                if (returnUrl != null && !returnUrl.trim().isEmpty()) {
+                    response.sendRedirect(URLDecoder.decode(returnUrl, "UTF-8"));
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
             } else {
                 request.getSession().setAttribute("message", "Registration failed.");
                 response.sendRedirect("register.jsp");

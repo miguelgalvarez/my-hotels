@@ -1,6 +1,8 @@
 <%@ page import="java.util.ArrayList,java.util.List" %>
 <%@ page import="com.hotels.BookingService" %>
 <%@ page import="com.hotels.Booking" %>
+<%@ page import="java.net.URLEncoder" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +96,8 @@
 
         }
 
-        .auth-buttons a {
+        .auth-buttons a,
+        .auth-buttons button {
             padding: 10px 20px;
             background-color: var(--main-colour);
             color: white;
@@ -104,6 +107,10 @@
             box-sizing: border-box;
             width: 200px;
             text-align: center;
+            border: none;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+
         }
 
         .auth-buttons a:hover {
@@ -212,19 +219,22 @@
                     <div class="details">Check-out: <%= booking.getCheckOut() %></div>
                 </div>
                 <div class="price">$<%= String.format("%.2f", booking.getPricePaid()) %></div>
-                <button class="cancel-booking-btn" data-booking-id="<%= booking.getBookingID() %>">Cancel Booking</button>
+                <button class="cancel-booking-btn" onclick="openModal(<%= booking.getBookingID() %>)">Cancel Booking</button>
             </div>
 
             <!-- Cancellation Confirmation Modal -->
-            <div id="cancelConfirmationModal" class="modal" style = "display: none;">
+            <div id="cancelConfirmationModal<%= booking.getBookingID() %>" class="modal" style="display: none;">
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>Confirm Cancellation</h2>
                     <p>Are you sure you want to cancel your booking?</p>
-                    <div class="auth-buttons">
-                        <a href="bookings.jsp" class="auth-button cancel-confirm-btn" data-booking-id="<%= booking.getBookingID() %>">Yes, Cancel It</a>
-                        <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
-                    </div>
+                    <form action="deleteBooking" method="post">
+                        <input type="hidden" name="bookingID" value="<%= booking.getBookingID() %>" />
+                        <div class="auth-buttons">
+                            <button type="submit" class="auth-button cancel-confirm-btn">Yes, Cancel It</button>
+                            <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         <%
@@ -236,8 +246,8 @@
             Please log in or register to view your bookings.
         </div>
         <div class="auth-buttons">
-            <a href="login.jsp" class = "login-btn">Log In</a>
-            <a href="register.jsp" class="register-btn">Register</a>
+            <a href="login.jsp?returnUrl=<%= URLEncoder.encode(request.getRequestURI(), "UTF-8") %>" class = "login-btn">Log In</a>
+            <a href="register.jsp?returnUrl=<%= URLEncoder.encode(request.getRequestURI(), "UTF-8") %>" class="register-btn">Register</a>
         </div>
     <% } %>
 
@@ -245,23 +255,22 @@
 </div>
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function() {
-        const cancelButtons = document.querySelectorAll('.cancel-booking-btn');
-        const modal = document.getElementById('cancelConfirmationModal');
-        const yesButton = modal.querySelector('.cancel-confirm-btn');
-        const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
-
-        // Function to open modal
-        function openModal(bookingId) {
-            yesButton.setAttribute('data-booking-id', bookingId);
+        // Function to open modal by booking ID
+        window.openModal = function(bookingId) {
+            var modal = document.getElementById('cancelConfirmationModal' + bookingId);
             modal.style.display = 'block';
-        }
+        };
 
-        // Function to close modal
-        function closeModal() {
+        // Function to close modal by booking ID
+        window.closeModal = function(bookingId) {
+            var modal = document.getElementById('cancelConfirmationModal' + bookingId);
             modal.style.display = 'none';
-        }
+        };
 
+        // Event listeners for each cancel button to open the modal
+        const cancelButtons = document.querySelectorAll('.cancel-booking-btn');
         cancelButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const bookingId = this.getAttribute('data-booking-id');
@@ -269,41 +278,27 @@
             });
         });
 
-        yesButton.addEventListener('click', function() {
-            const bookingId = this.getAttribute('data-booking-id');
-            fetch('deleteBooking', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'BookingID=' + bookingId
-            })
-            .then(response => response.text())
-            .then(data => {
-                window.location.href = 'bookings.jsp'; // Redirect to the bookings page
-            })
-
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-            closeModal(); // Close the modal
-        });
-
-        closeModalButtons.forEach(button => {
+        // Event listeners for closing the modal
+        const closeButtons = document.querySelectorAll('.modal .close, .modal .close-modal-btn');
+        closeButtons.forEach(button => {
             button.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent link action
-                closeModal();
+                event.preventDefault();
+                const bookingId = this.closest('.modal').id.replace('cancelConfirmationModal', '');
+                closeModal(bookingId);
             });
         });
 
-        // Close modal when clicking outside of it
+        // Close the modal if the user clicks outside of it
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
+            if (event.target.classList.contains('modal')) {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
             }
         };
     });
+
 </script>
 
 </body>

@@ -127,6 +127,7 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
+<jp:include page = "popup.jsp" />
 
 <%
     int hotelId = Integer.parseInt(request.getParameter("hotelId"));
@@ -241,7 +242,9 @@
         if (userStatus === "logged-in") {
             redirectToPayment(roomID); // User is logged in, proceed to payment
         } else {
-            window.location.href = 'loginOrRegister.jsp'; // User is not logged in, redirect to login page
+            // Encode the current URL and append it as a query parameter
+            const currentUrl = encodeURIComponent(window.location.href);
+            window.location.href = `loginOrRegister.jsp?returnUrl=${currentUrl}`;
         }
     }
 

@@ -1,4 +1,5 @@
 <!-- navbar.jsp -->
+<%@ page import="java.net.URLEncoder" %>
 <style>
 
         :root {
@@ -131,8 +132,8 @@
                  <% if (session.getAttribute("username") != null) { %>
                     <a href="logout">Logout</a>
                  <% } else { %>
-                     <a href="login.jsp">Log In</a>
-                     <a href="register.jsp">Register</a>
+                     <a href="login.jsp?returnUrl=<%= URLEncoder.encode(request.getRequestURI(), "UTF-8") %>">Log In</a>
+                     <a href="register.jsp?returnUrl=<%= URLEncoder.encode(request.getRequestURI(), "UTF-8") %>">Register</a>
                  <% } %>
              </div>
          </div>

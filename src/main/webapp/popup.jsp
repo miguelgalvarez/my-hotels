@@ -1,5 +1,12 @@
 <!-- popup.jsp -->
 <style>
+    :root {
+        --main-colour: #2596be;
+        --lighter-colour: #36bbeb;
+        --darker-colour: #1f7999;
+        --lightest-colour: #c0e1ed;
+    }
+
     /*popup window */
     .popup {
         position: fixed;
@@ -15,7 +22,7 @@
     }
 
     .popup-content {
-        background-color: #fce5b8;
+        background-color: var(--lightest-colour);
         padding: 5px;
         margin-left: 450px;
         margin-right: 450px;

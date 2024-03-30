@@ -123,6 +123,7 @@
     <form action="login" method="post">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
+        <input type="hidden" name="returnUrl" value="<%= request.getParameter("returnUrl") %>">
         <input type="submit" value="Log In">
     </form>
     <div class="employee-signin">

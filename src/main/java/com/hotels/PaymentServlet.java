@@ -35,9 +35,9 @@ public class PaymentServlet extends HttpServlet {
             int roomId = Integer.parseInt(request.getParameter("roomId"));
             int numberOfDays = Integer.parseInt(request.getParameter("numberOfDays"));
             int pricePaid = numberOfDays*Integer.parseInt(request.getParameter("price"));
-            //have to update this part
-            int customerID = 1;
-            int hotelID = 1;
+            int customerID = (int) request.getSession().getAttribute("customerID");
+            int hotelID = paymentService.getHotelID(roomId);
+
             // Parse the check-in date string into a Date object
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date checkInDate = null;
@@ -65,7 +65,7 @@ public class PaymentServlet extends HttpServlet {
             } catch (Exception e) {
                 // Log the exception and redirect to an error page
                 e.printStackTrace(); // Consider logging this properly
-                response.sendRedirect("payment.jsp?error=Payment failed");
+                response.sendRedirect("payment.jsp?error=Payment failed"+ e.getMessage());
             }
 
         } else {

@@ -106,6 +106,7 @@
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="address" placeholder="Address" required>
         <input type="text" name="type of ID" placeholder="Type of ID" required>
+        <input type="hidden" name="returnUrl" value="<%= request.getParameter("returnUrl") %>">
         <input type="submit" value="Register">
     </form>
 </div>

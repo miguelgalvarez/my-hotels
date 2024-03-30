@@ -21,18 +21,36 @@
         }
 
         .big-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-
-        .container {
+            max-width: 1200px;
+            margin: 40px auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-radius: 12px;
+            display: flex;
+            flex-direction: column; /* Stack the title and cards-container vertically */
+            align-items: center; /* Center-align the child elements */
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center; /* Center-align the cards */
+            gap: 20px; /* Add some space between the cards */
+        }
+
+        .container {
+            /* Set widths to make the cards equal width and adjust as necessary */
+            flex-basis: calc(50% - 10px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 20px;
+            width: 350px;
+
+        }
+
+        .title {
+            margin-bottom: 30px; /* Adjust this value as needed for spacing */
         }
 
         h2 {
@@ -125,26 +143,31 @@
 <jsp:include page = "popup.jsp" />
 
 <div class = "big-container">
-    <div class="container">
-        <h2>Log In</h2>
-        <form action="login" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Log In">
-        </form>
-    </div>
+    <h2 class="title">Please Login or Register to Book a Hotel</h2>
+    <div class = "cards-container">
+        <div class="container">
+            <h2>Log In</h2>
+            <form action="login" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="hidden" name="returnUrl" value="<%= request.getParameter("returnUrl") %>">
+                <input type="submit" value="Log In">
+            </form>
+        </div>
 
-    <div class="container">
-        <h2>Register</h2>
-        <form method="post" action="register">
-            <input type="text" name="full name" placeholder="Full Name" required>
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="address" placeholder="Address" required>
-            <input type="text" name="type of ID" placeholder="Type of ID" required>
-            <input type="submit" value="Register">
-        </form>
+        <div class="container">
+            <h2>Register</h2>
+            <form method="post" action="register">
+                <input type="text" name="full name" placeholder="Full Name" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="text" name="type of ID" placeholder="Type of ID" required>
+                <input type="hidden" name="returnUrl" value="<%= request.getParameter("returnUrl") %>">
+                <input type="submit" value="Register">
+            </form>
+        </div>
     </div>
 </div>
 

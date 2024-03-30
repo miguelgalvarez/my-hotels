@@ -12,7 +12,7 @@ import java.io.IOException;
 public class DeleteBookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String bookingIdStr = request.getParameter("BookingID");
+        String bookingIdStr = request.getParameter("bookingID");
         int bookingId = Integer.parseInt(bookingIdStr);
         BookingService bookingService = new BookingService();
 
@@ -22,7 +22,7 @@ public class DeleteBookingServlet extends HttpServlet {
         } catch (Exception e) {
             request.getSession().setAttribute("message", "Error deleting booking: " + e.getMessage());
         } finally {
-            response.sendRedirect("booking.jsp");
+            response.sendRedirect("bookings.jsp");
         }
     }
 }

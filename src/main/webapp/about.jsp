@@ -48,6 +48,7 @@
 <body>
 
 <jsp:include page="navbar.jsp" />
+<jsp:include page ="popup.jsp" />
 
 <div class="container">
     <h2 class="about-title">About myHotels</h2>
