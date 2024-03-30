@@ -117,6 +117,13 @@
             color: inherit;
         }
     </style>
+
+<% if (session.getAttribute("username") != null) { %>
+    <meta name="user-status" content="logged-in">
+<% } else { %>
+    <meta name="user-status" content="logged-out">
+<% } %>
+
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
@@ -182,7 +189,7 @@
     <div class="hotels">
         <% if (rooms != null) {
             for (Room room : rooms) { %>
-                <div class="hotel" onclick="redirectToPayment(<%= room.getRoomID() %>)" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
+                <div class="hotel" onclick="checkLoginStatus(<%=room.getRoomID()%>)" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomId="<%= room.getRoomID() %>">
                     <h3>Room <%= room.getID() %></h3>
                     <div class="hotel-info">
                         <p>Price Per Day: $<%= room.getPrice() %></p>
@@ -228,6 +235,15 @@
         });
     });
 
+    function checkLoginStatus(roomID) {
+        const userStatus = document.querySelector('meta[name="user-status"]').getAttribute('content');
+
+        if (userStatus === "logged-in") {
+            redirectToPayment(roomID); // User is logged in, proceed to payment
+        } else {
+            window.location.href = 'loginOrRegister.jsp'; // User is not logged in, redirect to login page
+        }
+    }
 
     function redirectToPayment(roomId) {
         const startDate = document.getElementById('start-date').value;

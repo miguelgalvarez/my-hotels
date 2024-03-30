@@ -45,7 +45,7 @@
         }
 
         .back-button:hover {
-            background-color: #FFAF45;
+            background-color: var(--darker-colour);
         }
     </style>
 </head>

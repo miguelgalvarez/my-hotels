@@ -20,13 +20,19 @@
             box-sizing: border-box;
         }
 
+        .big-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 400px;
-            margin: 80px auto;
             padding: 20px;
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 16px;
+            border-radius: 12px;
         }
 
         h2 {
@@ -41,7 +47,7 @@
             gap: 20px;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"], input[type = "email"] {
             font-size: 16px;
             padding: 10px;
             border: 1px solid #ddd;
@@ -118,15 +124,27 @@
 
 <jsp:include page = "popup.jsp" />
 
-<div class="container">
-    <h2>Log In</h2>
-    <form action="login" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Log In">
-    </form>
-    <div class="employee-signin">
-        <a href="employeeLogin.jsp">Employee Log In</a>
+<div class = "big-container">
+    <div class="container">
+        <h2>Log In</h2>
+        <form action="login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Register</h2>
+        <form method="post" action="register">
+            <input type="text" name="full name" placeholder="Full Name" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="type of ID" placeholder="Type of ID" required>
+            <input type="submit" value="Register">
+        </form>
     </div>
 </div>
 
