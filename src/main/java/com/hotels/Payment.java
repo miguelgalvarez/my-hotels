@@ -20,6 +20,7 @@ public class Payment {
         this.fullName = fullName;
     }
 
+
     /* Getters */
     public BigInteger getCreditCardNumber() {return this.creditCardNumber; }
     public int getCvv() {return this.cvv;}

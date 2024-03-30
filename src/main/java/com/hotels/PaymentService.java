@@ -2,6 +2,7 @@ package com.hotels;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 public class PaymentService {
     /**
@@ -43,6 +44,29 @@ public class PaymentService {
 
             // Check if any rows were affected
             return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            // Handle SQL exception
+            throw new RuntimeException("Error updating payment status: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getHotelID(int roomID){
+        String sql = "SELECT HotelID from room WHERE RoomID = ?";
+        ConnectionDB db = new ConnectionDB();
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, roomID);
+
+            // Execute the update statement
+            ResultSet result = stmt.executeQuery();
+            if(result.next()){
+                return result.getInt("HotelID");
+            }
+            // Check if any rows were affected
+            return 0;
 
         } catch (SQLException e) {
             // Handle SQL exception
