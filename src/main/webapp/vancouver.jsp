@@ -9,6 +9,11 @@
     <title>Vancouver Hotels</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
+        :root {
+                    --main-colour: #2596be;
+                    --lighter-colour: #36bbeb;
+                    --darker-colour: #1f7999;
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
@@ -59,13 +64,14 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
+            max-height: 200px;
         }
         .hotel:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
         .hotel h3 {
-            background-color: #f29602;
+            background-color: var(--main-colour);
             color: white;
             text-align: center;
             margin: 0;
