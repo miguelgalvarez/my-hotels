@@ -102,7 +102,7 @@
         <input type="submit" value="Submit Payment">
         <input type="hidden" id="room-id" name="roomID" value="<%= request.getParameter("roomID") %>">
         <input type="hidden" id="number-of-days" name="numberOfDays" value="<%= request.getParameter("numberOfDays") %>">
-        <input type="hidden" id="price" name="price" value="<%= request.getParameter("price") %>">
+        <input type="hidden" id="cost" name="cost" value="<%= request.getParameter("cost") %>">
         <input type="hidden" id="checkIN" name="checkIN" value="<%= request.getParameter("checkIN") %>">
         <input type="hidden" id="checkOut" name="checkOut" value="<%= request.getParameter("checkOut") %>">
     </form>

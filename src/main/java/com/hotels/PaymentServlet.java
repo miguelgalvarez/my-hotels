@@ -39,7 +39,7 @@ public class PaymentServlet extends HttpServlet {
             // If payment is valid, proceed to create the booking
             int roomId = Integer.parseInt(request.getParameter("roomID"));
             int numberOfDays = Integer.parseInt(request.getParameter("numberOfDays"));
-            int pricePaid = numberOfDays*Integer.parseInt(request.getParameter("price"));
+            int cost = Integer.parseInt(request.getParameter("cost"));
             int customerID = (int) request.getSession().getAttribute("customerID");
             int hotelID = paymentService.getHotelID(roomId);
 
@@ -54,7 +54,7 @@ public class PaymentServlet extends HttpServlet {
                 e.printStackTrace();
             }
             // Create a Booking object
-            Booking booking = new Booking(hotelID, true, pricePaid, customerID, roomId, checkInDate, checkOutDate);
+            Booking booking = new Booking(hotelID, true, cost, customerID, roomId, checkInDate, checkOutDate);
 
             // Create the booking using BookingService
             BookingService bookingService = new BookingService();

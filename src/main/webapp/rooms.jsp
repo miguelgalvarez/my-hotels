@@ -206,7 +206,10 @@
 
 <script>
     var bookingsData = <%=bookingsJson.toString()%>;
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
+
+    window.onload = filterRooms;
+
     const today = new Date();
     const oneWeekFromToday = new Date(today);
     oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today
