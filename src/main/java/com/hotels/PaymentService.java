@@ -18,13 +18,14 @@ public class PaymentService {
 
         int count2 = 0;
 
-
         while(cvv != 0){
             cvv /= 10;
             count2++;
         }
+        // getting length of creditcard number
+        int length = ccNumber.toString().length();
         // Return true if the count is 16, indicating a 16-digit number
-        return ((ccNumber.bitLength() == 16) && (!fullName.equals("")) && (count2 == 3) && (expDate.length() == 4 || expDate.length() == 5));
+        return ((length == 16) && (!fullName.equals("")) && (count2 == 3) && (expDate.length() == 4));
     }
 
     /**

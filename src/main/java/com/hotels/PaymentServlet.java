@@ -25,7 +25,12 @@ public class PaymentServlet extends HttpServlet {
 
         // Create a Payment object
         Payment payment = new Payment(creditCardNumber, cvv, expDate, fullName);
-
+        System.out.println(creditCardNumber);
+        System.out.println(cvv);
+        System.out.println(expDate);
+        System.out.println(fullName);
+        System.out.println(creditCardNumber.bitCount());
+        System.out.println(expDate.length());
         // Validate the payment
         PaymentService paymentService = new PaymentService();
         boolean paymentAccepted = paymentService.paymentAccepted(payment);
@@ -60,16 +65,16 @@ public class PaymentServlet extends HttpServlet {
                     response.sendRedirect("index.jsp");
                 } else {
                     // Handle the case where booking couldn't be created
-                    response.sendRedirect("payment.jsp?error=Booking failed");
+                    response.sendRedirect("payment.jsp?error=Booking could not be created");
                 }
             } catch (Exception e) {
                 // Log the exception and redirect to an error page
                 e.printStackTrace(); // Consider logging this properly
-                response.sendRedirect("payment.jsp?error=Payment failed"+ e.getMessage());
+                response.sendRedirect("payment.jsp?error=Payment exception"+ e.getMessage());
             }
 
         } else {
-            response.sendRedirect("payment.jsp?error=Payment failed");
+            response.sendRedirect("payment.jsp?error=Payment fatal error");
         }
     }
 }

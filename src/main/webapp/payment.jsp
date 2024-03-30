@@ -64,7 +64,7 @@
         <label for="full-name">Full Name:</label>
         <input type="text" id="full-name" name = "fullName" required><br><br>
         <button type="submit">Submit Payment</button>
-        <input type="hidden" id="room-id" name="roomId" value="">
+        <input type="hidden" id="room-id" name="roomId" value="<%= request.getParameter("roomId") %>">
         <input type="hidden" id="number-of-days" name="numberOfDays" value="">
     </form>
     <button class="back-button" onclick="goBack()">Back</button>
