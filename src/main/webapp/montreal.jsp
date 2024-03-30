@@ -113,18 +113,18 @@
         <label for="Hotel-Chain">Hotel Chain:</label>
         <select id="Hotel-Chain" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
-            <option value="1">Hotel-Chain 1</option>
-            <option value="2">Hotel-Chain 2</option>
-            <option value="3">Hotel-Chain 3</option>
-            <option value="4">Hotel-Chain 4</option>
-            <option value="5">Hotel-Chain 5</option>
+            <option value="WhiteLotus">White Lotus</option>
+            <option value="HolidayInn">Holiday Inn</option>
+            <option value="3">Chain 3</option>
+            <option value="4">Chain 4</option>
+            <option value="5">Chain 5</option>
         </select>
         <label for="Hotel-Type">Hotel Type:</label>
         <select id="Hotel-Type" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
-            <option value="1">Budget</option>
-            <option value="2">Mid-Range</option>
-            <option value="3">Luxury</option>
+            <option value="Budget">Budget</option>
+            <option value="Mid-Range">Mid-Range</option>
+            <option value="Luxury">Luxury</option>
         </select>
         <label for="Max-Rooms">Total Number Of Rooms:</label>
         <select id="Max-Rooms" class="filter-dropdown" onchange="filterHotels()">
@@ -164,28 +164,40 @@
         const hotels = document.querySelectorAll('.hotel');
 
         hotels.forEach(hotel => {
-            const hotelChain = parseInt(hotel.getAttribute('data-HotelChain'));
-            const hotelType = parseInt(hotel.getAttribute('data-HotelType'));
-            const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'));
+            const hotelChain = hotel.getAttribute('data-HotelChain');
+            const hotelType = hotel.getAttribute('data-HotelType');
+            const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'), 10); // Parse to integer
 
-            const hotelChainPass = hotelChainFilter == 0 || hotelChain == hotelChainFilter;
-            const hotelTypePass = hotelTypeFilter == 0 || hotelType == hotelTypeFilter;
-            const maxRoomsPass = maxRoomsFilter == 0 ||
-                (maxRoomsFilter == 1 && maxRooms < 50) ||
-                (maxRoomsFilter == 2 && maxRooms >= 50 && maxRooms <= 100) ||
-                (maxRoomsFilter == 3 && maxRooms > 100);
+            const hotelChainPass = hotelChainFilter === "0" || hotelChain === hotelChainFilter;
+            const hotelTypePass = hotelTypeFilter === "0" || hotelType === hotelTypeFilter;
+            let maxRoomsPass = false;
+            switch(maxRoomsFilter) {
+                case "0":
+                    maxRoomsPass = true;
+                    break;
+                case "1":
+                    maxRoomsPass = maxRooms < 50;
+                    break;
+                case "2":
+                    maxRoomsPass = maxRooms >= 50 && maxRooms <= 100;
+                    break;
+                case "3":
+                    maxRoomsPass = maxRooms > 100;
+                    break;
+            }
 
             if (hotelChainPass && hotelTypePass && maxRoomsPass) {
-                hotel.style.display = 'block';
+                hotel.style.display = '';
             } else {
                 hotel.style.display = 'none';
             }
         });
     }
 
-    // Initial filtering
-    filterHotels();
+    // Call the filterHotels function on page load to apply filters immediately
+    document.addEventListener('DOMContentLoaded', filterHotels);
 </script>
+
 
 </body>
 </html>
