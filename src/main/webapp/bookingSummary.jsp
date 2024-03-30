@@ -44,10 +44,11 @@
     </style>
 </head>
 <body>
+<jsp:include page="navbar.jsp" />
 <div class="summary-container">
     <h2>Booking Summary</h2>
     <div class="summary-detail">Hotel Name: <span class="highlight">HOTEL NAME PLACEHOLDER</span></div>
-    <div class="summary-detail">Room Name: <span class="highlight">ROOM NAME PLACEHOLDER</span></div>
+    <div class="summary-detail">Room Number: <span class="highlight"><%= request.getParameter("roomID")%></span></div>
     <div class="summary-detail">Cost: <span class="highlight"><%= request.getParameter("cost") %></span></div>
     <div class="summary-detail">Capacity: <span class="highlight"><%= request.getParameter("capacity")%> guests</span></div>
     <div class="summary-detail">Amenities: <span class="highlight"><%= request.getParameter("amenities") %></span></div>
