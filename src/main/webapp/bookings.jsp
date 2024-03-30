@@ -1,7 +1,9 @@
-<%@ page import="java.util.ArrayList,java.util.List" %>
+<%@ page import="java.util.ArrayList,java.util.List,java.text.SimpleDateFormat,java.util.Date" %>
 <%@ page import="com.hotels.BookingService" %>
 <%@ page import="com.hotels.Booking" %>
 <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.util.Calendar" %>
+
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -210,6 +212,23 @@
 
             // Displaying bookings
             for (Booking booking : bookings) {
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Ensure this matches your date format
+        Date checkInDate = booking.getCheckIn(); // Assuming getCheckIn() returns a Date object
+        Calendar calToday = Calendar.getInstance();
+        Calendar calCheckIn = Calendar.getInstance();
+        calCheckIn.setTime(checkInDate);
+
+        // Set to start of today for accurate comparison
+        calToday.set(Calendar.HOUR_OF_DAY, 0);
+        calToday.set(Calendar.MINUTE, 0);
+        calToday.set(Calendar.SECOND, 0);
+        calToday.set(Calendar.MILLISECOND, 0);
+
+        // Add 2 days to today's date to compare with the day after tomorrow
+        calToday.add(Calendar.DAY_OF_MONTH, 2);
+
+        // Check if the check-in date is after the day after tomorrow
+        boolean isCheckInAfterTomorrow = calCheckIn.after(calToday);
         %>
             <div class="booking-card">
                 <div class="booking-info">
@@ -219,8 +238,10 @@
                     <div class="details">Check-out: <%= booking.getCheckOut() %></div>
                 </div>
                 <div class="price">$<%= String.format("%.2f", booking.getPricePaid()) %></div>
+            <% if (isCheckInAfterTomorrow) { %>
                 <button class="cancel-booking-btn" onclick="openModal(<%= booking.getBookingID() %>)">Cancel Booking</button>
-            </div>
+            <% } %>
+                        </div>
 
             <!-- Cancellation Confirmation Modal -->
             <div id="cancelConfirmationModal<%= booking.getBookingID() %>" class="modal" style="display: none;">
