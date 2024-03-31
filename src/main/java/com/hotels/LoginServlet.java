@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -24,6 +25,8 @@ public class LoginServlet extends HttpServlet {
         Customer newCustomer = new Customer(username, password);
         CustomerService customerService = new CustomerService();
 
+        String returnUrl = request.getParameter("returnUrl");
+
         try {
             boolean success = customerService.validateCustomer(newCustomer);
 
@@ -33,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 
                 request.getSession().setAttribute("message", "Login successful!");
 
-                String returnUrl = request.getParameter("returnUrl");
                 if (returnUrl != null && !returnUrl.trim().isEmpty()) {
                     response.sendRedirect(URLDecoder.decode(returnUrl, "UTF-8"));
                 } else {
@@ -42,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
             } else {
                 request.getSession().setAttribute("message", "Invalid username or password.");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("login.jsp?returnUrl="+returnUrl);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

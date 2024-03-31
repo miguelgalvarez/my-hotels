@@ -145,22 +145,22 @@
             <a href="toronto.jsp" class="city-link">
                 <img src="assets/toronto.jpeg" alt="Toronto" class="city-image">
                 <span class="city-name">Toronto</span>
-                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Toronto") %> Available Rooms!</span>
             </a>
+            <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Toronto") %> Available Rooms!</span>
         </div>
         <div class="city-card">
             <a href="montreal.jsp" class="city-link">
                 <img src="assets/montreal.jpeg" alt="Montreal" class="city-image">
                 <span class="city-name">Montreal</span>
-                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Montreal") %> Available Rooms!</span>
             </a>
+            <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Montreal") %> Available Rooms!</span>
         </div>
         <div class="city-card">
             <a href="vancouver.jsp" class="city-link">
                 <img src="assets/vancouver.jpeg" alt="Vancouver" class="city-image">
                 <span class="city-name">Vancouver</span>
-                <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Vancouver") %> Available Rooms!</span>
             </a>
+            <span class="available-rooms"><%= hotelService.getTotalNumRoomsInArea("Vancouver") %> Available Rooms!</span>
         </div>
     </div>
 </div>
