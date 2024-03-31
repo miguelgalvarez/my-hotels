@@ -67,7 +67,7 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            max-height: 200px;
+            max-height: 220px;
         }
         .hotel:hover {
             transform: translateY(-5px);
@@ -81,7 +81,7 @@
             padding: 15px 0;
         }
         .hotel-info {
-            padding: 20px;
+            padding: 10px;
         }
         .hotel-info p {
             margin: 10px 0; /* Added for spacing */
@@ -109,6 +109,18 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             background-color: white; /* Ensure it's visible over any background */
+        }
+
+        .star {
+            font-size: 20px; /* Adjust the size of the stars */
+        }
+
+        .gold {
+            color: gold; /* Color for the rated stars */
+        }
+
+        .grey {
+            color: #ccc; /* Color for the unfilled stars */
         }
 
     </style>
@@ -156,18 +168,35 @@
             <option value="2">50-100</option>
             <option value="3">More than 100</option>
         </select>
+        <label for="Rating">Rating:</label>
+        <select id="Rating" class="filter-dropdown" onchange="filterHotels()">
+            <option value="0">All</option>
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+        </select>
     </div>
     <div class="hotels">
         <% if (hotels != null) {
             for (Hotel hotel : hotels) {
         %>
-            <div class="hotel" data-HotelChain="<%= hotel.getHotelChainName() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
+            <div class="hotel" data-HotelChain="<%= hotel.getHotelChainName() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>" data-rating="<%= hotel.getRating() %>">
                 <a href="rooms.jsp?hotelId=<%= hotel.getID() %>">
                     <h3><%= hotel.getHotelName() %></h3>
                     <div class="hotel-info">
                         <p>Hotel Chain: <%= hotel.getHotelChainName() %></p>
                         <p>Hotel Type: <%= hotel.getHotelCategory() %></p>
                         <p>Available Rooms: <%= hotel.getNumRooms() %></p>
+                        <!-- Star Rating -->
+                        <div class="rating">
+                            <% for(int i = 1; i <= 5; i++) { %>
+                                <% if(i <= hotel.getRating()) { %>
+                                    <span class="star gold">&#9733</span>
+                                <% } else { %>
+                                    <span class="star grey">&#9733</span>
+                                <% } %>
+                            <% } %>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -189,6 +218,7 @@
         const hotelChainFilter = document.getElementById('Hotel-Chain').value;
         const hotelTypeFilter = document.getElementById('Hotel-Type').value;
         const maxRoomsFilter = document.getElementById('Max-Rooms').value;
+        const ratingFilter = parseInt(document.getElementById('Rating').value, 10)
 
         const hotels = document.querySelectorAll('.hotel');
 
@@ -196,6 +226,7 @@
             const hotelChain = hotel.getAttribute('data-HotelChain');
             const hotelType = hotel.getAttribute('data-HotelType');
             const maxRooms = parseInt(hotel.getAttribute('data-MaxRooms'), 10); // Parse to integer
+            const rating = parseInt(hotel.getAttribute('data-rating'), 10);
 
             const hotelChainPass = hotelChainFilter === "0" || hotelChain === hotelChainFilter;
             const hotelTypePass = hotelTypeFilter === "0" || hotelType === hotelTypeFilter;
@@ -215,7 +246,9 @@
                     break;
             }
 
-            if (hotelChainPass && hotelTypePass && maxRoomsPass) {
+            const ratingPass = ratingFilter === 0 || rating === ratingFilter;
+
+            if (hotelChainPass && hotelTypePass && maxRoomsPass && ratingPass) {
                 hotel.style.display = '';
             } else {
                 hotel.style.display = 'none';
