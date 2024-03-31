@@ -263,6 +263,47 @@ public class BookingService {
             throw new Exception(e.getMessage());
         }
     }
+    /**
+     * Fetches all bookings for a specific hotel from the database.
+     *
+     * @param hotelID The ID of the hotel for which bookings are to be retrieved.
+     * @return A list of all bookings for the specified hotel.
+     * @throws Exception If there is an error connecting to the database or executing the query.
+     */
+    public List<Booking> getAllBookings(int hotelID) throws Exception {
+        // SQL query now includes a WHERE clause to filter by hotelID
+        String sql = "SELECT * FROM booking WHERE HotelID = ?";
+        ConnectionDB db = new ConnectionDB();
+        List<Booking> bookings = new ArrayList<>();
+
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            // Set the hotelID parameter in the prepared statement
+            stmt.setInt(1, hotelID);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = new Booking(
+                        rs.getInt("BookingID"),
+                        rs.getInt("HotelID"),
+                        rs.getInt("RoomID"),
+                        rs.getBoolean("Payment"),
+                        rs.getDouble("PricePaid"),
+                        rs.getInt("CustomerID"),
+                        rs.getDate("CheckIn"),
+                        rs.getDate("Checkout")
+                );
+
+                bookings.add(booking);
+            }
+        } catch (Exception e) {
+            throw new Exception("Error fetching bookings for hotelID " + hotelID + ": " + e.getMessage(), e);
+        }
+
+        return bookings;
+    }
 
     /**
      * Method to delete by ID a booking

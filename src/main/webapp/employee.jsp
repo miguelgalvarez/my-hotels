@@ -165,6 +165,11 @@
             </thead>
             <tbody>
                 <%
+                    //int employeeId = session.getAtribute("employeeNumber");
+                    //EmployeeService employeeService = new EmployeeService();
+                    //Employee employee = employeeService.getEmployeeById(employeeId);
+                    //int hotelID = employee.getHotelID();
+
                     BookingService bookingService = new BookingService();
                     List<Booking> bookings = bookingService.getAllBookings();
                     for(Booking booking : bookings) {
