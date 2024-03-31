@@ -56,18 +56,18 @@ if(message != null){
 %>
 
 <script>
-    window.onload = function() {
-        // Automatically show the popup
+    document.addEventListener("DOMContentLoaded", function() {
+        // Check if the message exists and if the popup element is present in the DOM
         var popup = document.getElementById("popup-message");
         if (popup) {
-            popup.style.display = 'block';
-        }
+            popup.style.display = 'block'; // Show the popup
 
-        // Automatically close the popup after 1 second
-        setTimeout(function() {
-            closePopup();
-        }, 2000);
-    };
+            // Close the popup after a delay (e.g., 2000 milliseconds)
+            setTimeout(function() {
+                closePopup();
+            }, 2000);
+        }
+    });
 
     // Function to close the popup
     function closePopup() {

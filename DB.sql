@@ -44,7 +44,7 @@ CREATE TABLE customer (
 	CustomerUsername varchar(45) NOT NULL,
 	CustomerPassword varchar(255) NOT NULL,
 	DateOfRegistration date NOT NULL,
-	Address varchar(45) NOT NULL,
+	Address varchar(100) NOT NULL,
 	FullName varchar(45) NOT NULL,
 	IDPresented varchar(45) NOT NULL,
 	CustomerEmail varchar(100) NOT NULL CHECK (CustomerEmail LIKE '_%@_%._%')
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
 	EmployeeID serial PRIMARY KEY,
 	HotelID serial REFERENCES hotel(HotelID),
-	Address varchar(45) NOT NULL,
+	Address varchar(100) NOT NULL,
 	FullName varchar(45) NOT NULL,
 	EmployeeNumber INT NOT NULL,
 	Role varchar(45) NOT NULL

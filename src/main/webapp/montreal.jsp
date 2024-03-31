@@ -25,30 +25,28 @@
 
         .container {
             display: flex;
-            padding: 20px;
+            padding: 10px;
         }
         .filters {
-            flex: 0 0 200px; /* Fixed width */
+            flex: 0 0 400px; /* Fixed width */
             background-color: #f9f9f9;
-            padding: 20px;
+            padding: 10px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
         }
         .filters h2 {
             font-size: 24px;
-            margin-bottom: 10px;
         }
         .filters label, .filters select {
             padding: 10px;
             background-color: #f9f9f9;
             border-radius: 8px;
             width: 100%;
-            margin-bottom: 10px;
         }
         .filters select:hover {
-            background-color: #0056b3;
+            background-color: var(--lighter-colour);
         }
 
 
@@ -95,14 +93,27 @@
         }
 
         #map {
-            height: 400px; /* or your preferred size */
+            height: 200px; /* or your preferred size */
             width: 100%;
+        }
+        .map-container {
+            position: fixed; /* Fix the position */
+            bottom: 20px; /* Adjust based on your navbar height and desired position */
+            left: 20px; /* Right align with some margin */
+            height: 210px; /* or your preferred size */
+            width: 350px; /* Adjust the width as per your requirement */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: white; /* Ensure it's visible over any background */
         }
 
     </style>
     </head>
 <body>
 <jsp:include page="navbar.jsp" />
+<jsp:include page="popup.jsp" />
 <%
     HotelService service = new HotelService();
     List<Hotel> hotels = null;
@@ -159,9 +170,13 @@
             }
         } %>
     </div>
+
+    <div class="map-container">
+        <div id="map"></div> <!-- The map will be inserted here -->
+    </div>
+
 </div>
 
-<div id="map"></div> <!-- Container for the map -->
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAcgTK4ZHvxFLZUhhVc517SjqXMmx3yY4&callback=initMap" async defer></script>
 
@@ -220,11 +235,12 @@
         <% if (hotels != null) {
             for (Hotel hotel : hotels) {
                 String address = hotel.getAddress(); // Assuming getAddress() method exists
-                String hotelInfo = "<div>Hotel Name: " + hotel.getHotelName() + "</div>" +
-                                            "<div>Hotel Chain: " + hotel.getHotelChainName() + "</div>" +
-                                            "<div>Hotel Type: " + hotel.getHotelCategory() + "</div>" +
-                                            "<div>Available Rooms: " + hotel.getNumRooms() + "</div>" +
-                                            "<div>Rating: " + hotel.getRating() + "</div>";
+                String hotelInfo = "<div>" +
+                                  "<strong>" + hotel.getHotelName() + "</strong><br>" +
+                                  "Chain: " + hotel.getHotelChainName() + "<br>" +
+                                  "Type: " + hotel.getHotelCategory() + "<br>" +
+                                  "Rooms: " + hotel.getNumRooms() + "<br>" +
+                                  "Rating: " + hotel.getRating() + "</div>";
         %>
                 geocoder.geocode({'address': '<%=address%>'}, function(results, status) {
                     if (status === 'OK') {

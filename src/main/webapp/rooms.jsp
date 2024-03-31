@@ -118,6 +118,7 @@
         a:active {
             color: inherit;
         }
+
     </style>
 
 <% if (session.getAttribute("username") != null) { %>
@@ -129,7 +130,7 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp" />
-<jp:include page = "popup.jsp" />
+<jsp:include page="popup.jsp" />
 
 <%
     int hotelId = Integer.parseInt(request.getParameter("hotelId"));
@@ -313,6 +314,7 @@ function filterRooms() {
         room.style.display = (dateAvailable && pricePass && capacityPass) ? '' : 'none';
     });
 }
+
 
 </script>
 
