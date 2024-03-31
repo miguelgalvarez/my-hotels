@@ -13,6 +13,7 @@
             --main-colour: #2596be;
             --lighter-colour: #36bbeb;
             --darker-colour: #1f7999;
+            --lightest-colour: #c0e1ed;
         }
 
         body {
@@ -47,7 +48,7 @@
             width: 80%;
         }
         .filters select:hover {
-            background-color: var(--lighter-colour);
+            background-color: var(--lightest-colour);
         }
 
 
@@ -242,7 +243,6 @@
                                   "<strong>" + hotel.getHotelName() + "</strong><br>" +
                                   "Chain: " + hotel.getHotelChainName() + "<br>" +
                                   "Type: " + hotel.getHotelCategory() + "<br>" +
-                                  "Rooms: " + hotel.getNumRooms() + "<br>" +
                                   "Rating: " + hotel.getRating() + "</div>";
         %>
                 geocoder.geocode({'address': '<%=address%>'}, function(results, status) {
