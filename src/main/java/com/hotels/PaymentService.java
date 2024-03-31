@@ -72,7 +72,7 @@ public class PaymentService {
 
         } catch (SQLException e) {
             // Handle SQL exception
-            throw new RuntimeException("Error updating payment status: " + e.getMessage(), e);
+            throw new RuntimeException("Error retrieving hotelID: " + e.getMessage(), e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

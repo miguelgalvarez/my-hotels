@@ -229,5 +229,33 @@ public class HotelService {
 
         return message;
     }
+
+    public static String getHotelAddress(int roomID) {
+        PaymentService paymentService = new PaymentService();
+        int hotelID = paymentService.getHotelID(roomID);
+
+        String sql = "SELECT address from hotel WHERE hotelID = ?";
+        ConnectionDB db = new ConnectionDB();
+        try (Connection con = db.getConnection();
+
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, hotelID);
+
+            // Execute the update statement
+            ResultSet result = stmt.executeQuery();
+            if(result.next()){
+                return result.getString("address");
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            // Handle SQL exception
+            throw new RuntimeException("Error retrieving hotel address: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
 

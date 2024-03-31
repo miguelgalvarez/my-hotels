@@ -278,6 +278,8 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function() {
+
+
         // Function to open modal by booking ID
         window.openModal = function(bookingId) {
             var modal = document.getElementById('cancelConfirmationModal' + bookingId);

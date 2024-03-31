@@ -1,5 +1,7 @@
 <%@ page import="java.util.List, java.util.ArrayList, java.text.SimpleDateFormat" %>
-<%@ page import="com.hotels.Room, com.hotels.RoomService, com.hotels.BookingService, com.hotels.Booking" %>
+<%@ page import="com.hotels.Room, com.hotels.RoomService, com.hotels.BookingService, com.hotels.Booking, com.hotels.HotelService" %>
+<%@ page import="java.net.URLEncoder, java.net.URLDecoder" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,9 +191,10 @@
     </div>
     <div class="hotels">
         <% if (rooms != null) {
-            for (Room room : rooms) { %>
-                <%String amenities = room.getAmenities().replace("'", "\\'"); %>
-                <div class="hotel" onclick="checkLoginStatus(<%=room.getRoomID()%>, <%=room.getPrice()%>, '<%=amenities%>')" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomID="<%= room.getRoomID() %>">
+            for (Room room : rooms) {
+                String amenities = room.getAmenities().replace("'", "\\'");
+                String address = HotelService.getHotelAddress(room.getRoomID()).replace("'", "\\'"); %>
+                <div class="hotel" onclick="checkLoginStatus(<%=room.getRoomID()%>, <%=room.getPrice()%>, '<%=amenities%>', '<%=address%>')" data-price="<%= room.getPrice() %>" data-capacity="<%= room.getCapacity() %>" data-roomID="<%= room.getRoomID() %>">
                     <h3>Room <%= room.getID() %></h3>
                     <div class="hotel-info">
                         <p>Price Per Day: $<%= room.getPrice() %></p>
@@ -240,11 +243,11 @@
     });
 
 
-    function checkLoginStatus(roomID, price, amenities) {
+    function checkLoginStatus(roomID, price, amenities, address) {
         const userStatus = document.querySelector('meta[name="user-status"]').getAttribute('content');
 
         if (userStatus === "logged-in") {
-            redirectToPayment(roomID, price, amenities); // User is logged in, proceed to payment
+            redirectToPayment(roomID, price, amenities, address); // User is logged in, proceed to payment
         } else {
             // Encode the current URL and append it as a query parameter
             const currentUrl = encodeURIComponent(window.location.href);
@@ -252,7 +255,7 @@
         }
     }
 
-    function redirectToPayment(roomID, price, amenities) {
+    function redirectToPayment(roomID, price, amenities, address) {
         const startDate = document.getElementById('start-date').value;
         const endDate = document.getElementById('end-date').value;
         let capacityFilter = document.getElementById('capacity').value;
@@ -265,9 +268,11 @@
         const diffTime = Math.abs(end - start);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         const encodedAmenities = encodeURIComponent(amenities);
+        const encodedAddress = encodeURIComponent(address);
         const cost = price * diffDays;
         const hotelId = <%= hotelId %>;
-        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${numberOfGuests}&amenities=${encodedAmenities}&cost=${cost}&hotelId=${hotelId}`;
+        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${numberOfGuests}&amenities=${encodedAmenities}&cost=${cost}&address=${address}&hotelId=${hotelId}`;
+
         window.location.href = url;
     }
 

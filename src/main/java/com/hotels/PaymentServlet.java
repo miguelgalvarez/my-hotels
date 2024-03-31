@@ -39,8 +39,7 @@ public class PaymentServlet extends HttpServlet {
         if (paymentAccepted) {
             // If payment is valid, proceed to create the booking
             int roomId = Integer.parseInt(request.getParameter("roomID"));
-            int numberOfDays = Integer.parseInt(request.getParameter("numberOfDays"));
-            int pricePaid = numberOfDays*Integer.parseInt(request.getParameter("price"));
+            int pricePaid = Integer.parseInt(request.getParameter("cost"));
             int customerID = (int) request.getSession().getAttribute("customerID");
             int hotelID = paymentService.getHotelID(roomId);
 
@@ -76,6 +75,7 @@ public class PaymentServlet extends HttpServlet {
 
         } else {
             response.sendRedirect("payment.jsp?error=Payment fatal error");
+            request.getSession().setAttribute("message", "Payment Failed");
         }
     }
 }
