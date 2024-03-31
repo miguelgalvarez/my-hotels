@@ -81,7 +81,7 @@
     <div class="text-container">
         <div class="summary-detail">Hotel Name: <span class="highlight"><%= hotelID %></span></div>
         <div class="summary-detail">Room Number: <span class="highlight"><%= request.getParameter("roomID")%></span></div>
-        <div class="summary-detail">Cost: <span class="highlight"><%= request.getParameter("cost") %></span></div>
+        <div class="summary-detail">Cost: <span class="highlight">$<%= String.format("%.2f", Float.parseFloat(request.getParameter("cost"))) %></span></div>
         <div class="summary-detail">Capacity: <span class="highlight"><%= request.getParameter("capacity")%> guests</span></div>
         <div class="summary-detail">Amenities: <span class="highlight"><%= request.getParameter("amenities") %></span></div>
         <div class="summary-detail">Check-in Date: <span class="highlight"><%= request.getParameter("checkIN") %></span></div>

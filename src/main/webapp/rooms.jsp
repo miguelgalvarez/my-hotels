@@ -62,7 +62,7 @@
             margin-right: 10px;
         }
         .filters button {
-            background-color: #007bff;
+            background-color: var(--main-colour);
             color: white;
             font-weight: 600;
             border: none;
@@ -70,7 +70,7 @@
             transition: background-color 0.3s ease;
         }
         .filters button:hover {
-            background-color: #0056b3;
+            background-color: var(--darker-colour);
         }
         .filters select:hover, .filters input:hover {
             background-color: #d0e7ff; /* Slightly darker blue on hover for inputs */
@@ -210,6 +210,9 @@
 <script>
     var bookingsData = <%=bookingsJson.toString()%>;
         document.addEventListener('DOMContentLoaded', function () {
+
+        window.onload = filterRooms;
+
         const today = new Date();
         const oneWeekFromToday = new Date(today);
         oneWeekFromToday.setDate(oneWeekFromToday.getDate() + 7); // Setting 'oneWeekFromToday' as one week after today

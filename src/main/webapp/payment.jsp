@@ -88,7 +88,8 @@
 <body>
 
 <jsp:include page ="popup.jsp"/>
-
+<% System.out.println("checkIN in payment.jsp is" + request.getParameter("checkIN"));
+System.out.println("checkOut in payment.jsp is" + request.getParameter("checkOut")); %>
 <div class="payment-container">
     <h1>Payment Screen</h1>
     <!-- Payment form inputs -->
