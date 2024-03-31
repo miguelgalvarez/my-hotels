@@ -140,9 +140,6 @@ VALUES
     (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
 <<<<<<< Updated upstream
     (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, Canada'),
-=======
-    (2,'hotel10@gmail.com', 'Vancouver', 'Mid-Range','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, BC, Canada'),
->>>>>>> Stashed changes
     (2,'hotel11@gmail.com', 'Montreal', 'Luxury','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
     (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),
     (2,'hotel13@gmail.com', 'Montreal', 'Luxury','Hyatt Regency', '3456789012', 5, 5, '400 Rue Richmond, H3J 1V1 Montreal, Canada'),
@@ -172,11 +169,7 @@ VALUES
 
     -- Hotels for IHG Hotels
     (5,'hotel33@gmail.com', 'Montreal', 'Budget','Intercontinental', '7890123456', 3, 5, '1390, boulevard René-Lévesque Ouest, H3G 0E3 Montreal, Canada'),
-<<<<<<< Updated upstream
-    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, '1300 Robson St, V6E1C5 Vancouver, Canada'),
-=======
     (5,'hotel34@gmail.com', 'Vancouver', 'Mid-Range','Regent', '8901234567', 4, 5, '1300 Robson St, Vancouver, BC, V6E1C5'),
->>>>>>> Stashed changes
     (5,'hotel35@gmail.com', 'Toronto', 'Luxury','Six Senses', '9012345678', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada'),
     (5,'hotel36@gmail.com', 'Toronto', 'Budget','Hotel Inn', '0123456789', 3, 5, '291 Glenforest Road, North York, M4N 2A5 Toronto, Canada'),
     (5,'hotel37@gmail.com', 'Montreal', 'Luxury','Hotel Indigo', '1234567890', 5, 5, '110 Rue Sainte-Thérèse Floor 2, H2Y 1E6 Montreal, Canada'),
@@ -447,17 +440,17 @@ VALUES
     (3, 4, 4, 250.00, '2024-07-15', '2024-07-20'),
     (3, 5, 5, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 6, 6, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 7, 7, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 8, 8, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 9, 9, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 10, 10, 5000.00, '2024-08-10', '2024-08-30'),
+    (1, 6, 1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 7, 2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 8, 3, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 9, 4, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 10, 5, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 11, 11, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 12, 12, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 13, 13, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 14, 14, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 15, 15, 5000.00, '2024-08-10', '2024-08-30');
+    (1, 11, 1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 12, 2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 13, 3, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 14, 4, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 15, 5, 5000.00, '2024-08-10', '2024-08-30');
 -- ----------------------------
 -- Records of renting
 -- ----------------------------
@@ -508,5 +501,17 @@ CREATE INDEX idx_hotelchainid_hotelid ON hotel (HotelChainID, HotelID);
 ---> I have many queries that search for RoomID therefore having this index will make searching more efficient. 
 CREATE INDEX idx_booking_room_id ON booking (RoomID);
 
+-- ----------------------------
+-- 2 triggers 
+-- ----------------------------
+CREATE TRIGGER booking_delete_trigger
+BEFORE DELETE ON booking
+FOR EACH ROW
+EXECUTE FUNCTION archive_booking();
+
+CREATE TRIGGER renting_delete_trigger
+BEFORE DELETE ON renting
+FOR EACH ROW
+EXECUTE FUNCTION archive_renting();
 
 
