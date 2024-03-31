@@ -27,13 +27,6 @@ public class CustomerService {
        String email = customer.getCustomerEmail();
        String IDPresented = customer.getIDPresented();
 
-        //testing
-        System.out.println(fullName);
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(dateOfRegistration);
-        System.out.println(address);
-
         //verifying that a username does not already exist
         RegisterService registerService = new RegisterService();
         if (registerService.usernameExists(username)) {
@@ -41,7 +34,7 @@ public class CustomerService {
         }
 
         //turn password into hash code to store securely
-        String hashedPassword = BCrypt.hashpw(customer.getCustomerPassword(), BCrypt.gensalt());
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         //establish connection with DB
         ConnectionDB db = new ConnectionDB();
