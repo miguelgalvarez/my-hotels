@@ -8,6 +8,7 @@ import java.util.Date;
 public class Renting {
 
     private int rentingID;
+    private String customerName;
     private int customerID;
     private int roomID;
     private Date checkIn;
@@ -29,6 +30,21 @@ public class Renting {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
     }
+
+    /**
+     * Constructor to save renting's data when a customer presents themselves in person.
+     *
+     * @param roomID the room being rented
+     * @param checkIn the check-in date of the renting instance
+     * @param checkOut the check-out date of the renting instance
+     */
+    public Renting(int roomID, Date checkIn, Date checkOut) {
+        this.roomID = roomID;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
+
+
 
     // Getters
     public int getRentingID() { return rentingID; }
