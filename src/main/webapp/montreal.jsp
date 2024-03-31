@@ -28,6 +28,7 @@
             padding: 10px;
         }
         .filters {
+            flex-basis: 25%;
             flex: 0 0 400px; /* Fixed width */
             background-color: #f9f9f9;
             padding: 10px;
@@ -43,7 +44,7 @@
             padding: 10px;
             background-color: #f9f9f9;
             border-radius: 8px;
-            width: 100%;
+            width: 80%;
         }
         .filters select:hover {
             background-color: var(--lighter-colour);
@@ -51,7 +52,7 @@
 
 
         .hotels {
-            flex: 1;
+            flex: 3;
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -117,25 +118,29 @@
 <%
     HotelService service = new HotelService();
     List<Hotel> hotels = null;
+    List<String> hotelChains = null;
     try {
         hotels = service.getHotels("Montreal"); // Fetch the list of hotels from your database
+        hotelChains = service.getHotelChains(); // Fetch the list of distinct hotel chains from your database
     } catch (Exception e) {
-        out.println("<p>Error fetching hotels: " + e.getMessage() + "</p>");
+        out.println("<p>Error fetching data: " + e.getMessage() + "</p>");
     }
 %>
 <div class="container">
     <div class="filters">
-<div class="filters">
         <h2>Filters</h2>
         <label for="Hotel-Chain">Hotel Chain:</label>
         <select id="Hotel-Chain" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
-            <option value="WhiteLotus">White Lotus</option>
-            <option value="HolidayInn">Holiday Inn</option>
-            <option value="3">Chain 3</option>
-            <option value="4">Chain 4</option>
-            <option value="5">Chain 5</option>
+            <% if (hotelChains != null) {
+                for(String chain : hotelChains) {
+            %>
+                    <option value="<%= chain %>"><%= chain %></option>
+            <%
+                }
+            } %>
         </select>
+
         <label for="Hotel-Type">Hotel Type:</label>
         <select id="Hotel-Type" class="filter-dropdown" onchange="filterHotels()">
             <option value="0">All</option>
@@ -151,21 +156,20 @@
             <option value="3">More than 100</option>
         </select>
     </div>
-        </div>
     <div class="hotels">
         <% if (hotels != null) {
             for (Hotel hotel : hotels) {
         %>
-                <div class="hotel" data-HotelChain="<%= hotel.getHotelChainName() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
-                        <a href="rooms.jsp?hotelId=<%= hotel.getID() %>">
-                        <h3><%= hotel.getHotelName() %></h3>
-                        <div class="hotel-info">
-                            <p>Hotel Chain: <%= hotel.getHotelChainName() %></p>
-                            <p>Hotel Type: <%= hotel.getHotelCategory() %></p>
-                            <p>Available Rooms: <%= hotel.getNumRooms() %></p>
-                        </div>
-                    </a>
-                </div>
+            <div class="hotel" data-HotelChain="<%= hotel.getHotelChainName() %>" data-HotelType="<%= hotel.getHotelCategory() %>" data-MaxRooms="<%= hotel.getNumRooms() %>">
+                <a href="rooms.jsp?hotelId=<%= hotel.getID() %>">
+                    <h3><%= hotel.getHotelName() %></h3>
+                    <div class="hotel-info">
+                        <p>Hotel Chain: <%= hotel.getHotelChainName() %></p>
+                        <p>Hotel Type: <%= hotel.getHotelCategory() %></p>
+                        <p>Available Rooms: <%= hotel.getNumRooms() %></p>
+                    </div>
+                </a>
+            </div>
         <%
             }
         } %>
@@ -174,7 +178,6 @@
     <div class="map-container">
         <div id="map"></div> <!-- The map will be inserted here -->
     </div>
-
 </div>
 
 

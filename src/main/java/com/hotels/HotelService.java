@@ -15,6 +15,25 @@ public class HotelService {
      * @return String that represents the hotel name
      * @throws Exception when trying to connect to database
      */
+    public List<String> getHotelChains() throws Exception {
+        String sql = "SELECT DISTINCT HotelChainName FROM hotelchain;";
+        ConnectionDB db = new ConnectionDB();
+        List<String> hotelChains = new ArrayList<>();
+
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String chainName = rs.getString("HotelChainName");
+                hotelChains.add(chainName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error fetching hotel chains: " + e.getMessage(), e);
+        }
+
+        return hotelChains;
+    }
     public String getHotelName(int hotelID){
         String sql = "SELECT HotelName FROM hotel WHERE HotelID = ?";
         ConnectionDB db = new ConnectionDB();
