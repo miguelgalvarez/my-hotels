@@ -43,13 +43,15 @@ public class PaymentServlet extends HttpServlet {
             int customerID = (int) request.getSession().getAttribute("customerID");
             int hotelID = paymentService.getHotelID(roomId);
 
-            // Parse the check-in date string into a Date object
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String checkInStr = request.getParameter("checkIN");
+            String checkOutStr = request.getParameter("checkOut");
             Date checkInDate = null;
             Date checkOutDate = null;
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
             try {
-                checkInDate = new Date(dateFormat.parse(request.getParameter("checkIN")).getTime());
-                checkOutDate = new Date(dateFormat.parse(request.getParameter("checkOut")).getTime());
+                checkInDate = new Date(dateFormat.parse(checkInStr).getTime());
+                checkOutDate = new Date(dateFormat.parse(checkOutStr).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
