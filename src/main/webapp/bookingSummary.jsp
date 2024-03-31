@@ -5,21 +5,24 @@
 <html>
 <head>
     <title>Booking Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
         }
         .summary-container, .map-container {
             width: 80%;
-            margin: 40px auto; /* Adjusted margin-top */
-            padding: 20px;
+            margin: 30px auto; /* Adjusted margin-top */
+            /*padding: 30px;*/
+            padding-left: 30px;
+            padding-bottom: 30px;
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .button-container {
-            width: 400px;
+            width: 500px;
             display: flex;
             justify-content: space-between;
             margin-top: 20px; /* Add some space between text and buttons */
@@ -46,7 +49,7 @@
             margin: 4px 2px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             width: 200px; /* Set the width to half of the container minus margin */
         }
         .go-back-button {
@@ -59,7 +62,7 @@
             margin: 4px 2px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             width: 200px; /* Set the width to half of the container minus margin */
         }
 
@@ -76,6 +79,7 @@
 %>
 
 <jsp:include page="navbar.jsp" />
+
 <div class="summary-container">
     <h2>Booking Summary</h2>
     <div class="text-container">
