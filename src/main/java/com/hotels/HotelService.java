@@ -10,6 +10,34 @@ import java.util.List;
 public class HotelService {
 
     /**
+     * Method to get hotel name given a hotel id
+     *
+     * @return String that represents the hotel name
+     * @throws Exception when trying to connect to database
+     */
+    public String getHotelName(int hotelID){
+        String sql = "SELECT HotelName FROM hotel WHERE HotelID = ?";
+        ConnectionDB db = new ConnectionDB();
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, hotelID);
+
+            // Execute the query statement
+            ResultSet result = stmt.executeQuery();
+            if(result.next()){
+                return result.getString("HotelName");
+            }
+            return "This hotel has no name";
+
+        } catch (SQLException e) {
+            // Handle SQL exception
+            throw new RuntimeException("Error updating payment status: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Method to get all hotels from the database
      *
      * @return List of hotels from database

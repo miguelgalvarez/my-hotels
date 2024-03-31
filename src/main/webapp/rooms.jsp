@@ -266,8 +266,8 @@
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         const encodedAmenities = encodeURIComponent(amenities);
         const cost = price * diffDays;
-        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${numberOfGuests}&amenities=${encodedAmenities}&cost=${cost}`;
-
+        const hotelId = <%= hotelId %>;
+        const url = `bookingSummary.jsp?roomID=${roomID}&numberOfDays=${diffDays}&price=${price}&checkIN=${startDate}&checkOut=${endDate}&capacity=${numberOfGuests}&amenities=${encodedAmenities}&cost=${cost}&hotelId=${hotelId}`;
         window.location.href = url;
     }
 
