@@ -33,7 +33,7 @@ public class EmployeeLoginServlet extends HttpServlet {
                 request.getSession().setAttribute("message", "Login successful!");
                 response.sendRedirect("employee.jsp");
             } else {
-                request.getSession().setAttribute("message", "Invalid Customer Name or Number.");
+                request.getSession().setAttribute("message", "Invalid Employee Name or Number.");
                 response.sendRedirect("employeeLogin.jsp");
             }
         } catch (Exception e) {

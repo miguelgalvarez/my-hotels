@@ -42,11 +42,11 @@ public class BookingService {
 
     public boolean createBooking(Booking booking) throws Exception {
 
-        /*boolean canCreate = canAddBooking(booking.getCustomerID());
+        boolean canCreate = canAddBooking(booking.getCustomerID());
 
         if (!canCreate) {
             return false;
-        }*/
+        }
 
         //testing
         System.out.println(booking.getPricePaid());

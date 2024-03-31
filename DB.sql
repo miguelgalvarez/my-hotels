@@ -138,7 +138,6 @@ VALUES
 
     -- Hotels for Hyatt
     (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
-<<<<<<< Updated upstream
     (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, Canada'),
     (2,'hotel11@gmail.com', 'Montreal', 'Luxury','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
     (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),

@@ -282,6 +282,28 @@
     </tbody>
 </table>            </tbody>
         </table>
+            <h2>Add a renting</h2>
+            <table id="additional-rentings-table">
+                <thead>
+                    <tr>
+                        <th>Customer Full Name</th>
+                        <th>Room ID</th>
+                        <th>Check-in Date</th>
+                        <th>Check-out Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="rentingID" id="rentingID"></td>
+                        <td><input type="text" name="customerID" id="customerID"></td>
+                        <td><input type="date" name="checkInDate" id="checkInDate"></td>
+                        <td><input type="date" name="checkOutDate" id="checkOutDate"></td>
+                        <td><button id="addRentingBtn">Add Renting</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 <script>
