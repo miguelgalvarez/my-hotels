@@ -138,7 +138,7 @@ VALUES
 
     -- Hotels for Hyatt
     (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
-    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, BC, Canada'),
+    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, Canada'),
     (2,'hotel11@gmail.com', 'Montreal', 'Luxury','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
     (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),
     (2,'hotel13@gmail.com', 'Montreal', 'Luxury','Hyatt Regency', '3456789012', 5, 5, '400 Rue Richmond, H3J 1V1 Montreal, Canada'),
@@ -147,28 +147,28 @@ VALUES
     (2,'hotel16@gmail.com', 'Toronto', 'Luxury','Hyatt Studios', '6789012345', 4, 5, '1214 Queen Street West, M6J 1J6 Toronto, Canada'),
 
     -- Hotels for Wyndham
-    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, '1133 Hastings St W, Vancouver, BC, V6E3T3),
-    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, '2030 Barclay St, Vancouver, BC, V6G 1L5'),
+    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, '1133 Hastings St W, V6E3T3 Vancouver, Canada'),
+    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, '2030 Barclay St, V6G 1L5, Vancouver, Canada'),
     (3,'hotel27@gmail.com', 'Montreal', 'Luxury','Ramada', '1234567890', 4, 5, '7200 Rue Sherbrooke East, H1N 1E7 Montreal, Canada'),
     (3,'hotel28@gmail.com', 'Montreal', 'Budget','Super 8', '2345678901', 3, 5, '96 Boulevard Mortagne, J4B 5M7 Boucherville, Canada'),
     (3,'hotel29@gmail.com', 'Toronto', 'Luxury','Ramada Encore', '3456789012', 5, 5, '80 Blue Jays Way, M5V 2G3 Toronto, Canada '),
     (3,'hotel30@gmail.com', 'Toronto', 'Budget','Travelodge', '4567890123', 4, 5, '80 Cooperage Street - George Brown College, M5A 0J3 Toronto, Canada'),
     (3,'hotel31@gmail.com', 'Toronto', 'Luxury','Wingate', '5678901234', 3, 5, '220 Bloor Street West, M5S 1T8 Toronto, Canada'),
-    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, '1111 Burnaby St, Vancouver, BC, V6E 1P4'),
+    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, '1111 Burnaby St, V6E 1P4, Vancouver, Canada'),
 
     -- Hotels for Marriott
     (4,'hotel17@gmail.com', 'Toronto', 'Budget','SpringHill Suites', '1234567890', 3, 5, '387 Bloor Street East, ON M4W 1H7 Toronto, Canada'),
-    (4,'hotel18@gmail.com', 'Vancouver', 'Luxury','Ritz Carleton', '2345678901', 4, 5, '1128 West Hastings Street, Vancouver, BC, V6B4R5'),
+    (4,'hotel18@gmail.com', 'Vancouver', 'Luxury','Ritz Carleton', '2345678901', 4, 5, '1128 West Hastings Street, V6B4R5 Vancouver, Canada'),
     (4,'hotel19@gmail.com', 'Montreal', 'Luxury','W Hotel', '3456789012', 4, 5, '7365 boulevard Marie-Victorin, J4W 1A6 Brossard, Canada'),
     (4,'hotel20@gmail.com', 'Montreal', 'Budget','Sheraton', '4567890123', 3, 5, '10888 Cote De Liesse, Montreal, QC H8T 1A6, Canada, H8T 1A6 Dorval, Canada'),
     (4,'hotel21@gmail.com', 'Toronto', 'Luxury','TownPlace Suites', '5678901234', 5, 5, '1364 Queen Street East, M4L 1C8 Toronto, Canada'),
     (4,'hotel22@gmail.com', 'Toronto', 'Budget','Residence Inn', '6789012345', 4, 5, '29 Waverley Road, M4L 3T2 Toronto, Canada'),
     (4,'hotel23@gmail.com', 'Toronto', 'Luxury','Element Hotel', '7890123456', 3, 5, '98 Lillian Street, M4S 0A5 Toronto, Canada'),
-    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, '999 Canada Pl, Vancouver, BC, V6C3B5'),
+    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, '999 Canada Pl, V6C3B5 Vancouver, Canada'),
 
     -- Hotels for IHG Hotels
     (5,'hotel33@gmail.com', 'Montreal', 'Budget','Intercontinental', '7890123456', 3, 5, '1390, boulevard René-Lévesque Ouest, H3G 0E3 Montreal, Canada'),
-    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, '1300 Robson St, Vancouver, BC, V6E1C5'),
+    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, '1300 Robson St, V6E1C5 Vancouver, Canada'),
     (5,'hotel35@gmail.com', 'Toronto', 'Luxury','Six Senses', '9012345678', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada'),
     (5,'hotel36@gmail.com', 'Toronto', 'Budget','Hotel Inn', '0123456789', 3, 5, '291 Glenforest Road, North York, M4N 2A5 Toronto, Canada'),
     (5,'hotel37@gmail.com', 'Montreal', 'Luxury','Hotel Indigo', '1234567890', 5, 5, '110 Rue Sainte-Thérèse Floor 2, H2Y 1E6 Montreal, Canada'),
@@ -436,23 +436,23 @@ VALUES
 -- ----------------------------
 INSERT INTO booking (CustomerID, HotelID, RoomID, PricePaid, CheckIn, CheckOut)
 VALUES
-    (1, 1, 201, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 2, 202, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 3, 203, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 4, 204, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 5, 205, 5000.00, '2024-08-10', '2024-08-30'),
+    (1, 1, 1, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 2, 2, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 3, 3, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 4, 4, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 5, 5, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 6, 201, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 7, 202, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 8, 203, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 9, 204, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 10, 205, 5000.00, '2024-08-10', '2024-08-30'),
+    (1, 6, 6, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 7, 7, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 8, 8, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 9, 9, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 10, 10, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 11, 201, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 12, 202, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 13, 203, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 14, 204, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 15, 205, 5000.00, '2024-08-10', '2024-08-30');
+    (1, 11, 11, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 12, 12, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 13, 13, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 14, 14, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 15, 15, 5000.00, '2024-08-10', '2024-08-30');
 -- ----------------------------
 -- Records of renting
 -- ----------------------------

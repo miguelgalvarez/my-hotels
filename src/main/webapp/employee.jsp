@@ -4,6 +4,8 @@
     <%@ page import="java.util.List" %>
     <%@ page import="com.hotels.BookingService, com.hotels.Booking" %>
     <%@ page import="com.hotels.RentingService, com.hotels.Renting" %>
+    <%@ page import="com.hotels.CustomerService" %>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management</title>
@@ -171,7 +173,8 @@
                     //int hotelID = employee.getHotelID();
 
                     BookingService bookingService = new BookingService();
-                    List<Booking> bookings = bookingService.getAllBookings();
+                    List<Booking> bookings = bookingService.getAllBookings(CustomerService.fetchHotelID(Integer.parseInt(session.getAttribute("employeeNumber").toString())));
+
                     for(Booking booking : bookings) {
 
                     String status = booking.getPayment() ? "Paid" : "Unpaid";

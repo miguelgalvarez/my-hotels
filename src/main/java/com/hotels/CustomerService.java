@@ -228,6 +228,31 @@ public class CustomerService {
         return customerID; // Return the found CustomerID or null
     }
 
+    public static Integer fetchHotelID(int employeeNumber) {
+        Integer hotelID = null; // Default to null if not found
+        String sql = "SELECT hotelid FROM employee WHERE employeenumber = ?;";
+
+        ConnectionDB db = new ConnectionDB();
+
+        try (Connection con = db.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, employeeNumber);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) { // If there is a result, get the first (and should be the only) CustomerID
+                    hotelID = rs.getInt("hotelid");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return hotelID;
+    }
+
 }
 
 
