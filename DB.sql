@@ -119,7 +119,63 @@ VALUES
     ('Wyndam', '18009378461', 8, 'wyndhamupport@westin.com','1900 5th Avenue Seattle, WA 98101, United States'),
     ('Marriott', '18882362427', 8, 'customer.care@marriott.com','7750 Wisconsin Avenue Bethesda, Maryland 20814, United States'),
     ('IHG Hotels', '18884654329', 8, 'customer@IHG.com','3 Ravinia DriveSuite Atlanta, Georgia 30346-2149, United States');
-	
+
+
+-- ----------------------------
+-- Records of hotels
+-- ----------------------------	
+INSERT INTO Hotel (HotelChainID, HotelEmail, HotelArea, HotelCategory, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
+VALUES
+	-- Hotels for Hilton
+    (1,'hotel1@gmail.com', 'Montreal', 'Luxury','Homewood Suites', '1234567890', 4, 5, '6939 Decarie, H3W3E5 Montreal, Canada'),
+    (1,'hotel2@gmail.com', 'Montreal', 'Budget','Hampton Inn', '2345678901', 3, 5, '1444 Drummond, H3G 1V9 Montreal, Canada'),
+    (1,'hotel3@gmail.com', 'Montreal', 'Luxury','Embassy Suites', '3456789012', 5, 5, '5225 Côte-des-Neiges, H3T 1Y1 Montreal, Canada'),
+    (1,'hotel4@gmail.com', 'Montreal', 'Budget','DoubleTree', '4567890123', 4, 5, '395 7e Avenue, Lachine, H8S 2Z5 Montreal, Canada'),
+    (1,'hotel5@gmail.com', 'Montreal', 'Luxury','Garden Inn', '5678901234', 3, 5, '5283 Avenue du Parc, Plateau Mont Royal, H2V 4G9 Montreal, Canada'),
+    (1,'hotel6@gmail.com', 'Toronto', 'Luxury','Vogue Hotel', '6789012345', 4, 5, '560 Evans Avenue, Etobicoke, M8W2W1 Toronto, Canada'),
+    (1,'hotel7@gmail.com', 'Toronto', 'Budget','Garden Inn Airport', '7890123456', 5, 5, '55 Evelyn Avenue, M6P 2Z2 Toronto, Canada'),
+    (1,'hotel8@gmail.com', 'Toronto', 'Luxury','Home2 Suites', '8901234567', 4, 5, '9 Old Mill Road, Etobicoke, M8X 1G5 Toronto, Canada'),
+
+    -- Hotels for Hyatt
+    (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
+    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, 'Hotel 10 Address'),
+    (2,'hotel11@gmail.com', 'Montreal', 'Luxury','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
+    (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),
+    (2,'hotel13@gmail.com', 'Montreal', 'Luxury','Hyatt Regency', '3456789012', 5, 5, '400 Rue Richmond, H3J 1V1 Montreal, Canada'),
+    (2,'hotel14@gmail.com', 'Montreal', 'Budget','Hyatt Andaz', '4567890123', 4, 5, '210 Rue De La Gauchetière Ouest, H2Z 2A2 Montreal, Canada'),
+    (2,'hotel15@gmail.com', 'Montreal', 'Luxury','Hyatt Place', '5678901234', 3, 5, 'Hotel 15 Address'),
+    (2,'hotel16@gmail.com', 'Toronto', 'Luxury','Hyatt Studios', '6789012345', 4, 5, '1214 Queen Street West, M6J 1J6 Toronto, Canada'),
+
+    -- Hotels for Wyndham
+    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, 'Hotel 25 Address'),
+    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, 'Hotel 26 Address'),
+    (3,'hotel27@gmail.com', 'Montreal', 'Luxury','Ramada', '1234567890', 4, 5, '7200 Rue Sherbrooke East, H1N 1E7 Montreal, Canada'),
+    (3,'hotel28@gmail.com', 'Montreal', 'Budget','Super 8', '2345678901', 3, 5, '96 Boulevard Mortagne, J4B 5M7 Boucherville, Canada'),
+    (3,'hotel29@gmail.com', 'Toronto', 'Luxury','Ramada Encore', '3456789012', 5, 5, '80 Blue Jays Way, M5V 2G3 Toronto, Canada '),
+    (3,'hotel30@gmail.com', 'Toronto', 'Budget','Travelodge', '4567890123', 4, 5, '80 Cooperage Street - George Brown College, M5A 0J3 Toronto, Canada'),
+    (3,'hotel31@gmail.com', 'Toronto', 'Luxury','Wingate', '5678901234', 3, 5, '220 Bloor Street West, M5S 1T8 Toronto, Canada'),
+    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, 'Hotel 32 Address'),
+
+    -- Hotels for Marriott
+    (4,'hotel17@gmail.com', 'Toronto', 'Budget','SpringHill Suites', '1234567890', 3, 5, '387 Bloor Street East, ON M4W 1H7 Toronto, Canada'),
+    (4,'hotel18@gmail.com', 'Vancouver', 'Luxury','Ritz Carleton', '2345678901', 4, 5, 'Hotel 18 Address'),
+    (4,'hotel19@gmail.com', 'Montreal', 'Luxury','W Hotel', '3456789012', 4, 5, '7365 boulevard Marie-Victorin, J4W 1A6 Brossard, Canada'),
+    (4,'hotel20@gmail.com', 'Montreal', 'Budget','Sheraton', '4567890123', 3, 5, '10888 Cote De Liesse, Montreal, QC H8T 1A6, Canada, H8T 1A6 Dorval, Canada'),
+    (4,'hotel21@gmail.com', 'Toronto', 'Luxury','TownPlace Suites', '5678901234', 5, 5, '1364 Queen Street East, M4L 1C8 Toronto, Canada'),
+    (4,'hotel22@gmail.com', 'Toronto', 'Budget','Residence Inn', '6789012345', 4, 5, '29 Waverley Road, M4L 3T2 Toronto, Canada'),
+    (4,'hotel23@gmail.com', 'Toronto', 'Luxury','Element Hotel', '7890123456', 3, 5, '98 Lillian Street, M4S 0A5 Toronto, Canada'),
+    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, 'Hotel 24 Address'),
+
+    -- Hotels for IHG Hotels
+    (5,'hotel33@gmail.com', 'Montreal', 'Budget','Intercontinental', '7890123456', 3, 5, '1390, boulevard René-Lévesque Ouest, H3G 0E3 Montreal, Canada'),
+    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, 'Hotel 34 Address'),
+    (5,'hotel35@gmail.com', 'Toronto', 'Luxury','Six Senses', '9012345678', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada'),
+    (5,'hotel36@gmail.com', 'Toronto', 'Budget','Hotel Inn', '0123456789', 3, 5, '291 Glenforest Road, North York, M4N 2A5 Toronto, Canada'),
+    (5,'hotel37@gmail.com', 'Montreal', 'Luxury','Hotel Indigo', '1234567890', 5, 5, '110 Rue Sainte-Thérèse Floor 2, H2Y 1E6 Montreal, Canada'),
+    (5,'hotel38@gmail.com', 'Montreal', 'Budget','Hotel Inne Express', '2345678901', 4, 5, 'Avenue Cedar 1725, H3G 1A5 Montreal, Canada'),
+    (5,'hotel39@gmail.com', 'Montreal', 'Luxury','Vignette', '3456789012', 3, 5, '1240 Place Phillips, H3B 3H4 Montreal, Canada'),
+    (5,'hotel40@gmail.com', 'Toronto', 'Luxury','Crowne Plaza', '4567890123', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada');
+
 -- ----------------------------
 -- Records of hotel rooms
 -- ----------------------------
@@ -366,61 +422,6 @@ VALUES
 	(40, 225.00, 2, 'Amenities 20', 'Boardwalk view', FALSE, 'No damages', 301);
 
 -- ----------------------------
--- Records of hotels
--- ----------------------------	
-INSERT INTO Hotel (HotelChainID, HotelEmail, HotelArea, HotelCategory, HotelName, HotelPhoneNumber, Rating, NumberOfRooms, Address)
-VALUES
-	-- Hotels for Hilton
-    (1,'hotel1@gmail.com', 'Montreal', 'Luxury','Homewood Suites', '1234567890', 4, 5, '6939 Decarie, H3W3E5 Montreal, Canada),
-    (1,'hotel2@gmail.com', 'Montreal', 'Budget','Hampton Inn', '2345678901', 3, 5, '1444 Drummond, H3G 1V9 Montreal, Canada'),
-    (1,'hotel3@gmail.com', 'Montreal', 'Luxury','Embassy Suites', '3456789012', 5, 5, '5225 Côte-des-Neiges, H3T 1Y1 Montreal, Canada'),
-    (1,'hotel4@gmail.com', 'Montreal', 'Budget','DoubleTree', '4567890123', 4, 5, '395 7e Avenue, Lachine, H8S 2Z5 Montreal, Canada'),
-    (1,'hotel5@gmail.com', 'Montreal', 'Luxury','Garden Inn', '5678901234', 3, 5, '5283 Avenue du Parc, Plateau Mont Royal, H2V 4G9 Montreal, Canada'),
-    (1,'hotel6@gmail.com', 'Toronto', 'Luxury','Vogue Hotel', '6789012345', 4, 5, '560 Evans Avenue, Etobicoke, M8W2W1 Toronto, Canada'),
-    (1,'hotel7@gmail.com', 'Toronto', 'Budget','Garden Inn Airport', '7890123456', 5, 5, '55 Evelyn Avenue, M6P 2Z2 Toronto, Canada'),
-    (1,'hotel8@gmail.com', 'Toronto', 'Luxury','Home2 Suites', '8901234567', 4, 5, '9 Old Mill Road, Etobicoke, M8X 1G5 Toronto, Canada'),
-
-    -- Hotels for Hyatt
-    (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
-    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, 'Hotel 10 Address'),
-    (2,'hotel11@gmail.com', 'Montreal', 'Luxury','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
-    (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),
-    (2,'hotel13@gmail.com', 'Montreal', 'Luxury','Hyatt Regency', '3456789012', 5, 5, '400 Rue Richmond, H3J 1V1 Montreal, Canada'),
-    (2,'hotel14@gmail.com', 'Montreal', 'Budget','Hyatt Andaz', '4567890123', 4, 5, '210 Rue De La Gauchetière Ouest, H2Z 2A2 Montreal, Canada'),
-    (2,'hotel15@gmail.com', 'Montreal', 'Luxury','Hyatt Place', '5678901234', 3, 5, 'Hotel 15 Address'),
-    (2,'hotel16@gmail.com', 'Toronto', 'Luxury','Hyatt Studios', '6789012345', 4, 5, '1214 Queen Street West, M6J 1J6 Toronto, Canada'),
-
-    -- Hotels for Wyndham
-    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, 'Hotel 25 Address'),
-    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, 'Hotel 26 Address'),
-    (3,'hotel27@gmail.com', 'Montreal', 'Luxury','Ramada', '1234567890', 4, 5, '7200 Rue Sherbrooke East, H1N 1E7 Montreal, Canada'),
-    (3,'hotel28@gmail.com', 'Montreal', 'Budget','Super 8', '2345678901', 3, 5, '96 Boulevard Mortagne, J4B 5M7 Boucherville, Canada'),
-    (3,'hotel29@gmail.com', 'Toronto', 'Luxury','Ramada Encore', '3456789012', 5, 5, '80 Blue Jays Way, M5V 2G3 Toronto, Canada '),
-    (3,'hotel30@gmail.com', 'Toronto', 'Budget','Travelodge', '4567890123', 4, 5, '80 Cooperage Street - George Brown College, M5A 0J3 Toronto, Canada'),
-    (3,'hotel31@gmail.com', 'Toronto', 'Luxury','Wingate', '5678901234', 3, 5, '220 Bloor Street West, M5S 1T8 Toronto, Canada'),
-    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, 'Hotel 32 Address'),
-
-    -- Hotels for Marriott
-    (4,'hotel17@gmail.com', 'Toronto', 'Budget','SpringHill Suites', '1234567890', 3, 5, '387 Bloor Street East, ON M4W 1H7 Toronto, Canada'),
-    (4,'hotel18@gmail.com', 'Vancouver', 'Luxury','Ritz Carleton', '2345678901', 4, 5, 'Hotel 18 Address'),
-    (4,'hotel19@gmail.com', 'Montreal', 'Luxury','W Hotel', '3456789012', 4, 5, '7365 boulevard Marie-Victorin, J4W 1A6 Brossard, Canada'),
-    (4,'hotel20@gmail.com', 'Montreal', 'Budget','Sheraton', '4567890123', 3, 5, '10888 Cote De Liesse, Montreal, QC H8T 1A6, Canada, H8T 1A6 Dorval, Canada'),
-    (4,'hotel21@gmail.com', 'Toronto', 'Luxury','TownPlace Suites', '5678901234', 5, 5, '1364 Queen Street East, M4L 1C8 Toronto, Canada'),
-    (4,'hotel22@gmail.com', 'Toronto', 'Budget','Residence Inn', '6789012345', 4, 5, '29 Waverley Road, M4L 3T2 Toronto, Canada'),
-    (4,'hotel23@gmail.com', 'Toronto', 'Luxury','Element Hotel', '7890123456', 3, 5, '98 Lillian Street, M4S 0A5 Toronto, Canada'),
-    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, 'Hotel 24 Address'),
-
-    -- Hotels for IHG Hotels
-    (5,'hotel33@gmail.com', 'Montreal', 'Budget','Intercontinental', '7890123456', 3, 5, '1390, boulevard René-Lévesque Ouest, H3G 0E3 Montreal, Canada'),
-    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, 'Hotel 34 Address'),
-    (5,'hotel35@gmail.com', 'Toronto', 'Luxury','Six Senses', '9012345678', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada'),
-    (5,'hotel36@gmail.com', 'Toronto', 'Budget','Hotel Inn', '0123456789', 3, 5, '291 Glenforest Road, North York, M4N 2A5 Toronto, Canada'),
-    (5,'hotel37@gmail.com', 'Montreal', 'Luxury','Hotel Indigo', '1234567890', 5, 5, '110 Rue Sainte-Thérèse Floor 2, H2Y 1E6 Montreal, Canada'),
-    (5,'hotel38@gmail.com', 'Montreal', 'Budget','Hotel Inne Express', '2345678901', 4, 5, 'Avenue Cedar 1725, H3G 1A5 Montreal, Canada'),
-    (5,'hotel39@gmail.com', 'Montreal', 'Luxury','Vignette', '3456789012', 3, 5, '1240 Place Phillips, H3B 3H4 Montreal, Canada'),
-    (5,'hotel40@gmail.com', 'Toronto', 'Luxury','Crowne Plaza', '4567890123', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada');
-
--- ----------------------------
 -- Records of customers
 -- ----------------------------
 INSERT INTO customer (CustomerUsername, CustomerPassword, DateOfRegistration, Address, FullName, IDPresented, CustomerEmail) 
@@ -435,23 +436,23 @@ VALUES
 -- ----------------------------
 INSERT INTO booking (CustomerID, HotelID, RoomID, PricePaid, CheckIn, CheckOut)
 VALUES
-    (1, 1, 211, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 2, 214, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 3, 213, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 4, 214, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 5, 225, 5000.00, '2024-08-10', '2024-08-30'),
+    (1, 1, 201, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 2, 202, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 3, 203, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 4, 204, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 5, 205, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 6, 221, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 7, 222, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 8, 322, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 9, 224, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 10, 215, 5000.00, '2024-08-10', '2024-08-30'),
+    (1, 6, 201, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 7, 202, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 8, 203, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 9, 204, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 10, 205, 5000.00, '2024-08-10', '2024-08-30'),
 
-    (1, 11, 1, 150.00, '2024-04-01', '2024-04-05'),
-    (2, 12, 2, 200.00, '2024-05-10', '2024-05-15'),
-    (3, 13, 3, 180.00, '2024-06-20', '2024-06-25'),
-    (3, 14, 4, 250.00, '2024-07-15', '2024-07-20'),
-    (3, 15, 5, 5000.00, '2024-08-10', '2024-08-30');
+    (1, 11, 201, 150.00, '2024-04-01', '2024-04-05'),
+    (2, 12, 202, 200.00, '2024-05-10', '2024-05-15'),
+    (3, 13, 203, 180.00, '2024-06-20', '2024-06-25'),
+    (3, 14, 204, 250.00, '2024-07-15', '2024-07-20'),
+    (3, 15, 205, 5000.00, '2024-08-10', '2024-08-30');
 -- ----------------------------
 -- Records of renting
 -- ----------------------------
