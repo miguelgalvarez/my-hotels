@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
             if (success) {
                 request.getSession().setAttribute("username", username);
                 request.getSession().setAttribute("message", "Registration successful!");
+                request.getSession().setAttribute("customerID", newCustomer.getCustomerID());
 
                 String returnUrl = request.getParameter("returnUrl");
                 if (returnUrl != null && !returnUrl.trim().isEmpty()) {

@@ -63,10 +63,11 @@ public class PaymentServlet extends HttpServlet {
             try {
                 boolean bookingCreated = bookingService.createBooking(booking);
                 if (bookingCreated) {
-                    // Redirect to main page
-                    response.sendRedirect("index.jsp");
+                    request.getSession().setAttribute("message", "Booking Successful!");
+                    response.sendRedirect("bookings.jsp");
+
                 } else {
-                    // Handle the case where booking couldn't be created
+                    request.getSession().setAttribute("message", "Booking could not be created!");
                     response.sendRedirect("payment.jsp?error=Booking could not be created");
                 }
             } catch (Exception e) {

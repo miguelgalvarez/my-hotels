@@ -93,6 +93,12 @@
         a:active {
             color: inherit;
         }
+
+        #map {
+            height: 400px; /* or your preferred size */
+            width: 100%;
+        }
+
     </style>
     </head>
 <body>
@@ -155,6 +161,10 @@
     </div>
 </div>
 
+<div id="map"></div> <!-- Container for the map -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAcgTK4ZHvxFLZUhhVc517SjqXMmx3yY4&callback=initMap" async defer></script>
+
 <script>
     function filterHotels() {
         const hotelChainFilter = document.getElementById('Hotel-Chain').value;
@@ -196,7 +206,52 @@
 
     // Call the filterHotels function on page load to apply filters immediately
     document.addEventListener('DOMContentLoaded', filterHotels);
+
+
+    //load the map
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: {lat: 45.5017, lng: -73.5673} // Montreal's latitude and longitude
+        });
+
+        var geocoder = new google.maps.Geocoder();
+
+        <% if (hotels != null) {
+            for (Hotel hotel : hotels) {
+                String address = hotel.getAddress(); // Assuming getAddress() method exists
+                String hotelInfo = "<div>Hotel Name: " + hotel.getHotelName() + "</div>" +
+                                            "<div>Hotel Chain: " + hotel.getHotelChainName() + "</div>" +
+                                            "<div>Hotel Type: " + hotel.getHotelCategory() + "</div>" +
+                                            "<div>Available Rooms: " + hotel.getNumRooms() + "</div>" +
+                                            "<div>Rating: " + hotel.getRating() + "</div>";
+        %>
+                geocoder.geocode({'address': '<%=address%>'}, function(results, status) {
+                    if (status === 'OK') {
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            title: '<%=hotelInfo%>' // Adding hotel info as marker title
+                        });
+                        var infowindow = new google.maps.InfoWindow({
+                            content: marker.title
+                        });
+                        marker.addListener('mouseover', function() {
+                            infowindow.open(map, marker);
+                        });
+                        marker.addListener('mouseout', function() {
+                            infowindow.close();
+                        });
+                    }
+                });
+        <%
+            }
+        } %>
+    }
+
 </script>
+
+
 
 
 </body>
