@@ -25,13 +25,7 @@ public class PaymentServlet extends HttpServlet {
 
         // Create a Payment object
         Payment payment = new Payment(creditCardNumber, cvv, expDate, fullName);
-        // Testing
-        System.out.println(creditCardNumber);
-        System.out.println(cvv);
-        System.out.println(expDate);
-        System.out.println(fullName);
-        System.out.println(creditCardNumber.bitCount());
-        System.out.println(expDate.length());
+
         // Validate the payment
         PaymentService paymentService = new PaymentService();
         boolean paymentAccepted = paymentService.paymentAccepted(payment);
