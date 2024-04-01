@@ -138,37 +138,37 @@ VALUES
 
     -- Hotels for Hyatt
     (2,'hotel9@gmail.com', 'Toronto', 'Budget','Hyatt Centric', '9012345678', 3, 5, '111 Princes Boulevard, M6K 3C3 Toronto, Canada'),
-    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, 'Hotel 10 Address'),
+    (2,'hotel10@gmail.com', 'Vancouver', 'Luxury','Grand Hyatt', '0123456789', 4, 5, '1253 Johnston St, V6H3R9 Vancouver, BC, Canada'),
     (2,'hotel11@gmail.com', 'Montreal', 'Mid-Range','Park Hyatt', '1234567890', 4, 5, '206 Rue Sainte-Marie, J5R 1G2 Laprairie, Canada'),
     (2,'hotel12@gmail.com', 'Montreal', 'Budget','Hyatt House', '2345678901', 3, 5, '2521 Rue du Centre, H3K 1J9 Montreal, Canada'),
     (2,'hotel13@gmail.com', 'Montreal', 'Luxury','Hyatt Regency', '3456789012', 5, 5, '400 Rue Richmond, H3J 1V1 Montreal, Canada'),
     (2,'hotel14@gmail.com', 'Montreal', 'Mid-Range','Hyatt Andaz', '4567890123', 4, 5, '210 Rue De La Gauchetière Ouest, H2Z 2A2 Montreal, Canada'),
-    (2,'hotel15@gmail.com', 'Montreal', 'Luxury','Hyatt Place', '5678901234', 3, 5, 'Hotel 15 Address'),
+    (2,'hotel15@gmail.com', 'Montreal', 'Luxury','Hyatt Place', '5678901234', 3, 5, '1155 Sherbrooke Ouest, Montreal, QC, H3A2N3'),
     (2,'hotel16@gmail.com', 'Toronto', 'Mid-Range','Hyatt Studios', '6789012345', 4, 5, '1214 Queen Street West, M6J 1J6 Toronto, Canada'),
 
     -- Hotels for Wyndham
-    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, 'Hotel 25 Address'),
-    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, 'Hotel 26 Address'),
+    (3,'hotel25@gmail.com', 'Vancouver', 'Budget','Days Inn', '9012345678', 3, 5, '1133 Hastings St W, Vancouver, BC, V6E3T3'),
+    (3,'hotel26@gmail.com', 'Vancouver', 'Luxury','Wyndham Grand', '0123456789', 4, 5, '2030 Barclay St, Vancouver, BC, V6G 1L5'),
     (3,'hotel27@gmail.com', 'Montreal', 'Luxury','Ramada', '1234567890', 4, 5, '7200 Rue Sherbrooke East, H1N 1E7 Montreal, Canada'),
     (3,'hotel28@gmail.com', 'Montreal', 'Budget','Super 8', '2345678901', 3, 5, '96 Boulevard Mortagne, J4B 5M7 Boucherville, Canada'),
     (3,'hotel29@gmail.com', 'Toronto', 'Luxury','Ramada Encore', '3456789012', 5, 5, '80 Blue Jays Way, M5V 2G3 Toronto, Canada '),
     (3,'hotel30@gmail.com', 'Toronto', 'Mid-Range','Travelodge', '4567890123', 4, 5, '80 Cooperage Street - George Brown College, M5A 0J3 Toronto, Canada'),
     (3,'hotel31@gmail.com', 'Toronto', 'Luxury','Wingate', '5678901234', 3, 5, '220 Bloor Street West, M5S 1T8 Toronto, Canada'),
-    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, 'Hotel 32 Address'),
+    (3,'hotel32@gmail.com', 'Vancouver', 'Luxury','Dolce Hotel and Resort', '6789012345', 4, 5, '1111 Burnaby St, Vancouver, BC, V6E 1P4'),
 
     -- Hotels for Marriott
     (4,'hotel17@gmail.com', 'Toronto', 'Budget','SpringHill Suites', '1234567890', 3, 5, '387 Bloor Street East, ON M4W 1H7 Toronto, Canada'),
-    (4,'hotel18@gmail.com', 'Vancouver', 'Mid-Range','Ritz Carleton', '2345678901', 4, 5, 'Hotel 18 Address'),
+    (4,'hotel18@gmail.com', 'Vancouver', 'Mid-Range','Ritz Carleton', '2345678901', 4, 5, '1128 West Hastings Street, Vancouver, BC, V6B4R5'),
     (4,'hotel19@gmail.com', 'Montreal', 'Luxury','W Hotel', '3456789012', 4, 5, '7365 boulevard Marie-Victorin, J4W 1A6 Brossard, Canada'),
     (4,'hotel20@gmail.com', 'Montreal', 'Mid-Range','Sheraton', '4567890123', 3, 5, '10888 Cote De Liesse, Montreal, QC H8T 1A6, Canada, H8T 1A6 Dorval, Canada'),
     (4,'hotel21@gmail.com', 'Toronto', 'Mid-Range','TownPlace Suites', '5678901234', 5, 5, '1364 Queen Street East, M4L 1C8 Toronto, Canada'),
     (4,'hotel22@gmail.com', 'Toronto', 'Budget','Residence Inn', '6789012345', 4, 5, '29 Waverley Road, M4L 3T2 Toronto, Canada'),
     (4,'hotel23@gmail.com', 'Toronto', 'Luxury','Element Hotel', '7890123456', 3, 5, '98 Lillian Street, M4S 0A5 Toronto, Canada'),
-    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, 'Hotel 24 Address'),
+    (4,'hotel24@gmail.com', 'Vancouver', 'Luxury','St. Regis', '8901234567', 4, 5, '999 Canada Pl, Vancouver, BC, V6C3B5'),
 
     -- Hotels for IHG Hotels
     (5,'hotel33@gmail.com', 'Montreal', 'Budget','Intercontinental', '7890123456', 3, 5, '1390, boulevard René-Lévesque Ouest, H3G 0E3 Montreal, Canada'),
-    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, 'Hotel 34 Address'),
+    (5,'hotel34@gmail.com', 'Vancouver', 'Luxury','Regent', '8901234567', 4, 5, '1300 Robson St, Vancouver, BC, V6E1C5'),
     (5,'hotel35@gmail.com', 'Toronto', 'Mid-Range','Six Senses', '9012345678', 4, 5, '3 Park Home Avenue, North York, M2N 6L3 Toronto, Canada'),
     (5,'hotel36@gmail.com', 'Toronto', 'Budget','Hotel Inn', '0123456789', 3, 5, '291 Glenforest Road, North York, M4N 2A5 Toronto, Canada'),
     (5,'hotel37@gmail.com', 'Montreal', 'Luxury','Hotel Indigo', '1234567890', 5, 5, '110 Rue Sainte-Thérèse Floor 2, H2Y 1E6 Montreal, Canada'),
