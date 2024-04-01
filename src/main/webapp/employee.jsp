@@ -282,7 +282,7 @@
     </tbody>
 </table>            </tbody>
         </table>
-            <h2>Add a renting</h2>
+            <h2>Add a Renting</h2>
             <table id="additional-rentings-table">
                 <thead>
                     <tr>
@@ -295,18 +295,74 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="rentingID" id="rentingID"></td>
-                        <td><input type="text" name="customerID" id="customerID"></td>
-                        <td><input type="date" name="checkInDate" id="checkInDate"></td>
-                        <td><input type="date" name="checkOutDate" id="checkOutDate"></td>
-                        <td><button id="addRentingBtn">Add Renting</button></td>
+                        <form id="addRentingForm" action="addRenting" method="POST">
+                            <td><input type="text" name="customername" id="customername" required></td>
+                            <td><input type="text" name="roomID" id="roomID" required></td>
+                            <td><input type="date" name="checkInDate" id="checkInDate" required></td>
+                            <td><input type="date" name="checkOutDate" id="checkOutDate" required></td>
+                            <td><button type ="button" id="addRentingBtn">Add Renting</button></td>
+                        </form>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Add Renting Confirmation Modal -->
+    <div id="addRentingConfirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Confirm Add Renting</h2>
+            <p>Are you sure you want to add this renting?</p>
+            <div class="auth-buttons">
+                <button id="confirmAddRenting" class="auth-button add-confirm-btn">Yes, Add It</button>
+                <a href="#" class="auth-button close-modal-btn">No, Go Back</a>
+            </div>
+        </div>
+    </div>
+
 <script>
+   document.addEventListener("DOMContentLoaded", function() {
+       const addRentingBtn = document.getElementById('addRentingBtn');
+       const confirmAddRentingBtn = document.getElementById('confirmAddRenting');
+       const addModal = document.getElementById('addRentingConfirmationModal');
+       const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
+       const addRentingForm = document.getElementById('addRentingForm');
+
+       addRentingBtn.addEventListener('click', function(event) {
+           event.preventDefault();
+           // Check if the form is valid
+           if (addRentingForm.checkValidity()) {
+               // Show the modal
+               addModal.style.display = 'block';
+           } else {
+               // If form is not valid, show a message to fill all required fields
+               alert('Please fill out all required fields.');
+               addRentingForm.reportValidity();
+           }
+       });
+
+       confirmAddRentingBtn.addEventListener('click', function() {
+           // Directly submit the form here if needed
+           addRentingForm.submit();
+       });
+
+       closeModalButtons.forEach(button => {
+           button.addEventListener('click', function() {
+               addModal.style.display = 'none';
+           });
+       });
+
+       window.onclick = function(event) {
+           if (event.target === addModal) {
+               addModal.style.display = 'none';
+           }
+       };
+   });
+
+
+
+
    document.addEventListener("DOMContentLoaded", function() {
        // For Delete Renting
        const deleteButtons = document.querySelectorAll('.delete-renting-btn');
@@ -319,6 +375,10 @@
       // For Convert Renting
       const convertButtons = document.querySelectorAll('.convert-renting-btn');
       const convertModal = document.getElementById('convertRentingConfirmation');
+
+      // For Add Renting
+      const addButtons = document.querySelectorAll('.addRentingBtn');
+      const addModal = document.getElementById('addRentingConfirmationModal');
 
        const closeModalButtons = document.querySelectorAll('.close, .close-modal-btn');
 
@@ -334,6 +394,7 @@
            deleteModal.style.display = 'none';
            paymentModal.style.display = 'none';
            convertModal.style.display = 'none';
+           addModal.style.display = 'none';
 
        }
 
@@ -359,6 +420,14 @@
               const bookingID = this.getAttribute('data-booking-id');
               openModal(convertModal, 'bookingID', bookingID);
           });
+      });
+
+      // Attach event listeners to Add buttons
+      addButtons.forEach(button => {
+         button.addEventListener('click', function() {
+             const rentingID = this.getAttribute('data-renting-id');
+             openModal(deleteModal, 'rentingID', rentingID);
+         });
       });
 
        // Close modals on close button click or when clicking outside the modal
