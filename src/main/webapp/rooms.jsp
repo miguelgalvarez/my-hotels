@@ -288,7 +288,7 @@ function filterRooms() {
     let capacityFilter = document.getElementById('capacity').value;
     const rooms = document.querySelectorAll('.hotel');
 
-    capacityFilter = capacityFilter === "0" ? "4" : capacityFilter;
+    capacityFilter = capacityFilter === "0" ? "1" : capacityFilter;
 
     rooms.forEach(room => {
         const roomID = parseInt(room.getAttribute('data-roomID'), 10);
@@ -309,7 +309,7 @@ function filterRooms() {
             case '3': pricePass = price > 200; break;
         }
 
-        const capacityPass = capacity <= parseInt(capacityFilter, 10);
+        const capacityPass = capacity >= parseInt(capacityFilter, 10);
 
         room.style.display = (dateAvailable && pricePass && capacityPass) ? '' : 'none';
     });
