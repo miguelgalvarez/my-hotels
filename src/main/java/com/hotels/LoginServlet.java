@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("message", "Login successful!");
 
                 if (returnUrl != null && !returnUrl.trim().isEmpty()) {
-                    response.sendRedirect(URLDecoder.decode(returnUrl, "UTF-8"));
+                    response.sendRedirect(returnUrl);
                 } else {
                     response.sendRedirect("index.jsp");
                 }

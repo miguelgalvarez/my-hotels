@@ -33,11 +33,11 @@ public class RegisterServlet extends HttpServlet {
             if (success) {
                 request.getSession().setAttribute("username", username);
                 request.getSession().setAttribute("message", "Registration successful!");
-                request.getSession().setAttribute("customerID", newCustomer.getCustomerID());
+                request.getSession().setAttribute("customerID", addCustomer.fetchCustomerID(username));
 
                 String returnUrl = request.getParameter("returnUrl");
                 if (returnUrl != null && !returnUrl.trim().isEmpty()) {
-                    response.sendRedirect(URLDecoder.decode(returnUrl, "UTF-8"));
+                    response.sendRedirect(returnUrl);
                 } else {
                     response.sendRedirect("index.jsp");
                 }
