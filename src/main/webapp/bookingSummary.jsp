@@ -80,6 +80,7 @@
 
 <jsp:include page="navbar.jsp" />
 
+
 <div class="summary-container">
     <h2>Booking Summary</h2>
     <div class="text-container">

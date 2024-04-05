@@ -48,13 +48,6 @@ public class BookingService {
             return false;
         }
 
-        //testing
-        System.out.println(booking.getPricePaid());
-        System.out.println(booking.getHotelID());
-        System.out.println(booking.getCustomerID());
-        System.out.println(booking.getCheckIn());
-        System.out.println(booking.getCheckOut());
-
         //establish connection with DB
         ConnectionDB db = new ConnectionDB();
 

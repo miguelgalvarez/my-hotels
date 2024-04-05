@@ -27,6 +27,8 @@ public class RegisterServlet extends HttpServlet {
 
         CustomerService addCustomer = new CustomerService();
 
+        String returnUrl = request.getParameter("returnUrl");
+
         try {
            boolean success = addCustomer.createCustomer(newCustomer);
 
@@ -35,7 +37,6 @@ public class RegisterServlet extends HttpServlet {
                 request.getSession().setAttribute("message", "Registration successful!");
                 request.getSession().setAttribute("customerID", addCustomer.fetchCustomerID(username));
 
-                String returnUrl = request.getParameter("returnUrl");
                 if (returnUrl != null && !returnUrl.trim().isEmpty()) {
                     response.sendRedirect(returnUrl);
                 } else {
@@ -43,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
                 }
             } else {
                 request.getSession().setAttribute("message", "Registration failed.");
-                response.sendRedirect("register.jsp");
+                response.sendRedirect("register.jsp?returnUrl="+returnUrl);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
